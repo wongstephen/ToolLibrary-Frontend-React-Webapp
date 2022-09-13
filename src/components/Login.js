@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { LoginToRegister } from "./LoginToRegister";
+import { AuthContext } from "./hooks/AuthContext";
 
 export const Login = () => {
+  const { hasUser, setUser } = useContext(AuthContext);
+  useEffect(() => console.log(hasUser), [hasUser]);
+
   const [loginValue, setLoginValue] = useState({
     email: "",
     password: "",
@@ -21,29 +26,54 @@ export const Login = () => {
   }, [loginValue]);
 
   return (
-    <div>
-      <h3>Register or Sign In</h3>
-      Please enter a valid email and password.
-      <form>
-        <input
-          placeholder="Email"
-          type="text"
-          name="email"
-          onChange={handleChange}
-        />
-        <input
-          placeholder="Password"
-          name="password"
-          type="password"
-          onChange={handleChange}
-        />
-        <button type="submit" name="loginBtn" disabled={disabledBtn}>
-          Login
-        </button>
-      </form>
-      <button className="" type="submit" name="registerBtn">
-        Register
-      </button>
+    <div className="login">
+      <h1 className="login__app-title">
+        Tool <br /> Loaner
+      </h1>
+      {/* <p>For the people who want to stay freinds with freinds</p> */}
+      <div className="login_gradient">
+        <div className="login__form_container">
+          <h3 className="login__title">Login Now</h3>
+          <p className="login__warning">
+            Please enter a valid email and password.
+          </p>
+          <form className="login__form">
+            <input
+              placeholder="Email"
+              className="login__input"
+              type="text"
+              name="email"
+              onChange={handleChange}
+            />
+            <input
+              placeholder="Password"
+              className="login__input"
+              name="password"
+              type="password"
+              onChange={handleChange}
+            />
+            <button
+              type="submit"
+              name="loginBtn"
+              disabled={disabledBtn}
+              className={`login__button ${
+                disabledBtn ? "login__button-disabled" : "login__button-enabled"
+              }`}
+            >
+              Login
+            </button>
+          </form>
+          <LoginToRegister />
+          <p
+            style={{ color: "white", textAlign: "center", cursor: "pointer" }}
+            onClick={() => {
+              setUser(true);
+            }}
+          >
+            Guest
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

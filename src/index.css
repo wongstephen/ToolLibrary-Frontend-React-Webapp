@@ -1,13 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700;800;900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.login {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-image: url("./assets/alexander-schimmeck-1N5jjLyBafc-unsplash.jpg");
+}
+.login_gradient {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    transparent,
+    hsla(0, 0%, 0%, 0.75),
+    hsl(0, 0%, 0%)
+  );
+}
+
+.login__app-title {
+  margin-left: 2.5vw;
+  font-size: 6.25rem;
+  font-weight: 800;
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: hsl(0, 0%, 25%);
+  line-height: 80%;
+}
+.login__form_container {
+  position: relative;
+  top: 15vh;
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.login__title {
+  font-size: 2rem;
+  color: white;
+}
+.login__warning {
+  font-size: 0.75rem;
+  color: red;
+}
+.login__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.login__input {
+  border-radius: 0.15rem;
+  border: 0;
+  width: 100%;
+  padding: 1rem;
+}
+.login__button {
+  border-radius: 100vmax;
+  width: 100%;
+  padding: 1rem;
+}
+.login__button-disabled {
+  background-color: hsl(0, 0%, 85%);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.login__button-enabled {
+  background-color: hsl(130, 75%, 50%);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.login__register {
+  color: white;
+  text-align: center;
+  font-size: 0.75rem;
+}
+.login__register-span {
+  color: hsl(130, 75%, 50%);
+  font-weight: 600;
 }

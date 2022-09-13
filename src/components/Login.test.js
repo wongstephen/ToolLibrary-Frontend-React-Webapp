@@ -1,15 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Login } from "./Login";
-
-//arrange
-//act
-//assert
+import "@testing-library/jest-dom/extend-expect";
 
 test("render page title", async () => {
   render(<Login />);
-  
-  expect(screen.getByText(/register or sign in/i)).toBeInTheDocument();
+
+  expect(screen.getByText(/login now/i)).toBeInTheDocument();
 });
 
 test("on render sign in button should be disabled", () => {
@@ -26,3 +23,4 @@ test("when login and password have a value, login button is enabled", () => {
 
   expect(screen.getByRole("button", { name: /login/i })).toBeEnabled();
 });
+
