@@ -3,16 +3,14 @@
 * {
   box-sizing: border-box;
 }
-body {
+body,
+.App {
   margin: 0;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  height: 100%;
+  background-color: hsl(0, 0%, 95%);
 }
 
 .login {

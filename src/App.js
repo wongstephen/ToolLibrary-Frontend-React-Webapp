@@ -1,23 +1,24 @@
 import { Routes, Route } from "react-router-dom";
-import { useContext, useState } from "react";
 
-import { AuthContext } from "./components/hooks/AuthContext";
+import { AuthProvider } from "./components/hooks/AuthContext";
 
 import { Register } from "./components/Register";
 import { HomeScreen } from "./components/HomeScreen";
+import { AddItem } from "./components/AddItem";
+import { Feed } from "./components/Feed";
 
 function App() {
-  // const { hasUser, setUser } = useContext(AuthContext);
-  const [hasUser, setUser] = useState(false);
   return (
-    <AuthContext.Provider value={{ hasUser, setUser }}>
+    <AuthProvider>
       <main className="App">
         <Routes>
           <Route path="/" element={<HomeScreen />} />
+          <Route path="feed" element={<Feed />} />
+          <Route path="additem" element={<AddItem />} />
           <Route path="register" element={<Register />} />
         </Routes>
       </main>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 
