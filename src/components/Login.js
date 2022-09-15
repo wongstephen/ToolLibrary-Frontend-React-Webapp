@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { LoginToRegister } from "./LoginToRegister";
-import { AuthContext } from "./hooks/AuthContext";
+import { LoginRegisterLink } from "./LoginRegisterLink";
+import { AuthContext } from "../hooks/AuthContext";
 import { LoginForm } from "./LoginForm";
+
+import useDisabled from "../hooks/useDisabled";
 
 export const Login = () => {
   const { setUser } = useContext(AuthContext);
@@ -11,7 +13,7 @@ export const Login = () => {
     password: "",
   });
 
-  const [disabledBtn, setDisabledBtn] = useState(true);
+  const [disabled, setDisabled] = useDisabled(true);
 
   const handleChange = (e) => {
     setLoginValue((prevState) => {
@@ -21,9 +23,9 @@ export const Login = () => {
 
   useEffect(() => {
     if (loginValue.email.length > 0 && loginValue.password.length > 0) {
-      setDisabledBtn(false);
+      setDisabled(false);
     } else {
-      setDisabledBtn(true);
+      setDisabled(true);
     }
   }, [loginValue]);
 
@@ -38,8 +40,12 @@ export const Login = () => {
           <p className="login__warning">
             Please enter a valid email and password.
           </p>
-          <LoginForm handleChange={handleChange} disabledBtn={disabledBtn} />
-          <LoginToRegister />
+          <LoginForm
+            handleChange={handleChange}
+            disabledBtn={disabled}
+            loginValue={loginValue}
+          />
+          <LoginRegisterLink />
           <p
             style={{ color: "white", textAlign: "center", cursor: "pointer" }}
             onClick={() => {

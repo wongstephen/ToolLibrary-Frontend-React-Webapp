@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import axios from "axios";
 
-export const LoginForm = ({ handleChange, disabledBtn }) => {
+import { AuthContext } from "../hooks/AuthContext";
+
+export const LoginForm = ({ handleChange, disabledBtn, loginValue }) => {
+  const { setUser } = useContext(AuthContext);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/users/signin",
+        loginValue
+      );
+      setUser(res.data);
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <form className="login__form">
       <input
@@ -9,6 +26,10 @@ export const LoginForm = ({ handleChange, disabledBtn }) => {
         type="text"
         name="email"
         onChange={handleChange}
+        onSubmit={handleLogin}
+        pattern=".+@globex\.com"
+        size="30"
+        required
       />
       <input
         placeholder="Password"
@@ -16,6 +37,7 @@ export const LoginForm = ({ handleChange, disabledBtn }) => {
         name="password"
         type="password"
         onChange={handleChange}
+        required
       />
       <button
         type="submit"
@@ -24,6 +46,7 @@ export const LoginForm = ({ handleChange, disabledBtn }) => {
         className={`login__button ${
           disabledBtn ? "login__button-disabled" : "login__button-enabled"
         }`}
+        onClick={handleLogin}
       >
         Login
       </button>

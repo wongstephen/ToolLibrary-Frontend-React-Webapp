@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-
+import useDisabled from "../hooks/useDisabled";
 export const Register = () => {
   const [formVal, setFormVal] = useState({ email: "", password: "" });
-  const [btnDisabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useDisabled(true);
 
   useEffect(() => {
     if (formVal.email && formVal.password) {
@@ -28,6 +28,9 @@ export const Register = () => {
           aria-label="email"
           name="email"
           onChange={handleChange}
+          pattern=".+@globex\.com"
+          size="30"
+          required
         ></input>
         <input
           type="password"
@@ -36,8 +39,9 @@ export const Register = () => {
           aria-label="password"
           name="password"
           onChange={handleChange}
+          required
         ></input>
-        <button name="register" aria-label="register" disabled={btnDisabled}>
+        <button name="register" aria-label="register" disabled={disabled}>
           Register
         </button>
       </form>
