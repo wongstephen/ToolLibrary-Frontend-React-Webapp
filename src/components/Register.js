@@ -37,12 +37,7 @@ export const Register = () => {
           name="password"
           onChange={handleChange}
         ></input>
-        <button
-          name="register"
-          data-testid="button"
-          aria-label="register"
-          disabled={btnDisabled}
-        >
+        <button name="register" aria-label="register" disabled={btnDisabled}>
           Register
         </button>
       </form>

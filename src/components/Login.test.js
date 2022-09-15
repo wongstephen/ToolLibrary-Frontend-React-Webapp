@@ -1,14 +1,18 @@
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
-import userEvent from "@testing-library/user-event";
+import { act, render, renderHook, screen } from "@testing-library/react";
+import { useContext } from "react";
 import { Login } from "./Login";
+// import userEvent from "@testing-library/user-event";
 
-test("render page title", async () => {
-  render(<Login />);
-
-  expect(screen.getByText(/login now/i)).toBeInTheDocument();
+describe(Login, () => {
+  it("tool loaner title should render", () => {
+    // render(<Login />);
+    // act(() => {
+    // render(<Login />);
+    // const title = getByTestId("title").textContent();
+    // expect(title).toEqual(/tool loaner/i);
+    // });
+  });
 });
-
 /* 
 test("on render sign in button should be disabled", () => {
   render(<Login />);

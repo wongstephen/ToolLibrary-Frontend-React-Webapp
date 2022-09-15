@@ -2,34 +2,41 @@ import { render, screen } from "@testing-library/react";
 import { Register } from "./Register";
 import userEvent from "@testing-library/user-event";
 
-test("render register component title", async () => {
-  render(<Register />);
-  expect(screen.getByText(/register a new account/i)).toBeInTheDocument();
-});
+describe("Register", () => {
+  it("render register component title", () => {
+    render(<Register />);
+    const text = screen.getByText(/register a new account/i);
+    expect(text).toBeTruthy();
+  });
+  it("register button disabled on render", () => {
+    render(<Register />);
+    const button = screen.getByRole("button", { name: /register/i });
+    expect(button).toBeDisabled();
+  });
 
-test("login and password have a value - register button is enabled", () => {
-  render(<Register />);
+  it("email and password has value, button is enabled", () => {
+    render(<Register />);
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    userEvent.type(emailInput, "email@email.com");
+    const passwordInput = screen.getByPlaceholderText(/password/i);
+    userEvent.type(passwordInput, "qwer1234");
+    const button = screen.getByRole("button", { name: /register/i });
+    expect(button).toBeEnabled();
+  });
 
-  userEvent.type(screen.getByPlaceholderText(/email/i), "test@email.com");
-  userEvent.type(screen.getByPlaceholderText(/password/i), "qwer1234");
+  it("only email has value, button should be disabled", () => {
+    render(<Register />);
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    userEvent.type(emailInput, "email@email.com");
+    const button = screen.getByRole("button", { name: /register/i });
+    expect(button).toBeDisabled();
+  });
 
-  expect(screen.getByRole("button", { name: /register/i })).toBeEnabled();
-});
-
-test("login has a value and password has no value - register button is disabled", () => {
-  render(<Register />);
-
-  userEvent.type(screen.getByPlaceholderText(/email/i), "test@email.com");
-  userEvent.type(screen.getByPlaceholderText(/password/i), "");
-
-  expect(screen.getByRole("button", { name: /register/i })).toBeDisabled();
-});
-
-test("login has a no value and password has a value - register button is disabled", () => {
-  render(<Register />);
-
-  userEvent.type(screen.getByPlaceholderText(/email/i), "test@email.com");
-  userEvent.type(screen.getByPlaceholderText(/password/i), "");
-
-  expect(screen.getByRole("button", { name: /register/i })).toBeDisabled();
+  it("only password has value, button should be disabled", () => {
+    render(<Register />);
+    const passwordInput = screen.getByPlaceholderText(/password/i);
+    userEvent.type(passwordInput, "qwer1234");
+    const button = screen.getByRole("button", { name: /register/i });
+    expect(button).toBeDisabled();
+  });
 });

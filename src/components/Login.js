@@ -29,8 +29,8 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <h1 className="login__app-title">
-        Tool <br /> Loaner
+      <h1 className="login__app-title" data-testid="title">
+        Tool Loaner
       </h1>
       <div className="login_gradient">
         <div className="login__form_container">
