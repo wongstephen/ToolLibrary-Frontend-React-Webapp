@@ -29,7 +29,7 @@ export const Feed = () => {
       </h2>
       <ul className="feed__layout">
         {feedData &&
-          feedData.map((tool) => <FeedItem key={tool.id} data={tool} />)}
+          feedData.map((tool) => <FeedItem key={tool.id} feed={tool} />)}
       </ul>
       <div className="feed__container-addBtn">
         <AddItemBtn />
