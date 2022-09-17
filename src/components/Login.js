@@ -37,9 +37,7 @@ export const Login = () => {
       <div className="login_gradient">
         <div className="login__form_container">
           <h3 className="login__title">Login Now</h3>
-          <p className="login__warning">
-            Please enter a valid email and password.
-          </p>
+
           <LoginForm
             handleChange={handleChange}
             disabledBtn={disabled}
