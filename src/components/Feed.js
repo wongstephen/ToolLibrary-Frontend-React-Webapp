@@ -18,12 +18,9 @@ export const Feed = () => {
         },
       });
       setfeedData(res.data);
-      console.log(res.data);
     };
     getUserTools();
   }, []);
-
-  useEffect(() => console.log(feedData), [feedData]);
 
   return (
     <main className="feed__container">
