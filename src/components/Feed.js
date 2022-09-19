@@ -18,9 +18,13 @@ export const Feed = () => {
         },
       });
       setfeedData(res.data);
+      console.log(res.data);
     };
     getUserTools();
   }, []);
+
+  useEffect(() => console.log(feedData), [feedData]);
+
   return (
     <main className="feed__container">
       <h1 className="feed__title">Tool Library</h1>
@@ -28,7 +32,7 @@ export const Feed = () => {
         Checked Out
       </h2>
       <ul className="feed__layout">
-        {feedData &&
+        {feedData.length > 0 &&
           feedData.map((tool) => <FeedItem key={tool.id} feed={tool} />)}
       </ul>
       <div className="feed__container-addBtn">

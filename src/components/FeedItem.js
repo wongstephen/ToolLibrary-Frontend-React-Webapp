@@ -1,7 +1,7 @@
 import React from "react";
 
 export const FeedItem = (props) => {
-  const tool = props.data;
+  const tool = props.feed;
   return (
     <li className="feed__card">
       <img src={tool.photo} alt="tool" className="feed__avator"></img>
