@@ -2,24 +2,15 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 
 import { AuthContext } from "../hooks/AuthContext";
+import { signInApi } from "../api/axiosApi";
 
 export const LoginForm = ({ handleChange, disabledBtn, loginValue }) => {
   const { setUser } = useContext(AuthContext);
   const [showErr, setShowErr] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post(
-        "http://localhost:8000/users/signin",
-        loginValue
-      );
-      setUser(res.data);
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-      setShowErr(true);
-    }
+    signInApi(e, loginValue, setUser);
   };
   return (
     <>

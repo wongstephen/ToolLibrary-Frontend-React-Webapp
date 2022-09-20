@@ -31,27 +31,49 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <h1 className="login__app-title" data-testid="title">
-        Tool Loaner
-      </h1>
-      <div className="login_gradient">
-        <div className="login__form_container">
-          <h3 className="login__title">Login Now</h3>
-
-          <LoginForm
-            handleChange={handleChange}
-            disabledBtn={disabled}
-            loginValue={loginValue}
-          />
-          <LoginRegisterLink />
-          <p
-            style={{ color: "white", textAlign: "center", cursor: "pointer" }}
-            onClick={() => {
-              setUser(true);
-            }}
-          >
-            Guest
-          </p>
+      <div className="login__image-container">
+        <img
+          src={require("../assets/login-hero.png")}
+          className="login__image-hero"
+          alt="hero"
+        />
+      </div>
+      <div className="login__content-container">
+        <div>
+          <h1 className="login__app-title" data-testid="title">
+            TOOL LOANER
+          </h1>
+          <h2 className="login__h2-instructions" data-testid="title">
+            Login or Register below to get started
+          </h2>
+          <div className="login_gradient">
+            <div className="login__form_container">
+              <LoginForm
+                handleChange={handleChange}
+                disabledBtn={disabled}
+                loginValue={loginValue}
+              />
+              <p
+                style={{
+                  color: "gray",
+                  textAlign: "center",
+                  fontSize: ".75rem",
+                }}
+              >
+                <span
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    setUser(true);
+                  }}
+                >
+                  Guest
+                </span>
+              </p>
+              <LoginRegisterLink />
+            </div>
+          </div>
         </div>
       </div>
     </div>

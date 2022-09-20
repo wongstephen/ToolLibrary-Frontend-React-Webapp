@@ -5,21 +5,14 @@ import { AuthContext } from "../hooks/AuthContext";
 
 import { AddItemBtn } from "./AddItemBtn";
 import { FeedItem } from "./FeedItem";
+import { getUserToolsApi } from "../api/axiosApi";
 
 export const Feed = () => {
   const { hasUser } = useContext(AuthContext);
   const [feedData, setfeedData] = useState([]);
 
   useEffect(() => {
-    const getUserTools = async () => {
-      const res = await axios.get("http://localhost:8000/tools", {
-        headers: {
-          Authorization: `Bearer ${hasUser.token}`,
-        },
-      });
-      setfeedData(res.data);
-    };
-    getUserTools();
+    getUserToolsApi(setfeedData, hasUser.token);
   }, []);
 
   return (
