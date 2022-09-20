@@ -7,13 +7,14 @@
   text-align: center;
 }
 .feed__layout {
+  border: 3px solid var(--primary-color);
   list-style: none;
   padding: 0;
   width: 90vw;
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.25rem;
   background-color: white;
   padding: 1rem;
   border-radius: 1rem;
@@ -27,11 +28,22 @@
   width: 100%;
 }
 
-.feed__avator {
+.feed__card__input-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.feed__card__input-checkin {
+  width: 1rem;
+  border: 2px solid red;
+}
+
+.feed__avator-image {
   flex: 1;
   width: 15vw;
   border-radius: 50%;
-  max-width: 5rem;
+  max-width: 3rem;
 }
 
 .feed__content {

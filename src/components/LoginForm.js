@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
 
 import { AuthContext } from "../hooks/AuthContext";
 import { signInApi } from "../api/axiosApi";
@@ -10,7 +9,7 @@ export const LoginForm = ({ handleChange, disabledBtn, loginValue }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    signInApi(e, loginValue, setUser);
+    signInApi(e, loginValue, setUser, setShowErr);
   };
   return (
     <>

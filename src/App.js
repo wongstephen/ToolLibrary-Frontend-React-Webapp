@@ -6,6 +6,7 @@ import { Register } from "./components/Register";
 import { HomeScreen } from "./components/HomeScreen";
 import { AddItem } from "./components/AddItem";
 import { Feed } from "./components/Feed";
+import { SignOut } from "./components/SignOut";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="feed" element={<Feed />} />
           <Route path="additem" element={<AddItem />} />
           <Route path="register" element={<Register />} />
+          <Route path="signout" element={<SignOut />} />
         </Routes>
       </main>
     </AuthProvider>
