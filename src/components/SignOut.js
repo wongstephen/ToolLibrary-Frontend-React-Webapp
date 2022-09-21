@@ -9,15 +9,7 @@ export const SignOut = () => {
     }, 2500);
   }, []);
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignContent: "center",
-        width: "100%",
-        height: "100%",
-      }}
-    >
+    <div className="text-green-900 text-lg font-medium flex justify-center w-screen m-4">
       <h3>Sign Out Successful</h3>
     </div>
   );
