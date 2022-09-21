@@ -7,9 +7,9 @@ export const AuthProvider = ({ children }) => {
 
   function setUser(data) {
     setHasUser((state) => {
-      return data;
+      return data.token;
     });
-    // localStorage.setItem("token", data.token);
+    localStorage.setItem("token", JSON.stringify(data.token));
   }
 
   return (

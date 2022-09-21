@@ -7,14 +7,7 @@ import { Feed } from "./Feed";
 import("./HomeScreen.css");
 
 export const HomeScreen = () => {
-  const { hasUser } = useContext(AuthContext);
-  const [token, setToken] = useState(null);
-  useEffect(() => {
-    const lcToken = localStorage.getItem("token");
-    if (token) {
-      setToken(lcToken);
-    }
-  }, [token]);
+  const { hasUser, setUser } = useContext(AuthContext);
 
-  return hasUser ? <Feed token={hasUser.token} /> : <Login />;
+  return hasUser ? <Feed token={hasUser} /> : <Login />;
 };

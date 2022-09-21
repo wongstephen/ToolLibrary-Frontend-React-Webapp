@@ -6,21 +6,7 @@
   margin: 0;
   text-align: center;
 }
-.feed__layout {
-  border: 3px solid var(--primary-color);
-  list-style: none;
-  padding: 0;
-  width: 90vw;
-  margin: 1rem auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 2px 2px 2px hsl(0, 0%, 90%);
-  max-width: 500px;
-}
+
 .feed__card {
   display: flex;
   flex-direction: row;
@@ -71,9 +57,4 @@
   height: 0.5px;
   width: 100%;
   background-color: hsla(0, 0%, 50%, 0.25);
-}
-
-.feed__container-addBtn {
-  display: flex;
-  justify-content: center;
 }
