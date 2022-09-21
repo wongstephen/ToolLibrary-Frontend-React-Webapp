@@ -40,7 +40,10 @@ export const Login = () => {
       </div>
       <div className="login__content-container">
         <div>
-          <h1 className="login__app-title" data-testid="title">
+          <h1
+            className="text-5xl font-medium text-center tracking-tighter uppercase"
+            data-testid="title"
+          >
             TOOL LOANER
           </h1>
           <h2 className="login__h2-instructions" data-testid="title">

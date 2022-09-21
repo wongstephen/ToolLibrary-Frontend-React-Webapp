@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   box-sizing: border-box;
@@ -11,6 +14,10 @@
   --cta-color: hsl(244, 100%, 50%);
 }
 
+#root {
+  height: 100vh;
+  width: 100vw;
+}
 body {
   margin: 0;
   padding: 0;
@@ -30,17 +37,11 @@ body {
   padding: 0;
   position: fixed;
 }
-.login__app-title {
-  font-size: 3rem;
-  font-weight: 500;
-  text-align: center;
-  letter-spacing: -2px;
-}
+
 .login__form_container {
   position: relative;
   width: 90vw;
   margin: 0 auto;
-  text-transform: uppercase;
 }
 .login__image-container {
   width: 90vw;

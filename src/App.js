@@ -11,13 +11,13 @@ import { SignOut } from "./components/SignOut";
 function App() {
   return (
     <AuthProvider>
-      <main className="App">
+      <main className="w-full h-full App">
         <Routes>
           <Route path="/" element={<HomeScreen />} />
-          <Route path="feed" element={<Feed />} />
-          <Route path="additem" element={<AddItem />} />
-          <Route path="register" element={<Register />} />
-          <Route path="signout" element={<SignOut />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/additem" element={<AddItem />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/signout" element={<SignOut />} />
         </Routes>
       </main>
     </AuthProvider>
