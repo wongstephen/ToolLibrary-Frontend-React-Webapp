@@ -3,32 +3,65 @@ import React, { useEffect, useState } from "react";
 import { getUserToolsApi } from "../api/axiosApi";
 
 import { FeedItemSkeleton } from "./FeedItemSkeleton";
-import { AppTitle } from "./AppTitle";
 import { FeedItem } from "./FeedItem";
-// import { FeedMenu } from "./FeedMenu";
+import { FeedMenu } from "./FeedMenu";
 import { FeedSearch } from "./FeedSearch";
 import { PageTemplate } from "./PageTemplate";
+import { FeedSortButton } from "./FeedSortButton";
 
 export const Inventory = () => {
   const [feedData, setFeedData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
 
-  // TODO: Search Input
-  const [searchData, setSearchData] = useState("");
-  const [searcInput, setSearchInput] = useState("");
+  // Sort Name and Borrower and Status
+  const [sortUp, setSortUp] = useState(true);
+  const handleSort = () => {
+    setSortUp((prevVal) => !prevVal);
+    sortUp
+      ? setSearchData(searchData.sort((a, b) => (a.name > b.name ? 1 : -1)))
+      : setSearchData(searchData.sort((a, b) => (a.name < b.name ? 1 : -1)));
+  };
+
+  const [borrowUp, setBorrowUp] = useState(true);
+  const handleBorrow = () => {
+    setBorrowUp((prevVal) => !prevVal);
+    borrowUp
+      ? setSearchData(searchData.sort((a, b) => (a.loanee > b.loanee ? 1 : -1)))
+      : setSearchData(
+          searchData.sort((a, b) => (a.loanee < b.loanee ? 1 : -1))
+        );
+  };
+  // End Sort Name and Borrower
+
+  // Filter by Status
+  const [onStatus, setOnStatus] = useState(true);
+  const handleStatus = () => {
+    setOnStatus((prevVal) => !prevVal);
+    console.log(feedData);
+    onStatus
+      ? setSearchData(feedData)
+      : setSearchData(
+          feedData.filter((tool) => {
+            return !tool.loanee;
+          })
+        );
+  };
+  // End Filter by Status
 
   useEffect(() => {
     const getItems = async () => {
       const token = await localStorage.getItem("token");
       const data = await getUserToolsApi(token);
       setFeedData(data);
+      setSearchData(data);
     };
     getItems();
   }, []);
 
   return (
     <PageTemplate>
-      {/* <FeedMenu setfeedData={setFeedData} /> */}
-      <FeedSearch />
+      <FeedMenu setfeedData={setFeedData} />
+      <FeedSearch feedData={feedData} setSearchData={setSearchData} />
       {/* checkout feed */}
       <ul className="flex flex-col justify-between gap-2.5 ">
         <li>
@@ -39,30 +72,28 @@ export const Inventory = () => {
             All Items
           </h2>
         </li>
-        <li className="flex items-center gap-2.5  md:gap-5">
+
+        {/* sort */}
+        <li className="flex items-center gap-5">
           <p className="text-sm font-normal tracking-wider ">Sort By</p>
-          <button className="px-2.5 py-2.5 text-xs font-light tracking-wider rounded-md bg-gray-500/10">
-            Tool name
-          </button>
-          <button className="px-2.5 py-2.5 text-xs font-light tracking-wider rounded-md bg-gray-500/10">
-            Borrower
-          </button>
-          <button className="px-2.5 py-2.5 text-xs font-light tracking-wider rounded-md bg-gray-500/10">
-            Status
-          </button>
+          <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton>
+          <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton>
         </li>
+        {/* filter */}
+        <li className="flex items-center gap-5">
+          <p className="text-sm font-normal tracking-wider ">Filter By</p>
+          <FeedSortButton handleSort={handleStatus}>Status</FeedSortButton>
+        </li>
+
         {feedData.length > 0 ? (
-          feedData
-            .sort((toola, toolb) => (toola.loanee < toolb.loanee ? 1 : -1))
+          searchData
+            // .sort((toola, toolb) => (toola.loanee < toolb.loanee ? 1 : -1))
             .map((tool) => <FeedItem key={tool.id} feed={tool} />)
         ) : (
           <>
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
+            {[...Array(Math.floor(Math.random() * 10 + 3))].map((e, i) => (
+              <FeedItemSkeleton key={i} />
+            ))}
           </>
         )}
       </ul>

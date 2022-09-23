@@ -3,35 +3,51 @@ import React, { useEffect, useState } from "react";
 import { getUserToolsApi } from "../api/axiosApi";
 
 import { FeedItemSkeleton } from "./FeedItemSkeleton";
-import { AppTitle } from "./AppTitle";
 import { FeedItem } from "./FeedItem";
 import { FeedMenu } from "./FeedMenu";
 import { FeedSearch } from "./FeedSearch";
 import { PageTemplate } from "./PageTemplate";
+import { FeedSortButton } from "./FeedSortButton";
 
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
 
-  // TODO: Search Input
-  const [searchData, setSearchData] = useState("");
-  const [searcInput, setSearchInput] = useState("");
+  // Sort Name and Borrower
+  const [sortUp, setSortUp] = useState(true);
+  const handleSort = () => {
+    setSortUp((prevVal) => !prevVal);
+    sortUp
+      ? setSearchData(searchData.sort((a, b) => (a.name > b.name ? 1 : -1)))
+      : setSearchData(searchData.sort((a, b) => (a.name < b.name ? 1 : -1)));
+  };
+
+  const [borrowUp, setBorrowUp] = useState(true);
+  const handleBorrow = () => {
+    setBorrowUp((prevVal) => !prevVal);
+    borrowUp
+      ? setSearchData(searchData.sort((a, b) => (a.loanee > b.loanee ? 1 : -1)))
+      : setSearchData(
+          searchData.sort((a, b) => (a.loanee < b.loanee ? 1 : -1))
+        );
+  };
+  // End Sort Name and Borrower
 
   useEffect(() => {
     const getItems = async () => {
       const token = await localStorage.getItem("token");
       const data = await getUserToolsApi(token);
-      // ! remove later
-      // console.log(data);
       setFeedData(data);
+      setSearchData(data);
     };
     getItems();
   }, []);
 
   return (
     <PageTemplate>
-      <FeedMenu setfeedData={setFeedData} />
+      <FeedMenu leftBtn="inventory" />
 
-      <FeedSearch />
+      <FeedSearch feedData={feedData} setSearchData={setSearchData} />
 
       {/* checkout feed */}
       <ul className="flex flex-col justify-between gap-2.5 ">
@@ -43,30 +59,34 @@ export const Feed = () => {
             Loaned Out
           </h2>
         </li>
+
+        {/* sort */}
         <li className="flex items-center gap-5">
           <p className="text-sm font-normal tracking-wider ">Sort By</p>
-          <button className="text-xs font-light tracking-wider p-2.5 bg-gray-500/10 rounded-md">
-            Tool Name
-          </button>
-          <button className="text-xs font-light p-2.5 tracking-wider  bg-gray-500/10 rounded-md">
-            Borrower
-          </button>
+          <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton>
+          <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton>
         </li>
+        {/* filter future feature */}
+        {/* <li className="flex flex-wrap items-center gap-5">
+          <p className="text-sm font-normal tracking-wider ">Filter By</p>
+          {[...new Set(feedData.filter((tool) => tool.loanee))]
+            .sort()
+            .map((data, idx) => {
+              return <FeedSortButton key={idx}>{data.loanee}</FeedSortButton>;
+            })}
+        </li> */}
         {feedData.length > 0 ? (
-          feedData
+          searchData
             .filter((tool) => {
               return tool.loanee;
             })
-            .sort((toola, toolb) => (toola.name > toolb.name ? 1 : -1))
+            // .sort((toola, toolb) => (toola.name > toolb.name ? 1 : -1))
             .map((tool) => <FeedItem key={tool.id} feed={tool} />)
         ) : (
           <>
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
-            <FeedItemSkeleton />
+            {[...Array(Math.floor(Math.random() * 10 + 3))].map((e, i) => (
+              <FeedItemSkeleton key={i} />
+            ))}
           </>
         )}
       </ul>

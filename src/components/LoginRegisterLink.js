@@ -9,7 +9,10 @@ export const LoginRegisterLink = () => {
   return (
     <p className="text-xs text-center">
       Done have an account?{" "}
-      <span onClick={handleClick} className="font-medium text-blue-500">
+      <span
+        onClick={handleClick}
+        className="font-medium text-blue-500 cursor-pointer"
+      >
         Register
       </span>
     </p>

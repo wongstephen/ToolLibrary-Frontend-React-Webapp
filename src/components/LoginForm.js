@@ -11,7 +11,7 @@ export const LoginForm = ({ handleChange, disabledBtn, loginValue }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await signInApi(e, loginValue, setUser, setShowErr);
+    const res = await signInApi(e, loginValue, setShowErr);
     if (res.status === 200) {
       localStorage.setItem("token", res.data.token);
       navigate("/feed");
@@ -20,7 +20,9 @@ export const LoginForm = ({ handleChange, disabledBtn, loginValue }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
+    if (token === null || token === undefined || token === "" || !token) {
+      return;
+    } else if (token) {
       navigate("/feed");
     }
   }, []);

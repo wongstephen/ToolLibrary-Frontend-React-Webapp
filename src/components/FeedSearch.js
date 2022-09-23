@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export const FeedSearch = () => {
+export const FeedSearch = ({ feedData, setSearchData }) => {
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  useEffect(() => {
+    if (searchInput.length === 0) {
+      setSearchData(feedData);
+    } else {
+      // console.log(feedData);
+      const searchTerm = searchInput.toLowerCase().trim();
+      setSearchData((searchData) =>
+        feedData.filter((tool) => tool.name.toLowerCase().includes(searchTerm))
+      );
+    }
+  }, [searchInput]);
+
   return (
     <div className="input-group relative flex  items-stretch w-full mb-4 border-gray-500/20 border-[1px] my-10 rounded">
       <input
@@ -9,6 +27,7 @@ export const FeedSearch = () => {
         placeholder="Search"
         aria-label="Search"
         aria-describedby="button-addon3"
+        onChange={handleChange}
       />
       <span
         className="input-group-text flex items-center px-3 py-1.5 text-base font-normal text-gray-700 text-center whitespace-nowrap rounded"

@@ -31,11 +31,12 @@ export const AddItem = () => {
       const token = await localStorage.getItem("token");
       const res = await axios.post(`${serverUrl}/tools/`, data, {
         headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
+      // ! delete later
+      // console.log(res);
       setData(initialState);
       navigate("/");
     } catch (err) {
