@@ -4,6 +4,7 @@ import { AuthContext } from "../hooks/AuthContext";
 import { LoginForm } from "./LoginForm";
 
 import useDisabled from "../hooks/useDisabled";
+import { AppTitle } from "./AppTitle";
 
 export const Login = () => {
   const { setUser } = useContext(AuthContext);
@@ -30,52 +31,24 @@ export const Login = () => {
   }, [loginValue]);
 
   return (
-    <div className="login">
-      <div className="login__image-container">
+    <div className="justify-center h-full sm:flex">
+      <div className="flex items-center justify-center flex-1 w-11/12 max-w-sm px-4 py-12 mx-auto my-10 sm:h-full rounded-2xl bg-lime-200 sm:max-w-l sm:rounded-none sm:m-0">
         <img
           src={require("../assets/login-hero.png")}
-          className="login__image-hero"
+          className="w-8/12"
           alt="hero"
         />
       </div>
-      <div className="login__content-container">
+      <div className="items-center justify-center flex-[1.5] w-11/12 mx-auto sm:px-5 sm:flex sm:justify-start md:pl-20">
         <div>
-          <h1
-            className="text-5xl font-medium text-center tracking-tighter uppercase"
-            data-testid="title"
-          >
-            TOOL LOANER
-          </h1>
-          <h2 className="login__h2-instructions" data-testid="title">
-            Login or Register below to get started
-          </h2>
-          <div className="login_gradient">
-            <div className="login__form_container">
-              <LoginForm
-                handleChange={handleChange}
-                disabledBtn={disabled}
-                loginValue={loginValue}
-              />
-              <p
-                style={{
-                  color: "gray",
-                  textAlign: "center",
-                  fontSize: ".75rem",
-                }}
-              >
-                <span
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    setUser(true);
-                  }}
-                >
-                  Guest
-                </span>
-              </p>
-              <LoginRegisterLink />
-            </div>
+          <AppTitle />
+          <div>
+            <LoginForm
+              handleChange={handleChange}
+              disabledBtn={disabled}
+              loginValue={loginValue}
+            />
+            <LoginRegisterLink />
           </div>
         </div>
       </div>

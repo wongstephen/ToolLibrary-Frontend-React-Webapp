@@ -7,7 +7,5 @@ import { Feed } from "./Feed";
 import("./HomeScreen.css");
 
 export const HomeScreen = () => {
-  const { hasUser, setUser } = useContext(AuthContext);
-
-  return hasUser ? <Feed token={hasUser} /> : <Login />;
+  return <Login />;
 };
