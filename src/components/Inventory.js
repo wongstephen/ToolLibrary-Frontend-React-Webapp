@@ -5,11 +5,11 @@ import { getUserToolsApi } from "../api/axiosApi";
 import { FeedItemSkeleton } from "./FeedItemSkeleton";
 import { AppTitle } from "./AppTitle";
 import { FeedItem } from "./FeedItem";
-import { FeedMenu } from "./FeedMenu";
+// import { FeedMenu } from "./FeedMenu";
 import { FeedSearch } from "./FeedSearch";
 import { PageTemplate } from "./PageTemplate";
 
-export const Feed = () => {
+export const Inventory = () => {
   const [feedData, setFeedData] = useState([]);
 
   // TODO: Search Input
@@ -20,8 +20,6 @@ export const Feed = () => {
     const getItems = async () => {
       const token = await localStorage.getItem("token");
       const data = await getUserToolsApi(token);
-      // ! remove later
-      // console.log(data);
       setFeedData(data);
     };
     getItems();
@@ -29,10 +27,8 @@ export const Feed = () => {
 
   return (
     <PageTemplate>
-      <FeedMenu setfeedData={setFeedData} />
-
+      {/* <FeedMenu setfeedData={setFeedData} /> */}
       <FeedSearch />
-
       {/* checkout feed */}
       <ul className="flex flex-col justify-between gap-2.5 ">
         <li>
@@ -40,24 +36,24 @@ export const Feed = () => {
             className="text-lg font-medium tracking-wider text-left "
             onClick={() => console.log(feedData)}
           >
-            Loaned Out
+            All Items
           </h2>
         </li>
-        <li className="flex items-center gap-5">
+        <li className="flex items-center gap-2.5  md:gap-5">
           <p className="text-sm font-normal tracking-wider ">Sort By</p>
-          <button className="text-xs font-light tracking-wider p-2.5 bg-gray-500/10 rounded-md">
-            Tool Name
+          <button className="px-2.5 py-2.5 text-xs font-light tracking-wider rounded-md bg-gray-500/10">
+            Tool name
           </button>
-          <button className="text-xs font-light p-2.5 tracking-wider  bg-gray-500/10 rounded-md">
+          <button className="px-2.5 py-2.5 text-xs font-light tracking-wider rounded-md bg-gray-500/10">
             Borrower
+          </button>
+          <button className="px-2.5 py-2.5 text-xs font-light tracking-wider rounded-md bg-gray-500/10">
+            Status
           </button>
         </li>
         {feedData.length > 0 ? (
           feedData
-            .filter((tool) => {
-              return tool.loanee;
-            })
-            .sort((toola, toolb) => (toola.name > toolb.name ? 1 : -1))
+            .sort((toola, toolb) => (toola.loanee < toolb.loanee ? 1 : -1))
             .map((tool) => <FeedItem key={tool.id} feed={tool} />)
         ) : (
           <>

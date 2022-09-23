@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    color: {
+      primary: "--var(--primary-color)",
+    },
+    extend: {
+      fontFamily: {
+        comfortaa: ["Comfortaa", "cursive"],
+        poppins: ["Poppins", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

@@ -7,9 +7,9 @@ export const LoginRegisterLink = () => {
     navigate("/register");
   };
   return (
-    <p className="login__register">
+    <p className="text-xs text-center">
       Done have an account?{" "}
-      <span onClick={handleClick} className="login__register-span">
+      <span onClick={handleClick} className="font-medium text-blue-500">
         Register
       </span>
     </p>
