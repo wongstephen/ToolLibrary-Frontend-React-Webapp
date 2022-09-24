@@ -11,7 +11,6 @@ export const FeedSearch = ({ feedData, setSearchData }) => {
     if (searchInput.length === 0) {
       setSearchData(feedData);
     } else {
-      // console.log(feedData);
       const searchTerm = searchInput.toLowerCase().trim();
       setSearchData((searchData) =>
         feedData.filter((tool) => tool.name.toLowerCase().includes(searchTerm))

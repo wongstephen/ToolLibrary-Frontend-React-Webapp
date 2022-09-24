@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { getUserToolsApi } from "../api/axiosApi";
+import { useNavigate } from "react-router-dom";
 
 import { FeedItemSkeleton } from "./FeedItemSkeleton";
 import { FeedItem } from "./FeedItem";
@@ -10,6 +11,8 @@ import { PageTemplate } from "./PageTemplate";
 import { FeedSortButton } from "./FeedSortButton";
 
 export const Feed = () => {
+  const navigate = useNavigate();
+
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
 
@@ -37,6 +40,9 @@ export const Feed = () => {
     const getItems = async () => {
       const token = await localStorage.getItem("token");
       const data = await getUserToolsApi(token);
+      if (!data) {
+        navigate("/");
+      }
       setFeedData(data);
       setSearchData(data);
     };

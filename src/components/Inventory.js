@@ -39,12 +39,12 @@ export const Inventory = () => {
     setOnStatus((prevVal) => !prevVal);
     console.log(feedData);
     onStatus
-      ? setSearchData(feedData)
-      : setSearchData(
+      ? setSearchData(
           feedData.filter((tool) => {
             return !tool.loanee;
           })
-        );
+        )
+      : çsetSearchData(feedData);
   };
   // End Filter by Status
 
@@ -86,9 +86,7 @@ export const Inventory = () => {
         </li>
 
         {feedData.length > 0 ? (
-          searchData
-            // .sort((toola, toolb) => (toola.loanee < toolb.loanee ? 1 : -1))
-            .map((tool) => <FeedItem key={tool.id} feed={tool} />)
+          searchData.map((tool) => <FeedItem key={tool.id} feed={tool} />)
         ) : (
           <>
             {[...Array(Math.floor(Math.random() * 10 + 3))].map((e, i) => (
