@@ -1,14 +1,14 @@
 import React from "react";
 import { PencilSquareIcon, MinusCircleIcon } from "@heroicons/react/24/solid";
-
+import { updateLoanee } from "../api/axiosApi";
 export const FeedItem = (props) => {
   const tool = props.feed;
+  const handleLoanee = async () => {
+    const res = await updateLoanee(tool._id);
+    props.setFeedData(res);
+  };
   return (
     <li className="flex gap-5 p-2.5 border-2 border-gray-100 rounded">
-      {/* <div className="feed__card__input-container">
-        <input type="checkbox" className="feed__card__input-checkin" />
-      </div> */}
-
       <img
         src={tool.photo}
         alt="tool"
@@ -25,7 +25,10 @@ export const FeedItem = (props) => {
       </div>
       <div className="flex items-center justify-center gap-2.5">
         {tool.loanee && (
-          <MinusCircleIcon className="w-6 h-auto text-gray-500/50" />
+          <MinusCircleIcon
+            className="w-6 h-auto cursor-pointer text-gray-500/50"
+            onClick={handleLoanee}
+          />
         )}
         <PencilSquareIcon className="w-6 h-auto text-gray-500/50" />
       </div>

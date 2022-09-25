@@ -34,17 +34,26 @@ export const Inventory = () => {
   // End Sort Name and Borrower
 
   // Filter by Status
-  const [onStatus, setOnStatus] = useState(true);
+  const [onStatus, setOnStatus] = useState(3);
   const handleStatus = () => {
-    setOnStatus((prevVal) => !prevVal);
-    console.log(feedData);
-    onStatus
-      ? setSearchData(
-          feedData.filter((tool) => {
-            return !tool.loanee;
-          })
-        )
-      : çsetSearchData(feedData);
+    setOnStatus((prevVal) => {
+      return (prevVal += 1);
+    });
+    if (onStatus % 3 === 0) {
+      setSearchData(
+        feedData.filter((tool) => {
+          return !tool.loanee;
+        })
+      );
+    } else if (onStatus % 3 === 1) {
+      setSearchData(
+        feedData.filter((tool) => {
+          return tool.loanee;
+        })
+      );
+    } else {
+      setSearchData(feedData);
+    }
   };
   // End Filter by Status
 
@@ -57,6 +66,10 @@ export const Inventory = () => {
     };
     getItems();
   }, []);
+
+  useEffect(() => {
+    setSearchData(feedData);
+  }, [feedData]);
 
   return (
     <PageTemplate>
@@ -86,7 +99,9 @@ export const Inventory = () => {
         </li>
 
         {feedData.length > 0 ? (
-          searchData.map((tool) => <FeedItem key={tool.id} feed={tool} />)
+          searchData.map((tool) => (
+            <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
+          ))
         ) : (
           <>
             {[...Array(Math.floor(Math.random() * 10 + 3))].map((e, i) => (

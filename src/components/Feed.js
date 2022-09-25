@@ -38,7 +38,7 @@ export const Feed = () => {
 
   useEffect(() => {
     const getItems = async () => {
-      const token = await localStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const data = await getUserToolsApi(token);
       if (!data) {
         navigate("/");
@@ -48,6 +48,10 @@ export const Feed = () => {
     };
     getItems();
   }, []);
+
+  useEffect(() => {
+    setSearchData(feedData);
+  }, [feedData]);
 
   return (
     <PageTemplate>
@@ -87,7 +91,9 @@ export const Feed = () => {
               return tool.loanee;
             })
             // .sort((toola, toolb) => (toola.name > toolb.name ? 1 : -1))
-            .map((tool) => <FeedItem key={tool.id} feed={tool} />)
+            .map((tool) => (
+              <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
+            ))
         ) : (
           <>
             {[...Array(Math.floor(Math.random() * 10 + 3))].map((e, i) => (

@@ -28,3 +28,4 @@ The page will reload when you make changes.
 - Relationship Schema for Loanee
 - Additional test for user login
 - Password requirements
+- Store data into useContext to reduce API calls
