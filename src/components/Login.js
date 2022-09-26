@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import { LoginRegisterLink } from "./LoginRegisterLink";
+import { LoginRegisterLink } from "./presentational/LoginRegisterLink";
 import { AuthContext } from "../hooks/AuthContext";
 import { LoginForm } from "./LoginForm";
 
 import useDisabled from "../hooks/useDisabled";
-import { AppTitle } from "./AppTitle";
+import { AppTitle } from "./presentational/AppTitle";
 
 export const Login = () => {
   const { setUser } = useContext(AuthContext);

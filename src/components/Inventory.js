@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { getUserToolsApi } from "../api/axiosApi";
 
-import { FeedItemSkeleton } from "./FeedItemSkeleton";
-import { FeedItem } from "./FeedItem";
-import { FeedMenu } from "./FeedMenu";
-import { FeedSearch } from "./FeedSearch";
-import { PageTemplate } from "./PageTemplate";
-import { FeedSortButton } from "./FeedSortButton";
+import { FeedItemSkeleton } from "./presentational/FeedItemSkeleton";
+import { FeedItem } from "./presentational/FeedItem";
+import { FeedMenu } from "./presentational/FeedMenu";
+import { FeedSearch } from "./presentational/FeedSearch";
+import { PageTemplate } from "./presentational/PageTemplate";
+import { FeedSortButton } from "./presentational/FeedSortButton";
 
 export const Inventory = () => {
   const [feedData, setFeedData] = useState([]);

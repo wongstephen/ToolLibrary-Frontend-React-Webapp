@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const serverUrl = process.env.REACT_APP_SERVER_URL;
-const serverUrl = "http://localhost:8000";
+const serverUrl = process.env.REACT_APP_SERVER_URL;
+// const serverUrl = "http://localhost:8000";
 const lctoken = localStorage.getItem("token");
 
 export const getUserToolsApi = async (token) => {

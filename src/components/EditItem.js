@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { PageTemplate } from "./PageTemplate";
+import { PageTemplate } from "./presentational/PageTemplate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateTool } from "../api/axiosApi";
 
-export const EditTool = () => {
+export const EditItem = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const tool = location.state;

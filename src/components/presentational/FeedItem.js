@@ -1,6 +1,6 @@
 import React from "react";
 import { PencilSquareIcon, MinusCircleIcon } from "@heroicons/react/24/solid";
-import { updateTool } from "../api/axiosApi";
+import { updateTool } from "../../api/axiosApi";
 import { useNavigate } from "react-router-dom";
 
 export const FeedItem = (props) => {
@@ -17,7 +17,7 @@ export const FeedItem = (props) => {
       <img
         src={tool.photo}
         alt="tool"
-        className="feed__avator-image"
+        className="flex-1 w-2/12 rounded-full max-w-[4rem]"
         placeholder="none"
       />
       <div className="flex flex-col justify-around flex-1">
@@ -38,7 +38,7 @@ export const FeedItem = (props) => {
         <PencilSquareIcon
           className="w-6 h-auto cursor-pointer text-gray-500/50"
           onClick={() => {
-            navigate("/edit-tool", { state: tool });
+            navigate("/edit-item", { state: tool });
           }}
         />
       </div>

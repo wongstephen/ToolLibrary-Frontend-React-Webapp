@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { LoginRegisterLink } from "./LoginRegisterLink";
+import { LoginRegisterLink } from "../presentational/LoginRegisterLink";
 import { BrowserRouter as Router } from "react-router-dom";
 describe("LoginRegisterLink", () => {
   it("register text links to register component", () => {

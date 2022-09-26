@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Register } from "./Register";
+import { Register } from "../Register";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 

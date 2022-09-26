@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { PageTemplate } from "./PageTemplate";
+import { PageTemplate } from "./presentational/PageTemplate";
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 export const AddItem = () => {

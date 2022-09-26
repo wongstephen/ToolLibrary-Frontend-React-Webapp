@@ -3,7 +3,8 @@ import useDisabled from "../hooks/useDisabled";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "../api/axiosApi";
 
-import { PageTemplate } from "./PageTemplate";
+import { PageTemplate } from "./presentational/PageTemplate";
+import { InputText } from "./presentational/InputText";
 
 export const Register = () => {
   const [formVal, setFormVal] = useState({ email: "", password: "" });
@@ -39,7 +40,7 @@ export const Register = () => {
       <h3 className="m-2.5 text-base text-center">Already have an account?</h3>
       <div className="text-center">
         <button
-          className="w-full px-6 py-3 mt-0 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 hover:shadow-lg"
+          className="w-full max-w-sm px-6 py-3 mt-0 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 hover:shadow-lg"
           onClick={goHome}
         >
           Log In
@@ -49,21 +50,22 @@ export const Register = () => {
       <div className="h-[1px] w-auto bg-gray-300 my-10" />
 
       <h1 className="mb-5 text-center">Register a new account</h1>
-      <form onSubmit={handleSubmit}>
-        <input
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-wrap justify-center max-w-sm gap-2.5 my-2 mx-auto"
+      >
+        <InputText
           type="email"
           value={formVal.email}
           placeholder="Email"
           aria-label="email"
           name="email"
           onChange={handleChange}
-          // pattern=".+@globex\.com"
           size="30"
           required
-          className="block w-full px-3 py-3 m-0 text-base font-normal text-gray-700 ease-in-out border border-gray-300 border-solid rounded bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-gray-300 "
         />
 
-        <input
+        <InputText
           type="password"
           value={formVal.password}
           placeholder="Password"
@@ -71,23 +73,20 @@ export const Register = () => {
           name="password"
           onChange={handleChange}
           required
-          className="block w-full px-3 py-3 mt-5 text-base font-normal text-gray-700 ease-in-out border border-gray-300 border-solid rounded bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-gray-300"
         />
-        <div className="text-center">
-          <button
-            name="register"
-            aria-label="register"
-            disabled={disabledBtn}
-            type="submit"
-            className={`px-6 py-3 font-bold text-white rounded-md w-full mt-5 transition-all ease-in-out ${
-              disabledBtn
-                ? "bg-green-300 disabled:"
-                : "bg-green-500 hover:bg-green-700 hover:shadow-lg"
-            }`}
-          >
-            Register
-          </button>
-        </div>
+        <button
+          aria-label="register"
+          disabled={disabledBtn}
+          name="register"
+          type="submit"
+          className={`w-full px-6 py-3 mt-0 font-bold text-white bg-blue-500 rounded-md ${
+            disabledBtn
+              ? "bg-green-300 disabled:"
+              : "bg-green-500 hover:bg-green-700 hover:shadow-lg"
+          }`}
+        >
+          Register
+        </button>
       </form>
     </PageTemplate>
   );
