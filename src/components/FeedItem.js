@@ -1,12 +1,17 @@
 import React from "react";
 import { PencilSquareIcon, MinusCircleIcon } from "@heroicons/react/24/solid";
-import { updateLoanee } from "../api/axiosApi";
+import { updateTool } from "../api/axiosApi";
+import { useNavigate } from "react-router-dom";
+
 export const FeedItem = (props) => {
+  const navigate = useNavigate();
   const tool = props.feed;
+
   const handleLoanee = async () => {
-    const res = await updateLoanee(tool._id);
+    const res = await updateTool(tool._id, { loanee: "" });
     props.setFeedData(res);
   };
+
   return (
     <li className="flex gap-5 p-2.5 border-2 border-gray-100 rounded">
       <img
@@ -30,7 +35,12 @@ export const FeedItem = (props) => {
             onClick={handleLoanee}
           />
         )}
-        <PencilSquareIcon className="w-6 h-auto text-gray-500/50" />
+        <PencilSquareIcon
+          className="w-6 h-auto cursor-pointer text-gray-500/50"
+          onClick={() => {
+            navigate("/edit-tool", { state: tool });
+          }}
+        />
       </div>
     </li>
   );

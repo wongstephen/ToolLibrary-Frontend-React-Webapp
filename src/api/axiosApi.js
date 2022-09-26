@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const serverUrl = process.env.REACT_APP_SERVER_URL;
-// const serverUrl = "http://localhost:8000";
+// const serverUrl = process.env.REACT_APP_SERVER_URL;
+const serverUrl = "http://localhost:8000";
 const lctoken = localStorage.getItem("token");
 
 export const getUserToolsApi = async (token) => {
@@ -37,17 +37,13 @@ export const signUp = async (userData) => {
   }
 };
 
-export const updateLoanee = async (id) => {
+export const updateTool = async (id, body) => {
   try {
-    const res = await axios.patch(
-      `${serverUrl}/tools/${id}`,
-      { loanee: "" },
-      {
-        headers: {
-          Authorization: `Bearer ${lctoken}`,
-        },
-      }
-    );
+    const res = await axios.patch(`${serverUrl}/tools/${id}`, body, {
+      headers: {
+        Authorization: `Bearer ${lctoken}`,
+      },
+    });
     return res.data.tool;
   } catch (err) {
     console.log(err);

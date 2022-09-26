@@ -31,8 +31,8 @@ export const Login = () => {
   }, [loginValue]);
 
   return (
-    <div className="justify-center h-full sm:flex">
-      <div className="flex items-center justify-center flex-1 w-11/12 max-w-sm px-4 py-12 mx-auto my-10 sm:h-full rounded-2xl bg-lime-200 sm:max-w-l sm:rounded-none sm:m-0">
+    <div className="justify-center min-h-screen sm:flex">
+      <div className="flex items-center justify-center flex-1 w-11/12 max-w-sm px-4 py-12 mx-auto my-10 rounded-2xl bg-lime-200 sm:max-w-l sm:rounded-none sm:m-0">
         <img
           src={require("../assets/login-hero.png")}
           className="w-8/12"

@@ -67,6 +67,7 @@ export const Inventory = () => {
     getItems();
   }, []);
 
+  // Update list when loanee is removed
   useEffect(() => {
     setSearchData(feedData);
   }, [feedData]);

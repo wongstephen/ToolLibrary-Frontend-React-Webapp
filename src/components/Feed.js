@@ -11,8 +11,6 @@ import { PageTemplate } from "./PageTemplate";
 import { FeedSortButton } from "./FeedSortButton";
 
 export const Feed = () => {
-  const navigate = useNavigate();
-
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
 
@@ -36,6 +34,8 @@ export const Feed = () => {
   };
   // End Sort Name and Borrower
 
+  // Send user to homepage if no data
+  const navigate = useNavigate();
   useEffect(() => {
     const getItems = async () => {
       const token = localStorage.getItem("token");
@@ -49,6 +49,7 @@ export const Feed = () => {
     getItems();
   }, []);
 
+  // Update list when loanee is removed
   useEffect(() => {
     setSearchData(feedData);
   }, [feedData]);
