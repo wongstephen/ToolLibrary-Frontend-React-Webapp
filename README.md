@@ -1,12 +1,37 @@
 # Tool Loaner App
 
-To solve needing to mentally remember who you loaned your tools out to, you can track it with Tool Loaner.
-This project is a full-stack app that allows users to create an account and track a list of items loaned out to loanees.
+Why get frustrated trying to remember if you loaned your tools out again? Tool Library is a full-stack app that automatically tracks all the items in your tool inventory and you can see who has what. Forget about writing up a list on paper or trying to remember who you lent to; just use Tool Library and never worry about it again.
+<br />
+<br />
 
+<a href="https://toollibrary.netlify.app/">
+<img src="https://img.shields.io/badge/WWW-Tool%20Library-green" alt="tool library link"/></a>
+<br />
+<br />
+
+<img src="./assets/gitmockup.png">
+
+<br />
+<br />
+
+
+
+## Development
 ### Technologies Used
 
-ReactJS, JavaScript, MongoDB, NodeJS, Express, Authentication (JWT and Bcrypt, Tailwind,
+Front end
 
+- ReactJS
+- JavaScript
+- Tailwind
+
+Backend
+
+- MongoDB
+- NodeJS
+- Express
+- Bcrypt Encryption
+- JWT Authentication
 ### `npm start`
 
 Runs the app in the development mode.
@@ -29,3 +54,4 @@ The page will reload when you make changes.
 - Additional test for user login
 - Password requirements
 - Store data into useContext to reduce API calls
+- Protected Routes

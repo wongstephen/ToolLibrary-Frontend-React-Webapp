@@ -13,6 +13,7 @@ import { FeedSortButton } from "./presentational/FeedSortButton";
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Sort Name and Borrower
   const [sortUp, setSortUp] = useState(true);
@@ -45,6 +46,7 @@ export const Feed = () => {
       }
       setFeedData(data);
       setSearchData(data);
+      setLoading(false);
     };
     getItems();
   }, []);
@@ -86,21 +88,20 @@ export const Feed = () => {
               return <FeedSortButton key={idx}>{data.loanee}</FeedSortButton>;
             })}
         </li> */}
-        {feedData.length > 0 ? (
-          searchData
-            .filter((tool) => {
-              return tool.loanee;
-            })
-            // .sort((toola, toolb) => (toola.name > toolb.name ? 1 : -1))
-            .map((tool) => (
-              <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
-            ))
-        ) : (
+        {loading ? (
           <>
             {[...Array(Math.floor(Math.random() * 10 + 3))].map((e, i) => (
               <FeedItemSkeleton key={i} />
             ))}
           </>
+        ) : (
+          searchData
+            .filter((tool) => {
+              return tool.loanee;
+            })
+            .map((tool) => (
+              <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
+            ))
         )}
       </ul>
     </PageTemplate>
