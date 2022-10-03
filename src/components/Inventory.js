@@ -12,6 +12,7 @@ import { FeedSortButton } from "./presentational/FeedSortButton";
 export const Inventory = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Sort Name and Borrower and Status
   const [sortUp, setSortUp] = useState(true);
@@ -63,6 +64,7 @@ export const Inventory = () => {
       const data = await getUserToolsApi(token);
       setFeedData(data);
       setSearchData(data);
+      setLoading(false);
     };
     getItems();
   }, []);
@@ -99,16 +101,16 @@ export const Inventory = () => {
           <FeedSortButton handleSort={handleStatus}>Status</FeedSortButton>
         </li>
 
-        {feedData.length > 0 ? (
-          searchData.map((tool) => (
-            <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
-          ))
-        ) : (
+        {loading ? (
           <>
             {[...Array(Math.floor(Math.random() * 10 + 3))].map((e, i) => (
               <FeedItemSkeleton key={i} />
             ))}
           </>
+        ) : (
+          searchData.map((tool) => (
+            <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
+          ))
         )}
       </ul>
     </PageTemplate>
