@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const serverUrl = process.env.REACT_APP_SERVER_URL;
-// const serverUrl = "http://localhost:8000";
+// const serverUrl = process.env.REACT_APP_SERVER_URL;
+const serverUrl = "http://localhost:8000";
 const lctoken = localStorage.getItem("token");
 
 export const getUserToolsApi = async (token) => {
@@ -33,7 +33,7 @@ export const signUp = async (userData) => {
     const res = await axios.post(`${serverUrl}/users/signup`, userData);
     return res;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 

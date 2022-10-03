@@ -5,10 +5,12 @@ import { signUp } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
+import { Alert } from "./presentational/Alert";
 
 export const Register = () => {
   const [formVal, setFormVal] = useState({ email: "", password: "" });
   const [disabledBtn, setDisabledBtn] = useDisabled(true);
+  const [dupUser, setDupUser] = useState(false);
 
   useEffect(() => {
     if (formVal.email && formVal.password) {
@@ -31,8 +33,13 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await signUp(formVal);
-    console.log(res);
-    navigate("/");
+
+    if (res.request.status === 500) {
+      setDupUser(true);
+    }
+    if (res.status === 201) {
+      navigate("/accountcreated");
+    }
   };
 
   return (
@@ -50,6 +57,7 @@ export const Register = () => {
       <div className="h-[1px] w-auto bg-gray-300 my-10" />
 
       <h1 className="mb-5 text-center">Register a new account</h1>
+      {dupUser && <Alert>Email has already been taken</Alert>}
       <form
         onSubmit={handleSubmit}
         className="flex flex-wrap justify-center max-w-sm gap-2.5 my-2 mx-auto"

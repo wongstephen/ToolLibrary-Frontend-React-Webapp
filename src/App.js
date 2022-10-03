@@ -9,6 +9,7 @@ import { Feed } from "./components/Feed";
 import { SignOut } from "./components/SignOut";
 import { Inventory } from "./components/Inventory";
 import { EditItem } from "./components/EditItem";
+import { AccountCreated } from "./components/AccountCreated";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/register" element={<Register />} />
           <Route path="/signout" element={<SignOut />} />
+          <Route path="/accountcreated" element={<AccountCreated />} />
         </Routes>
       </main>
     </AuthProvider>
