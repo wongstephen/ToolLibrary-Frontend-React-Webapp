@@ -10,6 +10,7 @@ import { SignOut } from "./components/SignOut";
 import { Inventory } from "./components/Inventory";
 import { EditItem } from "./components/EditItem";
 import { AccountCreated } from "./components/AccountCreated";
+import { PrivateRoutes } from "./components/utils/PrivateRoutes";
 
 function App() {
   return (
@@ -17,13 +18,16 @@ function App() {
       <main className="w-full h-full App">
         <Routes>
           <Route path="/" element={<HomeScreen />} />s
-          <Route path="/additem" element={<AddItem />} />
-          <Route path="/edit-item/" element={<EditItem />} />
-          <Route path="/feed" element={<Feed />} />
-          <Route path="/inventory" element={<Inventory />} />
           <Route path="/register" element={<Register />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/accountcreated" element={<AccountCreated />} />
+          {/* Private Route */}
+          <Route element={<PrivateRoutes />}>
+            <Route path="/feed" element={<Feed />} exact />
+            <Route path="/inventory" element={<Inventory />} />
+            <Route path="/additem" element={<AddItem />} />
+            <Route path="/edit-item/" element={<EditItem />} />
+          </Route>
         </Routes>
       </main>
     </AuthProvider>

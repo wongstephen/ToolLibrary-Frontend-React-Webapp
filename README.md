@@ -14,9 +14,8 @@ Why get frustrated trying to remember if you loaned your tools out again? Tool L
 <br />
 <br />
 
-
-
 ## Development
+
 ### Technologies Used
 
 Front end
@@ -32,6 +31,7 @@ Backend
 - Express
 - Bcrypt Encryption
 - JWT Authentication
+
 ### `npm start`
 
 Runs the app in the development mode.
@@ -45,13 +45,16 @@ The page will reload when you make changes.
 
 ![Group 1](https://user-images.githubusercontent.com/20288105/190870869-642f60a7-70ab-4828-b164-0234d8359904.png)
 
+### Updates
+
+- 10/3/2022 Added check for duplicate email
+- 10/5/2022 Added Updated Routes
+
 ### Future Updates
 
 - Forget password
-- Host backend on Digital Ocean
-- Host frontend on Netlify
+- Host backend on AWS
 - Relationship Schema for Loanee
 - Additional test for user login
 - Password requirements
 - Store data into useContext to reduce API calls
-- Protected Routes
