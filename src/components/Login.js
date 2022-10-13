@@ -46,6 +46,7 @@ export const Login = () => {
             <LoginForm
               handleChange={handleChange}
               disabledBtn={disabled}
+              setDisabledBtn={setDisabled}
               loginValue={loginValue}
             />
             <LoginRegisterLink />

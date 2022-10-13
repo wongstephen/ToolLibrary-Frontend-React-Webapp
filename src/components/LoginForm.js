@@ -4,13 +4,20 @@ import { signInApi } from "../api/axiosApi";
 import { useNavigate } from "react-router-dom";
 import { InputText } from "./presentational/InputText";
 
-export const LoginForm = ({ handleChange, disabledBtn, loginValue }) => {
+export const LoginForm = ({
+  handleChange,
+  disabledBtn,
+  setDisabledBtn,
+  loginValue,
+}) => {
   const [showErr, setShowErr] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setDisabledBtn(true);
     const res = await signInApi(e, loginValue, setShowErr);
+    setDisabledBtn(false);
     if (res.status === 200) {
       localStorage.setItem("token", res.data.token);
       navigate("/feed");

@@ -32,7 +32,9 @@ export const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDisabledBtn(true);
     const res = await signUp(formVal);
+    setDisabledBtn(false);
 
     if (res.request.status === 500) {
       setDupUser(true);
