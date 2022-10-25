@@ -34,8 +34,7 @@ export const AddItem = () => {
           "Content-Type": "application/json",
         },
       });
-      // ! delete later
-      // console.log(res);
+
       setData(initialState);
       navigate("/");
     } catch (err) {
@@ -60,6 +59,8 @@ export const AddItem = () => {
 
         {/* <label htmlFor="photo">Image Url</label> */}
 
+        {/* Images / Future implementation
+        
         <input
           className={inputStyle}
           type="text"
@@ -67,7 +68,7 @@ export const AddItem = () => {
           placeholder="https://picsum.photos/200/"
           onChange={handleChange}
           value={data.photo}
-        />
+        /> */}
 
         {/* <label htmlFor="loanee">Loanee</label> */}
         <input

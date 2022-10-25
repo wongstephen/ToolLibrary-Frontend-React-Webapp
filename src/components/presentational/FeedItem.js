@@ -14,12 +14,13 @@ export const FeedItem = (props) => {
 
   return (
     <li className="flex gap-5 p-2.5 border-2 border-gray-100 rounded">
+      {/* Temp removed images features      
       <img
         src={tool.photo}
         alt="tool"
         className="flex-1 w-2/12 rounded-full max-w-[4rem]"
         placeholder="none"
-      />
+      /> */}
       <div className="flex flex-col justify-around flex-1">
         <h3 className="p-0 m-0 text-base font-semibold tracking-wider ">
           {tool.name}

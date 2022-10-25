@@ -43,14 +43,16 @@ export const EditItem = () => {
           onChange={handleChange}
         />
 
-        <input
+        {/* Images removed 
+        
+          <input
           className="block w-full px-3 py-3 m-0 my-5 text-base font-normal text-gray-700 ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding ransition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           type="text"
           name="photo"
           //   defaultValue={tool.photo}
           value={body.photo}
           onChange={handleChange}
-        />
+        /> */}
 
         <input
           name="loanee"
