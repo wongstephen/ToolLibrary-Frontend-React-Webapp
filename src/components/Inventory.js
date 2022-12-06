@@ -8,11 +8,29 @@ import { FeedMenu } from "./presentational/FeedMenu";
 import { FeedSearch } from "./presentational/FeedSearch";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { FeedSortButton } from "./presentational/FeedSortButton";
+import { useNavigate } from "react-router-dom";
 
 export const Inventory = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Send user to login if no data
+  const navigate = useNavigate();
+  useEffect(() => {
+    const getItems = async () => {
+      const token = localStorage.getItem("token");
+      const data = await getUserToolsApi(token);
+      if (!data) {
+        localStorage.clear();
+        navigate("/login");
+      }
+      setFeedData(data);
+      setSearchData(data);
+      setLoading(false);
+    };
+    getItems();
+  }, []);
 
   // Sort Name and Borrower and Status
   const [sortUp, setSortUp] = useState(true);

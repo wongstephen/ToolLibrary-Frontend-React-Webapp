@@ -35,7 +35,7 @@ export const Feed = () => {
   };
   // End Sort Name and Borrower
 
-  // Send user to homepage if no data
+  // Send user to login if no data
   const navigate = useNavigate();
   useEffect(() => {
     const getItems = async () => {
@@ -43,7 +43,7 @@ export const Feed = () => {
       const data = await getUserToolsApi(token);
       if (!data) {
         localStorage.clear();
-        navigate("/");
+        navigate("/login");
       }
       setFeedData(data);
       setSearchData(data);
