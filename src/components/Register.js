@@ -27,7 +27,7 @@ export const Register = () => {
 
   const navigate = useNavigate();
   const goHome = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   const handleSubmit = async (e) => {
@@ -46,18 +46,6 @@ export const Register = () => {
 
   return (
     <PageTemplate>
-      <h3 className="m-2.5 text-base text-center">Already have an account?</h3>
-      <div className="text-center">
-        <button
-          className="w-full max-w-sm px-6 py-3 mt-0 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 hover:shadow-lg"
-          onClick={goHome}
-        >
-          Log In
-        </button>
-      </div>
-
-      <div className="h-[1px] w-auto bg-gray-300 my-10" />
-
       <h1 className="mb-5 text-center">Register a new account</h1>
       {dupUser && <Alert>Email has already been taken</Alert>}
       <form
@@ -89,15 +77,27 @@ export const Register = () => {
           disabled={disabledBtn}
           name="register"
           type="submit"
-          className={`w-full px-6 py-3 mt-0 font-bold text-white bg-blue-500 rounded-md ${
+          className={`w-full px-6 py-3 mt-0 font-bold text-white bg-blue-500 rounded-sm ${
             disabledBtn
-              ? "bg-green-300 disabled:"
-              : "bg-green-500 hover:bg-green-700 hover:shadow-lg"
+              ? "bg-gray-400 disabled:"
+              : "bg-green-600 hover:bg-green-700 hover:shadow-lg"
           }`}
         >
           Register
         </button>
       </form>
+
+      <div className="h-[1px] w-auto bg-gray-300 my-10" />
+
+      <h3 className="m-2.5 text-base text-center">Already have an account?</h3>
+      <div className="text-center">
+        <button
+          className="w-full max-w-sm px-6 py-3 mt-0 font-bold text-white bg-blue-600 rounded-sm hover:bg-blue-700 hover:shadow-lg"
+          onClick={goHome}
+        >
+          Log In
+        </button>
+      </div>
     </PageTemplate>
   );
 };

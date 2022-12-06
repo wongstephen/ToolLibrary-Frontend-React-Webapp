@@ -11,6 +11,7 @@ import { Inventory } from "./components/Inventory";
 import { EditItem } from "./components/EditItem";
 import { AccountCreated } from "./components/AccountCreated";
 import { PrivateRoutes } from "./components/utils/PrivateRoutes";
+import { Login } from "./components/Login";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <main className="w-full h-full App">
         <Routes>
           <Route path="/" element={<HomeScreen />} />s
+          <Route path="/login" element={<Login />} />s
           <Route path="/register" element={<Register />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/accountcreated" element={<AccountCreated />} />

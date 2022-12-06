@@ -95,6 +95,7 @@ export const Feed = () => {
             ))}
           </>
         ) : (
+          searchData &&
           searchData
             .filter((tool) => {
               return tool.loanee;

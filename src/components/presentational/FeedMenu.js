@@ -35,7 +35,7 @@ export const FeedMenu = ({ leftBtn }) => {
           <button>
             <HomeIcon
               onClick={() => {
-                navigate("/");
+                navigate("/feed");
               }}
               className="p-2.5 text-black rounded-full w-10 h-10 mx-auto white hover:bg-lime-400 transition-all"
             />

@@ -81,10 +81,7 @@ export const Inventory = () => {
       {/* checkout feed */}
       <ul className="flex flex-col justify-between gap-2.5 ">
         <li>
-          <h2
-            className="text-lg font-medium tracking-wider text-left "
-            onClick={() => console.log(feedData)}
-          >
+          <h2 className="text-lg font-medium tracking-wider text-left ">
             All Items
           </h2>
         </li>

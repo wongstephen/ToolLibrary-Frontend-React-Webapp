@@ -36,7 +36,7 @@ export const AddItem = () => {
       });
 
       setData(initialState);
-      navigate("/");
+      navigate("/feed");
     } catch (err) {
       console.log(err);
     }
@@ -91,7 +91,7 @@ export const AddItem = () => {
             type="button"
             className="px-6 py-3 font-bold text-white bg-red-600 rounded-md"
             onClick={() => {
-              navigate("/");
+              navigate("/feed");
             }}
           >
             Cancel
