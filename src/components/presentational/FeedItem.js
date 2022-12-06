@@ -1,7 +1,12 @@
 import React from "react";
-import { PencilSquareIcon, MinusCircleIcon } from "@heroicons/react/24/solid";
+import {
+  PencilSquareIcon,
+  TrashIcon,
+  UserMinusIcon,
+} from "@heroicons/react/24/solid";
 import { updateTool } from "../../api/axiosApi";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const FeedItem = (props) => {
   const navigate = useNavigate();
@@ -10,6 +15,33 @@ export const FeedItem = (props) => {
   const handleLoanee = async () => {
     const res = await updateTool(tool._id, { loanee: "" });
     props.setFeedData(res);
+  };
+
+  const handleTrash = async () => {
+    // const res = await updateTool(tool._id, { loanee: "" });
+    // props.setFeedData(res);
+    try {
+      const res = await axios.delete(
+        `${process.env.REACT_APP_SERVER_URL}/tools/${tool._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log(res.data);
+      const res2 = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/tools`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      props.setFeedData(res2.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -31,16 +63,23 @@ export const FeedItem = (props) => {
       </div>
       <div className="flex items-center justify-center gap-2.5">
         {tool.loanee && (
-          <MinusCircleIcon
+          <UserMinusIcon
             className="w-6 h-auto cursor-pointer text-gray-500/50"
             onClick={handleLoanee}
+            title="Remove Loanee"
           />
         )}
         <PencilSquareIcon
+          title="Edit Tool"
           className="w-6 h-auto cursor-pointer text-gray-500/50"
           onClick={() => {
             navigate("/edit-item", { state: tool });
           }}
+        />
+        <TrashIcon
+          className="w-6 h-auto cursor-pointer text-gray-500/50"
+          title="Delete Tool"
+          onClick={handleTrash}
         />
       </div>
     </li>

@@ -1,0 +1,42 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const useAxios = (path, body = null) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(process.env.REACT_APP_SERVER_URL + path)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [path]);
+
+  const login = (body) => {
+    setLoading(true);
+    axios
+      .post(process.env.REACT_APP_SERVER_URL, body)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  return { data, loading, error, login };
+};
+
+export default useAxios;

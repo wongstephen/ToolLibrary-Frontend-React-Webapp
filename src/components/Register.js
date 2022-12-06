@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useDisabled from "../hooks/useDisabled";
 import { useNavigate } from "react-router-dom";
+import { useCheckToken } from "../hooks/useCheckToken";
 import { signUp } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
@@ -11,6 +12,9 @@ export const Register = () => {
   const [formVal, setFormVal] = useState({ email: "", password: "" });
   const [disabledBtn, setDisabledBtn] = useDisabled(true);
   const [dupUser, setDupUser] = useState(false);
+
+  const navigate = useNavigate();
+  useCheckToken(); //Send user to feed if already logged in
 
   useEffect(() => {
     if (formVal.email && formVal.password) {
@@ -25,7 +29,6 @@ export const Register = () => {
     setFormVal((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const navigate = useNavigate();
   const goHome = () => {
     navigate("/login");
   };
@@ -46,7 +49,9 @@ export const Register = () => {
 
   return (
     <PageTemplate>
-      <h1 className="mb-5 text-center">Register a new account</h1>
+      <p className="mt-5 text-sm font-light text-center">
+        Register a new account
+      </p>
       {dupUser && <Alert>Email has already been taken</Alert>}
       <form
         onSubmit={handleSubmit}

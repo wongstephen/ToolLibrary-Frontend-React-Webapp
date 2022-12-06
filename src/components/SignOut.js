@@ -1,10 +1,8 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../hooks/AuthContext";
 import { AppTitle } from "./presentational/AppTitle";
 
 export const SignOut = () => {
-  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
     localStorage.clear();

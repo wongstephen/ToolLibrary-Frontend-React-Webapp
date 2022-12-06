@@ -17,17 +17,6 @@ export const getUserToolsApi = async (token) => {
   }
 };
 
-export const signInApi = async (e, loginValue, setShowErr) => {
-  e.preventDefault();
-  try {
-    const res = await axios.post(`${serverUrl}/users/signin`, loginValue);
-    return res;
-  } catch (err) {
-    console.log(err);
-    setShowErr(true);
-  }
-};
-
 export const signUp = async (userData) => {
   try {
     const res = await axios.post(`${serverUrl}/users/signup`, userData);

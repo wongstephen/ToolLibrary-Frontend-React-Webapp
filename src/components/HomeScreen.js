@@ -6,6 +6,7 @@ export const HomeScreen = () => {
     e.preventDefault();
     navigate(`/${e.target.name}`);
   };
+  
   return (
     <div id="homescreen" className="max-w-5xl p-10 mx-auto">
       <div className="flex justify-between mb-20">
@@ -53,12 +54,12 @@ export const HomeScreen = () => {
         </div>
       </div>
 
-      <div className="p-4 mx-auto mb-20 bg-white rounded-lg">
+      <div className="p-16 mx-auto mb-20 bg-white rounded-lg">
         <p className="mb-12 text-2xl tracking-wider font-extralight text-neutral-700 leading-wider max-w-prose">
           "You might not know it yet, but Tool Library is an app that keeps
           track of the tools you loan out to friends so you get them back! It
           makes lending tools easy and efficient. It's like giving someone a key
-          to your house.
+          to your house."
         </p>
         <div className="w-full py-6 pl-6 md:flex md:gap-12 md:items-center">
           <p className="mb-4 text-xl font-extralight text-neutral-700 leading-wider md:order-2">
@@ -77,7 +78,7 @@ export const HomeScreen = () => {
         <img
           src={require("../assets/yellow-set-tools-black-background.jpg")}
           alt="Yellow on black background by senivpetro on Freepik"
-          className="mb-16 rounded-md"
+          className="w-full h-auto mx-auto mb-16 rounded-md"
         />
         <p className="mb-12 text-2xl tracking-wider font-extralight text-neutral-700 leading-wider max-w-prose">
           Tool Library is the app for people who love lending tools! It's never
