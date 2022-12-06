@@ -42,6 +42,7 @@ export const Feed = () => {
       const token = localStorage.getItem("token");
       const data = await getUserToolsApi(token);
       if (!data) {
+        localStorage.clear();
         navigate("/");
       }
       setFeedData(data);
