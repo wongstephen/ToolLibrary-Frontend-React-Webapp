@@ -6,7 +6,7 @@ export const HomeScreen = () => {
     e.preventDefault();
     navigate(`/${e.target.name}`);
   };
-  
+
   return (
     <div id="homescreen" className="max-w-5xl p-10 mx-auto">
       <div className="flex justify-between mb-20">
@@ -25,13 +25,13 @@ export const HomeScreen = () => {
       <div className="mb-20 md:flex md:gap-8">
         <div className="md:basis-1/2">
           <h2
-            className="mb-12 text-6xl font-light leading-tight tracking-tight text-neutral-900"
+            className="mb-12 text-4xl font-light leading-tight tracking-tight md:text-6xl text-neutral-900"
             id="home-subtitle"
           >
             The #1 List Platform to Track Your Stuff.
           </h2>
 
-          <p className="mb-12 text-xl tracking-wider font-extralight text-neutral-700 leading-wider ">
+          <p className="mb-12 tracking-wider text- font-extralight text-neutral-700 leading-wider ">
             You've loaned your tools to a friend and now you're not sure which
             tool they have. You're too embarrassed to ask them, and it's become
             a pet peeve. Tool Library is an app that keeps track of the tools
@@ -54,15 +54,15 @@ export const HomeScreen = () => {
         </div>
       </div>
 
-      <div className="p-16 mx-auto mb-20 bg-white rounded-lg">
-        <p className="mb-12 text-2xl tracking-wider font-extralight text-neutral-700 leading-wider max-w-prose">
+      <div className="p-6 mx-auto mb-20 bg-white rounded-lg md:p-16">
+        <p className="mb-12 tracking-wider text-md md:text-2xl font-extralight text-neutral-700 leading-wider max-w-prose">
           "You might not know it yet, but Tool Library is an app that keeps
           track of the tools you loan out to friends so you get them back! It
           makes lending tools easy and efficient. It's like giving someone a key
           to your house."
         </p>
         <div className="w-full py-6 pl-6 md:flex md:gap-12 md:items-center">
-          <p className="mb-4 text-xl font-extralight text-neutral-700 leading-wider md:order-2">
+          <p className="mb-4 text-md md:text-lg font-extralight text-neutral-700 leading-wider md:order-2">
             <span className="font-semibold">Stephen Wong</span>,<br /> Owner at
             Tool Library
           </p>
