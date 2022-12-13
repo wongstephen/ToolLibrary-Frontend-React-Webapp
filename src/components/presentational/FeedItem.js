@@ -18,8 +18,6 @@ export const FeedItem = (props) => {
   };
 
   const handleTrash = async () => {
-    // const res = await updateTool(tool._id, { loanee: "" });
-    // props.setFeedData(res);
     try {
       const res = await axios.delete(
         `${process.env.REACT_APP_SERVER_URL}/tools/${tool._id}`,

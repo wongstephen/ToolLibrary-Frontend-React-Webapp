@@ -38,3 +38,16 @@ export const updateTool = async (id, body) => {
     console.log(err);
   }
 };
+
+export const deleteTool = async (id) => {
+  try {
+    const res = await axios.delete(`${serverUrl}/tools/${id}`, {
+      headers: {
+        Authorization: `Bearer ${lctoken}`,
+      },
+    });
+    return res.data.tool;
+  } catch (err) {
+    console.log(err);
+  }
+};
