@@ -9,9 +9,14 @@ import { InputText } from "./presentational/InputText";
 import { Alert } from "./presentational/Alert";
 
 export const Register = () => {
-  const [formVal, setFormVal] = useState({ email: "", password: "" });
+  const [formVal, setFormVal] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [disabledBtn, setDisabledBtn] = useDisabled(true);
   const [dupUser, setDupUser] = useState(false);
+  const [passwordsNotMatch, setPasswordsNotMatch] = useState(false);
 
   const navigate = useNavigate();
   useCheckToken(); //Send user to feed if already logged in
@@ -35,6 +40,10 @@ export const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formVal.password !== formVal.confirmPassword) {
+      setPasswordsNotMatch(true);
+      return;
+    }
     setDisabledBtn(true);
     const res = await signUp(formVal);
     setDisabledBtn(false);
@@ -52,7 +61,12 @@ export const Register = () => {
       <p className="mt-5 text-sm font-light text-center">
         Register a new account
       </p>
-      {dupUser && <Alert>Email has already been taken</Alert>}
+      {dupUser && <Alert>Email has already been taken.</Alert>}
+      {passwordsNotMatch && (
+        <Alert>
+          Passwords do noth Match. Please enter your password again.
+        </Alert>
+      )}
       <form
         onSubmit={handleSubmit}
         className="flex flex-wrap justify-center max-w-sm gap-2.5 my-2 mx-auto"
@@ -74,6 +88,15 @@ export const Register = () => {
           placeholder="Password"
           aria-label="password"
           name="password"
+          onChange={handleChange}
+          required
+        />
+        <InputText
+          type="password"
+          value={formVal.confirmPassword}
+          placeholder="Confirm Password"
+          aria-label="password"
+          name="confirmPassword"
           onChange={handleChange}
           required
         />

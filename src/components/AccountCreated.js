@@ -7,8 +7,8 @@ export const AccountCreated = () => {
   useEffect(() => {
     localStorage.clear();
     setTimeout(() => {
-      navigate("/");
-    }, 1500);
+      navigate("/login");
+    }, 3000);
   }, []);
   return (
     <div className="flex flex-col flex-wrap justify-center w-full text-center item-center h-1/3">
