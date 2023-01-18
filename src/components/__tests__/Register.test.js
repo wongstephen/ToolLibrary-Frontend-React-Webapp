@@ -31,7 +31,7 @@ describe("Register", () => {
     );
     const emailInput = screen.getByPlaceholderText(/email/i);
     userEvent.type(emailInput, "email@email.com");
-    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const passwordInput = screen.getByPlaceholderText("Password");
     userEvent.type(passwordInput, "qwer1234");
     const button = screen.getByRole("button", { name: /register/i });
     expect(button).toBeEnabled();
@@ -55,7 +55,7 @@ describe("Register", () => {
         <Register />
       </BrowserRouter>
     );
-    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const passwordInput = screen.getByPlaceholderText("Password");
     userEvent.type(passwordInput, "qwer1234");
     const button = screen.getByRole("button", { name: /register/i });
     expect(button).toBeDisabled();

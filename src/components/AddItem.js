@@ -3,16 +3,21 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PageTemplate } from "./presentational/PageTemplate";
+import { ChooseAvator } from "./presentational/ChooseAvator";
 const serverUrl = process.env.REACT_APP_SERVER_URL;
-
+// const serverUrl = "http://localhost:8000";
 export const AddItem = () => {
   const navigate = useNavigate();
+
   const initialState = {
     name: "",
     photo: "https://loremflickr.com/200/200",
     loanee: "",
+    avator: "empty",
   };
   const [data, setData] = useState(initialState);
+
+  // avator for items
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -78,8 +83,9 @@ export const AddItem = () => {
           className={inputStyle}
           placeholder="Borrower"
         />
+        <ChooseAvator setData={setData} />
         <br />
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-8">
           <button
             type="submit"
             className="px-6 py-3 font-bold text-white bg-blue-600 rounded-md"

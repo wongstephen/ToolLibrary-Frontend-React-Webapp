@@ -95,7 +95,7 @@ export const Register = () => {
           type="password"
           value={formVal.confirmPassword}
           placeholder="Confirm Password"
-          aria-label="password"
+          aria-label="confirm password"
           name="confirmPassword"
           onChange={handleChange}
           required
@@ -114,7 +114,12 @@ export const Register = () => {
           Register
         </button>
       </form>
-
+      <p className="p-4 text-xs font-light">
+        The only reason we request your email is so that you can log in to the
+        Tool Library. We will never send emails to you from Tool Library.
+        Furthermore, your password is kept safe using a hashed and salted
+        security method.
+      </p>
       <div className="h-[1px] w-auto bg-gray-300 my-10" />
 
       <h3 className="m-2.5 text-base text-center">Already have an account?</h3>

@@ -35,7 +35,6 @@ export const Login = () => {
     }
   });
 
-  //TODO: move this to a custom hook
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -48,10 +47,12 @@ export const Login = () => {
         console.log("Success!");
         localStorage.setItem("token", res.data.token);
         navigate("/feed");
+        return;
       }
     } catch (err) {
       console.log("Invalid email or password.");
       setShowErr(true);
+      return;
     } finally {
       setDisabled(false);
     }
@@ -66,6 +67,7 @@ export const Login = () => {
       <form
         className="flex flex-wrap justify-center max-w-sm gap-2.5 my-2 mx-auto"
         onSubmit={handleLogin}
+        data-testid="form"
       >
         <InputText
           placeholder="Email"
