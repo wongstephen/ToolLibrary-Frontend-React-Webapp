@@ -11,7 +11,7 @@ export const AddItem = () => {
 
   const initialState = {
     name: "",
-    photo: "https://loremflickr.com/200/200",
+    // photo: "https://loremflickr.com/200/200",
     loanee: "",
     avator: "empty",
   };
@@ -84,8 +84,8 @@ export const AddItem = () => {
           placeholder="Borrower"
         />
         <ChooseAvator setData={setData} />
-        <br />
-        <div className="flex justify-between mt-8">
+
+        <div className="flex justify-between mt-12">
           <button
             type="submit"
             className="px-6 py-3 font-bold text-white bg-blue-600 rounded-md"

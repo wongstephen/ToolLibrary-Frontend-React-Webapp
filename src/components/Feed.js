@@ -1,19 +1,40 @@
 import React, { useEffect, useState } from "react";
 
+// api
 import { getUserToolsApi } from "../api/axiosApi";
+import useAxios from "../hooks/useAxiosInstance";
+import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
+// components
 import { FeedItemSkeleton } from "./presentational/FeedItemSkeleton";
 import { FeedItem } from "./presentational/FeedItem";
 import { FeedMenu } from "./presentational/FeedMenu";
 import { FeedSearch } from "./presentational/FeedSearch";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { FeedSortButton } from "./presentational/FeedSortButton";
+import axios from "../api/axios";
 
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // axios instance implementation
+  const [data, error, loading2] = useAxios({
+    axiosInstance: axios,
+    method: "GET",
+    url: "/tools/",
+    requestConfig: {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+    data: {},
+  });
+
+  // console.log({ feedData });
+  // console.log({ data, error, loading2 });
 
   // Sort Name and Borrower
   const [sortUp, setSortUp] = useState(true);

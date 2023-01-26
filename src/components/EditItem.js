@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateTool, deleteTool } from "../api/axiosApi";
+import { ChooseAvator } from "./presentational/ChooseAvator";
 
 export const EditItem = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const tool = location.state;
+
   const [body, setBody] = useState({
     name: tool.name,
     photo: tool.photo,
     loanee: tool.loanee,
+    avator: tool.avator,
   });
 
   const handleChange = (e) => {
@@ -45,7 +48,7 @@ export const EditItem = () => {
     <PageTemplate>
       <h2 className="text-3xl text-center uppercase">Edit Item</h2>
       <form onSubmit={editTool}>
-        <label className="relative top-5" htmlFor="name">
+        <label className="relative hidden top-5" htmlFor="name">
           Item Name
         </label>
         <input
@@ -66,7 +69,7 @@ export const EditItem = () => {
           value={body.photo}
           onChange={handleChange}
         /> */}
-        <label className="relative top-5" htmlFor="name">
+        <label className="relative hidden top-5" htmlFor="name">
           Borrower Name
         </label>
         <input
@@ -77,8 +80,8 @@ export const EditItem = () => {
           value={body.loanee}
           onChange={handleChange}
         />
-        <br />
-        <div className="flex justify-between">
+        <ChooseAvator setData={setBody} />
+        <div className="flex justify-between mt-12">
           <button
             type="submit"
             className="px-6 py-3 font-bold text-white bg-blue-600 rounded-md"
