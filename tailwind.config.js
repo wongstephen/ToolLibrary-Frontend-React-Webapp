@@ -9,6 +9,7 @@ module.exports = {
       fontFamily: {
         comfortaa: ["Comfortaa", "cursive"],
         poppins: ["Poppins", "sans-serif"],
+        unbounded: ["Unbounded", "cursive"],
       },
     },
   },

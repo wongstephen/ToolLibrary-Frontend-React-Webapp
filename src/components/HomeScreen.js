@@ -10,8 +10,8 @@ export const HomeScreen = () => {
   return (
     <div id="homescreen" className="max-w-5xl p-10 mx-auto">
       <div className="flex justify-between mb-20">
-        <h1 className="text-2xl font-medium tracking-tight uppercase md:text-4xl">
-          Tool Library App
+        <h1 className="text-2xl font-medium tracking-tight uppercase md:text-4xl font-unbounded">
+          Tool Library
         </h1>
         <button
           className="w-24 h-8 tracking-wider text-white bg-blue-600 rounded-sm"

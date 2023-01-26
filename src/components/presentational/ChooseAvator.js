@@ -25,9 +25,10 @@ export const ChooseAvator = ({ setData }) => {
     <div className="mt-12">
       <p>Choose a tool avator</p>
       <div className="flex gap-4 mt-2">
-        {Object.keys(avators).map((avator) => {
+        {Object.keys(avators).map((avator, idx) => {
           return (
             <img
+              key={idx}
               src={require(`../../assets/avator/${avators[avator]}`)}
               name={avator}
               alt={avator}
