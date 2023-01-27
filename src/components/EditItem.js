@@ -6,6 +6,7 @@ import { ChooseAvator } from "./presentational/ChooseAvator";
 
 export const EditItem = () => {
   const location = useLocation();
+
   const navigate = useNavigate();
   const tool = location.state;
 
@@ -54,7 +55,6 @@ export const EditItem = () => {
         <input
           name="name"
           className="block w-full px-3 py-3 m-0 my-5 text-base font-normal text-gray-700 ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding ransition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          //   defaultValue={tool.name}
           value={body.name}
           onChange={handleChange}
         />
@@ -80,7 +80,7 @@ export const EditItem = () => {
           value={body.loanee}
           onChange={handleChange}
         />
-        <ChooseAvator setData={setBody} />
+        <ChooseAvator setData={setBody} currentAvator={tool.avator} />
         <div className="flex justify-between mt-12">
           <button
             type="submit"

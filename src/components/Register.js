@@ -115,10 +115,11 @@ export const Register = () => {
         </button>
       </form>
       <p className="p-4 text-xs font-light">
-        The only reason we request your email is so that you can log in to the
-        Tool Library. We will never send emails to you from Tool Library.
-        Furthermore, your password is kept safe using a hashed and salted
-        security method.
+        The purpose of collecting the email address is to facilitate user
+        authentication for accessing the Tool Library. The email address will
+        not be utilized for any form of communication or correspondence by the
+        Tool Library. The password is stored in a secure manner by applying a
+        cryptographic hashing algorithm with a unique salt value for each user.
       </p>
       <div className="h-[1px] w-auto bg-gray-300 my-10" />
 

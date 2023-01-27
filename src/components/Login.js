@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCheckToken } from "../hooks/useCheckToken";
 import axios from "axios";
+import useAxios from "../hooks/useAxiosInstance";
 
 import { LoginRegisterLink } from "./presentational/LoginRegisterLink";
 import useDisabled from "../hooks/useDisabled";
@@ -44,7 +45,7 @@ export const Login = () => {
         userInput
       );
       if (res.status === 200) {
-        console.log("Success!");
+        console.log("Success!");  
         localStorage.setItem("token", res.data.token);
         navigate("/feed");
         return;

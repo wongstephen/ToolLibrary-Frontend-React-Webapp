@@ -16,8 +16,8 @@ import { Login } from "./components/Login";
 function App() {
   return (
     <AuthProvider>
-      <main className="w-full h-full overflow-hidden bg-cover App bg-bgImg">
-        <div className="bg-white bg-opacity-50">
+      <main className="w-full overflow-hidden bg-cover App bg-bgImg">
+        <div className="h-full min-h-screen bg-white bg-opacity-50">
           <Routes>
             <Route path="/" element={<HomeScreen />} />s
             <Route path="/login" element={<Login />} />s

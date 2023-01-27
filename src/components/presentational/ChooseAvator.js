@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export const ChooseAvator = ({ setData }) => {
+export const ChooseAvator = ({ setData, currentAvator }) => {
   const avators = {
     empty: "empty.png",
     hammer: "hammer.png",
@@ -14,6 +14,12 @@ export const ChooseAvator = ({ setData }) => {
 
   const [selAvator, setSelAvator] = useState("empty");
 
+  useEffect(() => {
+    if (currentAvator) {
+      setSelAvator(currentAvator);
+    }
+  }, []);
+
   const handleClick = (el) => {
     setSelAvator(el.target.name);
     setData((data) => {
@@ -24,7 +30,7 @@ export const ChooseAvator = ({ setData }) => {
   return (
     <div className="mt-12">
       <p>Choose a tool avator</p>
-      <div className="flex gap-4 mt-2">
+      <div className="flex flex-wrap gap-4 mt-2">
         {Object.keys(avators).map((avator, idx) => {
           return (
             <img
