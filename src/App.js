@@ -16,21 +16,23 @@ import { Login } from "./components/Login";
 function App() {
   return (
     <AuthProvider>
-      <main className="w-full h-full App">
-        <Routes>
-          <Route path="/" element={<HomeScreen />} />s
-          <Route path="/login" element={<Login />} />s
-          <Route path="/register" element={<Register />} />
-          <Route path="/signout" element={<SignOut />} />
-          <Route path="/accountcreated" element={<AccountCreated />} />
-          {/* Private Route */}
-          <Route element={<PrivateRoutes />}>
-            <Route path="/feed" element={<Feed />} exact />
-            <Route path="/inventory" element={<Inventory />} />
-            <Route path="/additem" element={<AddItem />} />
-            <Route path="/edit-item/" element={<EditItem />} />
-          </Route>
-        </Routes>
+      <main className="w-full h-full overflow-hidden bg-cover App bg-bgImg">
+        <div className="bg-gradient-to-b from-stone-800-50">
+          <Routes>
+            <Route path="/" element={<HomeScreen />} />s
+            <Route path="/login" element={<Login />} />s
+            <Route path="/register" element={<Register />} />
+            <Route path="/signout" element={<SignOut />} />
+            <Route path="/accountcreated" element={<AccountCreated />} />
+            {/* Private Route */}
+            <Route element={<PrivateRoutes />}>
+              <Route path="/feed" element={<Feed />} exact />
+              <Route path="/inventory" element={<Inventory />} />
+              <Route path="/additem" element={<AddItem />} />
+              <Route path="/edit-item/" element={<EditItem />} />
+            </Route>
+          </Routes>
+        </div>
       </main>
     </AuthProvider>
   );
