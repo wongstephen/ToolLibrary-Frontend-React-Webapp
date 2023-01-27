@@ -8,12 +8,14 @@ export const SignOut = () => {
     localStorage.clear();
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 2000);
   }, []);
   return (
-    <div className="flex flex-col flex-wrap justify-center w-full text-center item-center h-1/3">
+    <div className="flex flex-col justify-center w-full h-screen text-center item-center">
       <AppTitle />
-      <h3>Sign Out Successful</h3>
+      <div className="flex items-center justify-center h-full">
+        <h3>Sign Out Successful</h3>
+      </div>
     </div>
   );
 };

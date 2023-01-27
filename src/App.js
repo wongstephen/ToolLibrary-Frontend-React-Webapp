@@ -17,7 +17,7 @@ function App() {
   return (
     <AuthProvider>
       <main className="w-full h-full overflow-hidden bg-cover App bg-bgImg">
-        <div className="bg-gradient-to-b from-stone-800-50">
+        <div className="bg-white bg-opacity-50">
           <Routes>
             <Route path="/" element={<HomeScreen />} />s
             <Route path="/login" element={<Login />} />s
