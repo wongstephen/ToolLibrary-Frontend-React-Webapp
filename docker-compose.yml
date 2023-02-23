@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  toolloaner:
+    container_name: tl_public
+    build:
+      context: .
+      # dockerfile: dockerfile
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env.local

@@ -54,25 +54,6 @@ describe("Login Component Test", () => {
     expect(submitButton).toHaveAttribute("disabled");
   });
 
-  // test("form submits with valid inputs", async () => {
-  //   axios.get.mockResolvedValue({
-  //     status: 200,
-  //   });
-  //   render(<Login />);
-  //   const inputForm = screen.getByTestId("form");
-  //   // Find the form fields and enter valid input
-  //   const emailInput = screen.getByPlaceholderText(/email/i);
-  //   const passwordInput = screen.getByPlaceholderText(/password/i);
-  //   const submitButton = within(inputForm).getByText(/login/i);
-
-  //   fireEvent.change(emailInput, { target: { value: "n@e.com" } });
-  //   fireEvent.change(passwordInput, { target: { value: "pw" } });
-
-  //   // Todo: Navigate should have been called with ('/feed')
-
-  //   fireEvent.click(submitButton);
-  // });
-
   test("form displays error message when a required field is blank", () => {
     render(<Login />);
 
@@ -86,7 +67,6 @@ describe("Login Component Test", () => {
     // Fire Button
     const submitButton = within(inputForm).getByText(/login/i);
     fireEvent.click(submitButton);
-
     expect(
       screen.getByText(/please enter a valid email and password/i)
     ).toBeInTheDocument();

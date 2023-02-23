@@ -47,6 +47,7 @@ The page will reload when you make changes.
 
 ### Updates
 
+- 02/03/2023 Update summmary: Updates made to background and edit functionality. Added avatar for edit and tools. Localhost removed from API and confirm password feature added. Login redirected when no token is present and updated auth in mid-app. Deleted user tools and updated homepage. Google analytics and adsense added, loading screens added for inventory and login/registration. Private routes added and components organized for better functionality. Edit items feature added and loanee removed on click. Search and sort added to inventory, heroic icons added and styling updated with Tailwind. Connected frontend to live backend and updated signout page. Add Item component connected to backend and tests added for register. Feed connected to backend and updated with context for auth. Basic tests added.
 - 10/3/2022 Added check for duplicate email
 - 10/5/2022 Added Updated Routes
 

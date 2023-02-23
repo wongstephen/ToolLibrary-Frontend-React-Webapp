@@ -9,7 +9,6 @@ export const EditItem = () => {
 
   const navigate = useNavigate();
   const tool = location.state;
-
   const [body, setBody] = useState({
     name: tool.name,
     photo: tool.photo,

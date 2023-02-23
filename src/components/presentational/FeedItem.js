@@ -27,7 +27,6 @@ export const FeedItem = (props) => {
           },
         }
       );
-      console.log(res.data);
       const res2 = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/tools`,
         {
