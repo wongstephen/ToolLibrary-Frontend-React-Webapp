@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const serverUrl = process.env.REACT_APP_SERVER_URL;
-// const serverUrl = "http://localhost:8000";
+const URL = process.env.REACT_APP_SERVER_URL;
+// const URL = "http://localhost:8000";
 const lctoken = localStorage.getItem("token");
 
 export const getUserToolsApi = async (token) => {
   try {
-    const res = await axios.get(`${serverUrl}/tools`, {
+    const res = await axios.get(`${URL}/tools`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -19,7 +19,7 @@ export const getUserToolsApi = async (token) => {
 
 export const signUp = async (userData) => {
   try {
-    const res = await axios.post(`${serverUrl}/users/signup`, userData);
+    const res = await axios.post(`${URL}/users/signup`, userData);
     return res;
   } catch (err) {
     return err;
@@ -28,7 +28,7 @@ export const signUp = async (userData) => {
 
 export const updateTool = async (id, body) => {
   try {
-    const res = await axios.patch(`${serverUrl}/tools/${id}`, body, {
+    const res = await axios.patch(`${URL}/tools/${id}`, body, {
       headers: {
         Authorization: `Bearer ${lctoken}`,
       },
@@ -41,7 +41,7 @@ export const updateTool = async (id, body) => {
 
 export const deleteTool = async (id) => {
   try {
-    const res = await axios.delete(`${serverUrl}/tools/${id}`, {
+    const res = await axios.delete(`${URL}/tools/${id}`, {
       headers: {
         Authorization: `Bearer ${lctoken}`,
       },

@@ -14,6 +14,7 @@ export const FeedItem = (props) => {
 
   const handleLoanee = async () => {
     const res = await updateTool(tool._id, { loanee: "" });
+    console.log({ res });
     props.setFeedData(res);
   };
 

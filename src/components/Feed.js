@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // api
 import { getUserToolsApi } from "../api/axiosApi";
 import useAxios from "../hooks/useAxiosInstance";
-import api from "../api/axios";
+// import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 // components
@@ -18,10 +18,9 @@ import axios from "../api/axios";
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   // axios instance implementation
-  const [data, error, loading2] = useAxios({
+  const [response, error, loading] = useAxios({
     axiosInstance: axios,
     method: "GET",
     url: "/tools/",
@@ -33,8 +32,17 @@ export const Feed = () => {
     data: {},
   });
 
+  // Update list when loanee is removed
+  useEffect(() => {
+    setFeedData(response);
+  }, [response]);
+
+  useEffect(() => {
+    setSearchData(feedData);
+  }, [feedData]);
+
   // console.log({ feedData });
-  // console.log({ data, error, loading2 });
+  // console.log({ response, error, loading });
 
   // Sort Name and Borrower
   const [sortUp, setSortUp] = useState(true);
@@ -58,30 +66,29 @@ export const Feed = () => {
 
   // Send user to login if no data
   const navigate = useNavigate();
+
   useEffect(() => {
-    const getItems = async () => {
+    async function checkToken() {
       const token = localStorage.getItem("token");
       const data = await getUserToolsApi(token);
       if (!data) {
         localStorage.clear();
         navigate("/login");
       }
-      setFeedData(data);
-      setSearchData(data);
-      setLoading(false);
-    };
-    getItems();
+    }
+    checkToken();
   }, []);
 
-  // Update list when loanee is removed
-  useEffect(() => {
-    setSearchData(feedData);
-  }, [feedData]);
+  function createSkeleton() {
+    const rand = Math.floor(Math.random() * 10 + 3);
+    const arr = new Array(rand).fill("");
+    const arrMap = arr.map((_, idx) => <FeedItemSkeleton key={idx} />);
+    return arrMap;
+  }
 
   return (
     <PageTemplate>
       <FeedMenu leftBtn="inventory" />
-
       <FeedSearch feedData={feedData} setSearchData={setSearchData} />
 
       {/* checkout feed */}
@@ -101,28 +108,15 @@ export const Feed = () => {
           <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton>
           <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton>
         </li>
-        {/* filter future feature */}
-        {/* <li className="flex flex-wrap items-center gap-5">
-          <p className="text-sm font-normal tracking-wider ">Filter By</p>
-          {[...new Set(feedData.filter((tool) => tool.loanee))]
-            .sort()
-            .map((data, idx) => {
-              return <FeedSortButton key={idx}>{data.loanee}</FeedSortButton>;
-            })}
-        </li> */}
         {loading ? (
-          <>
-            {[...Array(Math.floor(Math.random() * 10 + 3))].map((e, i) => (
-              <FeedItemSkeleton key={i} />
-            ))}
-          </>
+          <>{createSkeleton()}</>
         ) : (
           searchData &&
           searchData
             .filter((tool) => {
               return tool.loanee;
             })
-            .map((tool) => (
+            .map((tool, idx) => (
               <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
             ))
         )}

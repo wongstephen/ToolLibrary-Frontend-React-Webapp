@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCheckToken } from "../hooks/useCheckToken";
+// import { useCheckToken } from "../hooks/useCheckToken";
 import axios from "axios";
-import useAxios from "../hooks/useAxiosInstance";
 
 import { LoginRegisterLink } from "./presentational/LoginRegisterLink";
 import useDisabled from "../hooks/useDisabled";
@@ -11,7 +10,7 @@ import { InputText } from "./presentational/InputText";
 
 export const Login = () => {
   const navigate = useNavigate();
-  useCheckToken(); //Send user to feed if already logged in
+  // useCheckToken(); // sends user to user homepage if already logged in (currently disabled)
 
   const [userInput, setUserInput] = useState({
     email: "",
@@ -20,21 +19,21 @@ export const Login = () => {
   const [disabled, setDisabled] = useDisabled(true);
   const [showErr, setShowErr] = useState(false);
 
-  //Stores values of input into userInput state
+  // stores values of input into userInput state
   const handleChange = (e) => {
     setUserInput((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
   };
 
-  //Disables login button if email/pw critera isn't met
+  // disables login button if email/pw critera isn't met
   useEffect(() => {
     if (userInput.email.length > 0 && userInput.password.length > 0) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  });
+  }, [userInput]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -45,7 +44,6 @@ export const Login = () => {
         userInput
       );
       if (res.status === 200) {
-        console.log("Success!");  
         localStorage.setItem("token", res.data.token);
         navigate("/feed");
         return;
