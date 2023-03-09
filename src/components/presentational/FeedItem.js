@@ -14,13 +14,12 @@ export const FeedItem = (props) => {
 
   const handleLoanee = async () => {
     const res = await updateTool(tool._id, { loanee: "" });
-    console.log({ res });
     props.setFeedData(res);
   };
 
   const handleTrash = async () => {
     try {
-      const res = await axios.delete(
+      await axios.delete(
         `${process.env.REACT_APP_SERVER_URL}/tools/${tool._id}`,
         {
           headers: {
@@ -28,15 +27,12 @@ export const FeedItem = (props) => {
           },
         }
       );
-      const res2 = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/tools`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      props.setFeedData(res2.data);
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/tools`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      props.setFeedData(res.data);
     } catch (err) {
       console.log(err);
     }

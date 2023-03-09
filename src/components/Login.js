@@ -43,7 +43,6 @@ export const Login = () => {
       );
       if (res.status === 200) {
         await localStorage.setItem("token", res.data.token);
-        console.log("login " + res.data.token);
         navigate("/feed");
         return;
       }

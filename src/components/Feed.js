@@ -41,9 +41,6 @@ export const Feed = () => {
     setSearchData(feedData);
   }, [feedData]);
 
-  // console.log({ feedData });
-  // console.log({ response, error, loading });
-
   // Sort Name and Borrower
   const [sortUp, setSortUp] = useState(true);
   const handleSort = () => {
@@ -110,15 +107,29 @@ export const Feed = () => {
         </li>
         {loading ? (
           <>{createSkeleton()}</>
+        ) : !searchData || searchData.length === 0 ? (
+          <div>
+            <br />
+            No results!
+          </div>
         ) : (
-          searchData &&
-          searchData
-            .filter((tool) => {
+          <div>
+            {searchData.filter((tool) => {
               return tool.loanee;
-            })
-            .map((tool, idx) => (
-              <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
-            ))
+            }).length === 0 && (
+              <>
+                <br />
+                You have nothing loaned out!
+              </>
+            )}
+            {searchData
+              .filter((tool) => {
+                return tool.loanee;
+              })
+              .map((tool, idx) => (
+                <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
+              ))}
+          </div>
         )}
       </ul>
     </PageTemplate>
