@@ -2,7 +2,6 @@ import axios from "axios";
 
 const URL = process.env.REACT_APP_SERVER_URL;
 // const URL = "http://localhost:8000";
-const lctoken = localStorage.getItem("token");
 
 export const getUserToolsApi = async (token) => {
   try {
@@ -28,9 +27,11 @@ export const signUp = async (userData) => {
 
 export const updateTool = async (id, body) => {
   try {
+    const token = await localStorage.getItem("token");
+    console.log("patch " + token);
     const res = await axios.patch(`${URL}/tools/${id}`, body, {
       headers: {
-        Authorization: `Bearer ${lctoken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     return res.data.tool;
@@ -41,9 +42,11 @@ export const updateTool = async (id, body) => {
 
 export const deleteTool = async (id) => {
   try {
+    const token = await localStorage.getItem("token");
+    console.log("delete " + token);
     const res = await axios.delete(`${URL}/tools/${id}`, {
       headers: {
-        Authorization: `Bearer ${lctoken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     return res.data.tool;

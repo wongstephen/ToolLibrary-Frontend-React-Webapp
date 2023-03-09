@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useCheckToken } from "../hooks/useCheckToken";
 import axios from "axios";
 
 import { LoginRegisterLink } from "./presentational/LoginRegisterLink";
@@ -10,7 +9,6 @@ import { InputText } from "./presentational/InputText";
 
 export const Login = () => {
   const navigate = useNavigate();
-  // useCheckToken(); // sends user to user homepage if already logged in (currently disabled)
 
   const [userInput, setUserInput] = useState({
     email: "",
@@ -44,7 +42,8 @@ export const Login = () => {
         userInput
       );
       if (res.status === 200) {
-        localStorage.setItem("token", res.data.token);
+        await localStorage.setItem("token", res.data.token);
+        console.log("login " + res.data.token);
         navigate("/feed");
         return;
       }
