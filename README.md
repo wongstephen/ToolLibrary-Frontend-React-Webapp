@@ -59,3 +59,7 @@ The page will reload when you make changes.
 - Additional test for user login
 - Password requirements
 - Store data into useContext to reduce API calls
+
+
+### Issue Tracking
+- When the user edits an item and tries to update it, the server responds with an error.
