@@ -119,7 +119,7 @@ export const Feed = () => {
             }).length === 0 && (
               <>
                 <br />
-                You have nothing loaned out!
+                <p className="text-sm text-center">The list is empty!</p>
               </>
             )}
             {searchData

@@ -62,7 +62,7 @@ export const FeedItem = (props) => {
       <div className="flex items-center justify-center gap-2.5">
         {tool.loanee && (
           <UserMinusIcon
-            className="w-6 h-auto cursor-pointer text-gray-500/50"
+            className="hidden w-6 h-auto cursor-pointer text-gray-500/50 sm:block"
             onClick={handleLoanee}
             title="Remove Loanee"
           />
@@ -75,7 +75,7 @@ export const FeedItem = (props) => {
           }}
         />
         <TrashIcon
-          className="w-6 h-auto cursor-pointer text-gray-500/50"
+          className="hidden w-6 h-auto cursor-pointer text-gray-500/50 sm:block"
           title="Delete Tool"
           onClick={handleTrash}
         />
