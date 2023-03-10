@@ -33,6 +33,13 @@ export const Login = () => {
     }
   }, [userInput]);
 
+  // resets error when changes are made to input
+  useEffect(() => {
+    setShowErr(() => {
+      return false;
+    });
+  }, [userInput.email, userInput.password]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
