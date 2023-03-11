@@ -11,10 +11,10 @@ import { FeedItem } from "./presentational/FeedItem";
 import { FeedMenu } from "./presentational/FeedMenu";
 import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
-import { FeedSortButton } from "./presentational/FeedSortButton";
+// import { FeedSortButton } from "./presentational/FeedSortButton";
 import axios from "../api/axios";
 
-import { FunnelIcon } from "@heroicons/react/24/outline";
+// import { FunnelIcon } from "@heroicons/react/24/outline";
 
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);

@@ -46,7 +46,7 @@ export const AddItem = () => {
     }
     try {
       const token = await localStorage.getItem("token");
-      const res = await axios.post(`${serverUrl}/tools/`, data, {
+      await axios.post(`${serverUrl}/tools/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
