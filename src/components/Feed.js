@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // api
 import { getUserToolsApi } from "../api/axiosApi";
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { FeedItemSkeleton } from "./presentational/FeedItemSkeleton";
 import { FeedItem } from "./presentational/FeedItem";
 import { FeedMenu } from "./presentational/FeedMenu";
-import { FeedSearch } from "./presentational/FeedSearch";
+import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { FeedSortButton } from "./presentational/FeedSortButton";
 import axios from "../api/axios";
@@ -20,6 +20,7 @@ import { FunnelIcon } from "@heroicons/react/24/outline";
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const listTitleRef = useRef("All Items");
 
   useEffect(() => {
     async function checkToken() {
@@ -58,11 +59,16 @@ export const Feed = () => {
     setSearchData(feedData);
   }, [feedData]);
 
+  const [searchVal, setSearchVal] = useState("");
+
   //return list unfiltered
   const showFullList = () => {
     setSearchData(() => {
       return feedData;
     });
+    listTitleRef.current = "All Items";
+    setSearchVal((prev) => "");
+    return;
   };
 
   //return list with server data filtered with items borrorwd
@@ -72,6 +78,9 @@ export const Feed = () => {
         return tool.loanee;
       });
     });
+    listTitleRef.current = "Borrowed";
+    setSearchVal((prev) => "");
+    return;
   };
 
   // Sort Name and Borrower
@@ -111,10 +120,10 @@ export const Feed = () => {
         showFullList={showFullList}
         showBorrowedList={showBorrowedList}
       />
-
       {/* checkout feed */}
-      <ul className="flex flex-col justify-between gap-2 mt-8">
-        <li>
+
+      <div className="flex flex-col justify-between mt-8">
+        <div>
           <div className="flex items-center justify-between mx-4">
             <h2 className="text-4xl font-light tracking-wider text-left text-light-gray">
               Inventory
@@ -123,16 +132,25 @@ export const Feed = () => {
               <FunnelIcon className="w-6 h-6 ml-2 bg-transparent cursor-pointer text-light-gray" />
             </div>
           </div>
-        </li>
-
+        </div>
+        <div className="mt-8">
+          <Search
+            feedData={feedData}
+            setSearchData={setSearchData}
+            inputVal={searchVal}
+            setInputVal={setSearchVal}
+          />
+        </div>
+        <div className="mt-4">
+          <p className="ml-8 text-sm font-bold text-light-gray">
+            {listTitleRef.current}
+          </p>
+        </div>
         {/* sort */}
-        <li className="flex items-center ml-2">
-          {/* <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton> */}
-          {/* <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton> */}
-        </li>
-        <li>
-          <FeedSearch feedData={feedData} setSearchData={setSearchData} />
-        </li>
+
+        {/* <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton> */}
+        {/* <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton> */}
+
         {loading ? (
           <>{createSkeleton()}</>
         ) : !searchData || searchData.length === 0 ? (
@@ -154,7 +172,7 @@ export const Feed = () => {
                 </p>
               </>
             )}
-            <ul className="mt-4 mb-20">
+            <ul className="p-4 mx-4 mt-2 mb-20 rounded-md bg-white/5">
               {searchData.map((tool, idx) => (
                 <FeedItem
                   key={tool._id}
@@ -165,7 +183,7 @@ export const Feed = () => {
             </ul>
           </div>
         )}
-      </ul>
+      </div>
     </PageTemplate>
   );
 };

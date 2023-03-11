@@ -101,7 +101,7 @@ export const AddItem = () => {
         />
         <ChooseAvator setData={setData} />
 
-        <div className="justify-center mx-auto mt-4">
+        <div className="justify-center mx-auto my-4">
           <button
             type="submit"
             className="w-40 py-3 font-bold text-white rounded-md bg-blue-cement hover:bg-blue-cement/80 active:bg-blue-900"

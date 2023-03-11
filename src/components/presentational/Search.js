@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-export const FeedSearch = ({ feedData, setSearchData }) => {
+export const Search = ({ feedData, setSearchData, inputVal, setInputVal }) => {
   const [searchInput, setSearchInput] = useState("");
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
+    setInputVal((prev) => e.target.value);
   };
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export const FeedSearch = ({ feedData, setSearchData }) => {
         aria-label="Search"
         aria-describedby="button-addon3"
         onChange={handleChange}
+        value={inputVal}
       />
       <div className="flex items-center justify-center w-12">
         <svg
