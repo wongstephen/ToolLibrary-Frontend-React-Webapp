@@ -8,7 +8,7 @@ export const HomeScreen = () => {
   };
 
   return (
-    <div className="h-full bg-white bg-opacity-80">
+    <div className="h-full bg-white">
       <div id="homescreen" className="max-w-5xl p-10 mx-auto">
         <div className="flex justify-between mb-20">
           <h1 className="text-2xl font-medium tracking-tight uppercase md:text-4xl font-unbounded">
