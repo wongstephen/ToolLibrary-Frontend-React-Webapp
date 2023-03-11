@@ -20,13 +20,13 @@ export const Search = ({ feedData, setSearchData, inputVal, setInputVal }) => {
   }, [searchInput]);
 
   return (
-    <div className="flex w-full bg-gray-700 border-none ">
+    <div className="flex w-full max-w-5xl mx-auto bg-gray-700 border-none lg:rounded-xl ">
       <label htmlFor="search" className="sr-only">
         Search by Tool
       </label>
       <input
         type="search"
-        className="w-full p-4 font-light text-white transition ease-in-out bg-gray-700 border-none focus:bg-gray-600 focus:border-none focus:outline-none"
+        className="w-full p-4 font-light text-white transition ease-in-out bg-gray-700 border-none focus:bg-gray-600 focus:border-none focus:outline-none lg:rounded-l-xl "
         placeholder="Search by Tool Name"
         aria-label="Search"
         aria-describedby="button-addon3"

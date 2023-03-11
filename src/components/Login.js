@@ -50,7 +50,7 @@ export const Login = () => {
       );
       if (res.status === 200) {
         await localStorage.setItem("token", res.data.token);
-        navigate("/feed");
+        navigate("/home");
         return;
       }
     } catch (err) {

@@ -28,11 +28,11 @@ export const ChooseAvator = ({ setData, currentAvator }) => {
   };
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 mt-4">
       <p className="mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
         Choose a tool avator
       </p>
-      <div className="flex flex-wrap gap-4 mt-2">
+      <div className="flex flex-wrap gap-4 mt-4">
         {Object.keys(avators).map((avator, idx) => {
           return (
             <img

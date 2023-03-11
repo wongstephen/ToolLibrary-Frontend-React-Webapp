@@ -7,7 +7,6 @@ import { HomeScreen } from "./components/HomeScreen";
 import { AddItem } from "./components/AddItem";
 import { Feed } from "./components/Feed";
 import { SignOut } from "./components/SignOut";
-import { Inventory } from "./components/Inventory";
 import { EditItem } from "./components/EditItem";
 import { AccountCreated } from "./components/AccountCreated";
 import { PrivateRoutes } from "./components/utils/PrivateRoutes";
@@ -25,8 +24,7 @@ function App() {
           <Route path="/accountcreated" element={<AccountCreated />} />
           {/* Private Routes */}
           <Route element={<PrivateRoutes />}>
-            <Route path="/feed" element={<Feed />} exact />
-            <Route path="/inventory" element={<Inventory />} />
+            <Route path="/home" element={<Feed />} exact />
             <Route path="/additem" element={<AddItem />} />
             <Route path="/edit-item/" element={<EditItem />} />
           </Route>

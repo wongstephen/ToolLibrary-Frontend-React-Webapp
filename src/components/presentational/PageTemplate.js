@@ -3,7 +3,7 @@ import { AppTitle } from "./AppTitle";
 
 export const PageTemplate = ({ children }) => {
   return (
-    <div>
+    <div className="pb-32 mx-auto">
       <AppTitle />
       {children}
     </div>

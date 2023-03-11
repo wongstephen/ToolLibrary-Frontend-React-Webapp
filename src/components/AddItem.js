@@ -54,7 +54,7 @@ export const AddItem = () => {
       });
 
       setData(initialState);
-      navigate("/feed");
+      navigate("/home");
     } catch (err) {
       console.log(err);
     }
@@ -65,63 +65,65 @@ export const AddItem = () => {
 
   return (
     <PageTemplate>
-      <h2 className="mx-4 mt-8 text-4xl font-light tracking-wider text-left text-white">
-        Add Item
-      </h2>
-      <p className="mx-4 mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
-        To begin tracking a new item in your inventory, complete the form below
-        and add it to your list.
-      </p>
-      <form onSubmit={addTool} className="flex flex-col gap-4 mt-4">
-        <label className="sr-only" htmlFor="name">
-          Tool Name
-        </label>
-        <p
-          className={`mx-auto text-xs text-center text-red-500 ${
-            !submitErr ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          A tool name is required!
+      <div className="mx-auto max-w-7xl">
+        <h2 className="mx-4 mt-8 text-4xl font-light tracking-wider text-left text-white">
+          Add Item
+        </h2>
+        <p className="mx-4 mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
+          To begin tracking a new item in your inventory, complete the form
+          below and add it to your list.
         </p>
-
-        <input
-          name="name"
-          className={inputStyle}
-          onChange={handleChange}
-          value={data.name}
-          placeholder="Tool Name"
-        />
-        <label className="sr-only" htmlFor="loanee">
-          Borrower
-        </label>
-        <input
-          name="loanee"
-          onChange={handleChange}
-          value={data.loanee}
-          className={inputStyle}
-          placeholder="Borrower"
-        />
-        <ChooseAvator setData={setData} />
-
-        <div className="justify-center mx-auto my-4">
-          <button
-            type="submit"
-            className="w-40 py-3 font-bold text-white rounded-md bg-blue-cement hover:bg-blue-cement/80 active:bg-blue-900"
-            onClick={addTool}
+        <form onSubmit={addTool} className="flex flex-col gap-4 mt-4">
+          <label className="sr-only" htmlFor="name">
+            Tool Name
+          </label>
+          <p
+            className={`mx-auto text-xs text-center text-red-500 ${
+              !submitErr ? "opacity-0" : "opacity-100"
+            }`}
           >
-            Submit
-          </button>
-          <button
-            type="button"
-            className="font-bold text-white "
-            onClick={() => {
-              navigate("/feed");
-            }}
-          >
-            <XCircleIcon className="absolute w-12 h-12 text-white right-4 top-4 hover:text-light-gray active:text-med-gray" />
-          </button>
-        </div>
-      </form>
+            A tool name is required!
+          </p>
+
+          <input
+            name="name"
+            className={inputStyle}
+            onChange={handleChange}
+            value={data.name}
+            placeholder="Tool Name"
+          />
+          <label className="sr-only" htmlFor="loanee">
+            Borrower
+          </label>
+          <input
+            name="loanee"
+            onChange={handleChange}
+            value={data.loanee}
+            className={inputStyle}
+            placeholder="Borrower"
+          />
+          <ChooseAvator setData={setData} />
+
+          <div className="justify-center mx-auto my-6">
+            <button
+              type="submit"
+              className="w-40 py-3 font-bold text-white rounded-md bg-blue-cement hover:bg-blue-cement/80 active:bg-blue-900"
+              onClick={addTool}
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              className="font-bold text-white "
+              onClick={() => {
+                navigate("/home");
+              }}
+            >
+              <XCircleIcon className="absolute w-12 h-12 text-white right-4 top-4 hover:text-light-gray active:text-med-gray" />
+            </button>
+          </div>
+        </form>
+      </div>
     </PageTemplate>
   );
 };

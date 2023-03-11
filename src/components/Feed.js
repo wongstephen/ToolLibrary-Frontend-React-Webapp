@@ -77,7 +77,7 @@ export const Feed = () => {
         return tool.loanee;
       });
     });
-    listTitleRef.current = "Borrowed";
+    listTitleRef.current = "Currently Loaned Out";
     setSearchVal((prev) => "");
     return;
   };
@@ -116,7 +116,7 @@ export const Feed = () => {
       />
       {/* checkout feed */}
 
-      <div className="flex flex-col justify-between mt-8">
+      <div className="flex flex-col justify-between mx-auto mt-8 max-w-7xl">
         {feedData?.length > 0 && (
           <>
             <div>
@@ -125,11 +125,11 @@ export const Feed = () => {
                   Inventory
                 </h2>
                 <div>
-                  <FunnelIcon className="w-6 h-6 ml-2 bg-transparent cursor-pointer text-light-gray" />
+                  {/* <FunnelIcon className="w-6 h-6 ml-2 bg-transparent cursor-pointer text-light-gray" /> */}
                 </div>
               </div>
             </div>
-            <div className="mt-8">
+            <div className="mt-12">
               <Search
                 feedData={feedData}
                 setSearchData={setSearchData}
@@ -137,7 +137,7 @@ export const Feed = () => {
                 setInputVal={setSearchVal}
               />
             </div>
-            <div className="mt-4">
+            <div className="mt-12">
               <p className="ml-8 text-sm font-bold text-light-gray">
                 {listTitleRef.current}
               </p>
@@ -164,7 +164,7 @@ export const Feed = () => {
 
       <div>
         {searchData?.length > 0 ? (
-          <ul className="p-4 pb-20 mx-4 mt-2 rounded-md bg-white/5">
+          <ul className="p-4 mx-4 mx-auto mt-2 rounded-md bg-white/5 max-w-7xl">
             {searchData.map((tool) => (
               <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
             ))}

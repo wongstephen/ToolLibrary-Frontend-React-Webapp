@@ -32,17 +32,22 @@ export const FeedMenu = ({ leftBtn, showFullList, showBorrowedList }) => {
   };
 
   return (
-    <ul className="fixed bottom-0 grid items-center w-full grid-cols-3 bg-zinc-900/80 backdrop-blur-sm">
-      <StdNavBtn nav={borrowed ? "Borrowed" : "Show All"} onClick={handleList}>
-        <ListBulletIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer" />
-      </StdNavBtn>
-      <StdNavBtn nav="Add Item" onClick={navAdd}>
-        <PlusIcon className="w-12 h-12 p-2 text-white transition-all rounded-full cursor-pointer bg-blue-cement" />
-      </StdNavBtn>
-      <StdNavBtn nav="Logout" onClick={handleLogout}>
-        <ArrowLeftOnRectangleIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer" />
-      </StdNavBtn>
-    </ul>
+    <div className="fixed bottom-0 w-full bg-zinc-900/80 backdrop-blur-sm">
+      <ul className="grid items-center max-w-lg grid-cols-3 mx-auto">
+        <StdNavBtn
+          nav={borrowed ? "Borrowed" : "Show All"}
+          onClick={handleList}
+        >
+          <ListBulletIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer" />
+        </StdNavBtn>
+        <StdNavBtn nav="Add Item" onClick={navAdd}>
+          <PlusIcon className="w-12 h-12 p-2 text-white transition-all rounded-full cursor-pointer bg-blue-cement" />
+        </StdNavBtn>
+        <StdNavBtn nav="Logout" onClick={handleLogout}>
+          <ArrowLeftOnRectangleIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer" />
+        </StdNavBtn>
+      </ul>
+    </div>
   );
 };
 
