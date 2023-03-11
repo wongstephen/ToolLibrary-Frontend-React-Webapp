@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // api
 import { getUserToolsApi } from "../api/axiosApi";
@@ -7,30 +7,47 @@ import useAxios from "../hooks/useAxiosInstance";
 import { useNavigate } from "react-router-dom";
 
 // components
-import { FeedItemSkeleton } from "./presentational/FeedItemSkeleton";
 import { FeedItem } from "./presentational/FeedItem";
 import { FeedMenu } from "./presentational/FeedMenu";
-import { FeedSearch } from "./presentational/FeedSearch";
+import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { FeedSortButton } from "./presentational/FeedSortButton";
 import axios from "../api/axios";
 
+import { FunnelIcon } from "@heroicons/react/24/outline";
+
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const listTitleRef = useRef("All Items");
+
+  useEffect(() => {
+    async function checkToken() {
+      const token = localStorage.getItem("token");
+      const data = await getUserToolsApi(token);
+      if (!data) {
+        localStorage.clear();
+        navigate("/login");
+      }
+    }
+    checkToken();
+  }, []);
 
   // axios instance implementation
-  const [response, error, loading] = useAxios({
-    axiosInstance: axios,
-    method: "GET",
-    url: "/tools/",
-    requestConfig: {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+  const [response, error, loading] = useAxios(
+    {
+      axiosInstance: axios,
+      method: "GET",
+      url: "/tools/",
+      requestConfig: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       },
+      data: {},
     },
-    data: {},
-  });
+    []
+  );
 
   // Update list when loanee is removed
   useEffect(() => {
@@ -40,6 +57,30 @@ export const Feed = () => {
   useEffect(() => {
     setSearchData(feedData);
   }, [feedData]);
+
+  const [searchVal, setSearchVal] = useState("");
+
+  //return list unfiltered
+  const showFullList = () => {
+    setSearchData(() => {
+      return feedData;
+    });
+    listTitleRef.current = "All Items";
+    setSearchVal((prev) => "");
+    return;
+  };
+
+  //return list with server data filtered with items borrorwd
+  const showBorrowedList = () => {
+    setSearchData(() => {
+      return feedData.filter((tool) => {
+        return tool.loanee;
+      });
+    });
+    listTitleRef.current = "Currently Loaned Out";
+    setSearchVal((prev) => "");
+    return;
+  };
 
   // Sort Name and Borrower
   const [sortUp, setSortUp] = useState(true);
@@ -64,74 +105,76 @@ export const Feed = () => {
   // Send user to login if no data
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function checkToken() {
-      const token = localStorage.getItem("token");
-      const data = await getUserToolsApi(token);
-      if (!data) {
-        localStorage.clear();
-        navigate("/login");
-      }
-    }
-    checkToken();
-  }, []);
-
-  function createSkeleton() {
-    const rand = Math.floor(Math.random() * 10 + 3);
-    const arr = new Array(rand).fill("");
-    const arrMap = arr.map((_, idx) => <FeedItemSkeleton key={idx} />);
-    return arrMap;
-  }
-
   return (
     <PageTemplate>
-      <FeedMenu leftBtn="inventory" />
-      <FeedSearch feedData={feedData} setSearchData={setSearchData} />
-
+      <div className="w-full h-[30vh] bg-center bg-cover my-10 bg-toolTable"></div>
+      {/* <img src={require("../assets/tools-table.jpg")} className="my-4" /> */}
+      <FeedMenu
+        leftBtn="inventory"
+        showFullList={showFullList}
+        showBorrowedList={showBorrowedList}
+      />
       {/* checkout feed */}
-      <ul className="flex flex-col justify-between gap-2.5 ">
-        <li>
-          <h2
-            className="text-lg font-medium tracking-wider text-left "
-            onClick={() => console.log(feedData)}
-          >
-            Loaned Out
-          </h2>
-        </li>
 
+      <div className="flex flex-col justify-between mx-auto mt-8 max-w-7xl">
+        {feedData?.length > 0 && (
+          <>
+            <div>
+              <div className="flex items-center justify-between mx-4">
+                <h2 className="text-4xl font-light tracking-wider text-left text-light-gray">
+                  Inventory
+                </h2>
+                <div>
+                  {/* <FunnelIcon className="w-6 h-6 ml-2 bg-transparent cursor-pointer text-light-gray" /> */}
+                </div>
+              </div>
+            </div>
+            <div className="mt-12">
+              <Search
+                feedData={feedData}
+                setSearchData={setSearchData}
+                inputVal={searchVal}
+                setInputVal={setSearchVal}
+              />
+            </div>
+            <div className="mt-12">
+              <p className="ml-8 text-sm font-bold text-light-gray">
+                {listTitleRef.current}
+              </p>
+            </div>
+          </>
+        )}
         {/* sort */}
-        <li className="flex items-center gap-5">
-          <p className="text-sm font-normal tracking-wider ">Sort By</p>
-          <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton>
-          <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton>
-        </li>
-        {loading ? (
-          <>{createSkeleton()}</>
-        ) : !searchData || searchData.length === 0 ? (
+        {/* <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton> */}
+        {/* <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton> */}
+        {loading && (
+          <p className="mt-10 text-center text-light-gray animate-pulse">
+            Loading Data
+          </p>
+        )}
+        {!loading && feedData?.length === 0 && (
           <div>
             <br />
-            No results!
-          </div>
-        ) : (
-          <div>
-            {searchData.filter((tool) => {
-              return tool.loanee;
-            }).length === 0 && (
-              <>
-                <br />
-                You have nothing loaned out!
-              </>
-            )}
-            {searchData
-              .filter((tool) => {
-                return tool.loanee;
-              })
-              .map((tool, idx) => (
-                <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
-              ))}
+            <p className="mt-8 text-sm font-light text-center text-light-gray">
+              No results! Your list is empty.
+            </p>
           </div>
         )}
-      </ul>
+      </div>
+
+      <div>
+        {searchData?.length > 0 ? (
+          <ul className="p-4 mx-4 mt-2 rounded-md xl:mx-auto bg-white/5 max-w-7xl">
+            {searchData.map((tool) => (
+              <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-8 text-sm font-light text-center text-light-gray">
+            Your search did not match any items.
+          </p>
+        )}
+      </div>
     </PageTemplate>
   );
 };

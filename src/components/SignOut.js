@@ -14,7 +14,7 @@ export const SignOut = () => {
     <div className="flex flex-col justify-center w-full h-screen text-center item-center">
       <AppTitle />
       <div className="flex items-center justify-center h-full">
-        <h3>Sign Out Successful</h3>
+        <h3 className="font-semibold text-white">Sign Out Successful</h3>
       </div>
     </div>
   );

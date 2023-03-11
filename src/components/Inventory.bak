@@ -5,7 +5,7 @@ import { getUserToolsApi } from "../api/axiosApi";
 import { FeedItemSkeleton } from "./presentational/FeedItemSkeleton";
 import { FeedItem } from "./presentational/FeedItem";
 import { FeedMenu } from "./presentational/FeedMenu";
-import { FeedSearch } from "./presentational/FeedSearch";
+// import { FeedSearch } from "./presentational/FeedSearch";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { FeedSortButton } from "./presentational/FeedSortButton";
 import { useNavigate } from "react-router-dom";
@@ -95,7 +95,7 @@ export const Inventory = () => {
   return (
     <PageTemplate>
       <FeedMenu setfeedData={setFeedData} />
-      <FeedSearch feedData={feedData} setSearchData={setSearchData} />
+      {/* <FeedSearch feedData={feedData} setSearchData={setSearchData} /> */}
       {/* checkout feed */}
       <ul className="flex flex-col justify-between gap-2.5 ">
         <li>

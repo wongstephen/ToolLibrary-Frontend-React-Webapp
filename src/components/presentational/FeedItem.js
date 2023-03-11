@@ -39,7 +39,7 @@ export const FeedItem = (props) => {
   };
 
   return (
-    <li className="flex gap-5 p-2.5 border-2 border-gray-100 rounded">
+    <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none">
       {/* Temp removed images features */}
       <img
         src={
@@ -48,34 +48,30 @@ export const FeedItem = (props) => {
             : require(`../../assets/avator/empty.png`)
         }
         alt="tool"
-        className="flex-1 w-2/12 rounded-full max-w-[4rem]"
+        className="flex-1 w-2/12 rounded-full max-w-[4rem] hidden"
         placeholder="none"
       />
       <div className="flex flex-col justify-around flex-1">
-        <h3 className="p-0 m-0 text-base font-semibold tracking-wider ">
-          {tool.name}
-        </h3>
-        <p className="p-0 m-0 text-xs tracking-wider text-gray-500 ">
-          {tool.loanee}
-        </p>
+        <h3 className="font-light tracking-wider text-white">{tool.name}</h3>
+        <p className="text-xs tracking-wider text-gray-500 ">{tool.loanee}</p>
       </div>
       <div className="flex items-center justify-center gap-2.5">
         {tool.loanee && (
           <UserMinusIcon
-            className="w-6 h-auto cursor-pointer text-gray-500/50"
+            className="hidden w-6 h-auto text-gray-500 cursor-pointer sm:block"
             onClick={handleLoanee}
             title="Remove Loanee"
           />
         )}
         <PencilSquareIcon
           title="Edit Tool"
-          className="w-6 h-auto cursor-pointer text-gray-500/50"
+          className="w-6 h-auto text-gray-500 cursor-pointer"
           onClick={() => {
             navigate("/edit-item", { state: tool });
           }}
         />
         <TrashIcon
-          className="w-6 h-auto cursor-pointer text-gray-500/50"
+          className="hidden w-6 h-auto text-gray-500 cursor-pointerm sm:block"
           title="Delete Tool"
           onClick={handleTrash}
         />
