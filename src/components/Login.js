@@ -104,7 +104,7 @@ export const Login = () => {
           disabled={disabled}
           name="loginBtn"
           type="submit"
-          className={`py-3 font-bold text-white w-40 mx-auto rounded-md ${
+          className={`py-3 font-bold text-white w-full rounded-md ${
             disabled
               ? "bg-med-gray disabled:"
               : "bg-blue-cement  hover:bg-blue-700 hover:shadow-lg"
