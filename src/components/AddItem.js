@@ -1,11 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PageTemplate } from "./presentational/PageTemplate";
 import { ChooseAvator } from "./presentational/ChooseAvator";
+import { XCircleIcon } from "@heroicons/react/24/outline";
+
 const serverUrl = process.env.REACT_APP_SERVER_URL;
-// const serverUrl = "http://localhost:8000";
+
 export const AddItem = () => {
   const navigate = useNavigate();
 
@@ -15,8 +17,14 @@ export const AddItem = () => {
     loanee: "",
     avator: "empty",
   };
-  const [data, setData] = useState(initialState);
 
+  const [data, setData] = useState(initialState);
+  const [submitErr, setSubmitErr] = useState(false);
+  useEffect(() => {
+    setSubmitErr(() => {
+      return false;
+    });
+  }, [data]);
   // avator for items
 
   const handleChange = (event) => {
@@ -29,6 +37,9 @@ export const AddItem = () => {
   const addTool = async (event) => {
     event.preventDefault();
     if (!data.name) {
+      setSubmitErr(() => {
+        return true;
+      });
       return;
     }
     try {
@@ -48,12 +59,29 @@ export const AddItem = () => {
   };
 
   const inputStyle =
-    "form-control block w-full px-3 py-3 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded ransition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none my-5";
+    "w-full p-3 text-sm font-light transition-all ease-in-out bg-gray-800 text-light-gray focus:text-white";
 
   return (
     <PageTemplate>
-      <form onSubmit={addTool}>
-        {/* <label htmlFor="floatingInput" className="">Tool Name</label> */}
+      <h2 className="mx-4 mt-8 text-4xl font-light tracking-wider text-left text-white">
+        Add Item
+      </h2>
+      <p className="mx-4 mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
+        To begin tracking a new item in your inventory, complete the form below
+        and add it to your list.
+      </p>
+      <form onSubmit={addTool} className="flex flex-col gap-4 mt-4">
+        <label className="sr-only" htmlFor="name">
+          Tool Name
+        </label>
+        <p
+          className={`mx-auto text-xs text-center text-red-500 ${
+            !submitErr ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          A tool name is required!
+        </p>
+
         <input
           name="name"
           className={inputStyle}
@@ -61,21 +89,9 @@ export const AddItem = () => {
           value={data.name}
           placeholder="Tool Name"
         />
-
-        {/* <label htmlFor="photo">Image Url</label> */}
-
-        {/* Images / Future implementation
-        
-        <input
-          className={inputStyle}
-          type="text"
-          name="photo"
-          placeholder="https://picsum.photos/200/"
-          onChange={handleChange}
-          value={data.photo}
-        /> */}
-
-        {/* <label htmlFor="loanee">Loanee</label> */}
+        <label className="sr-only" htmlFor="loanee">
+          Borrower
+        </label>
         <input
           name="loanee"
           onChange={handleChange}
@@ -85,22 +101,22 @@ export const AddItem = () => {
         />
         <ChooseAvator setData={setData} />
 
-        <div className="flex justify-between mt-12">
+        <div className="justify-center mx-auto mt-4">
           <button
             type="submit"
-            className="px-6 py-3 font-bold text-white bg-blue-600 rounded-md"
+            className="w-40 py-3 font-bold text-white rounded-md bg-blue-cement hover:bg-blue-cement/80 active:bg-blue-900"
             onClick={addTool}
           >
             Submit
           </button>
           <button
             type="button"
-            className="px-6 py-3 font-bold text-white bg-red-600 rounded-md"
+            className="font-bold text-white "
             onClick={() => {
               navigate("/feed");
             }}
           >
-            Cancel
+            <XCircleIcon className="absolute w-12 h-12 text-white right-4 top-4 hover:text-light-gray active:text-med-gray" />
           </button>
         </div>
       </form>

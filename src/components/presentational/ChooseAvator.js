@@ -28,8 +28,10 @@ export const ChooseAvator = ({ setData, currentAvator }) => {
   };
 
   return (
-    <div className="mt-12">
-      <p>Choose a tool avator</p>
+    <div className="mx-4">
+      <p className="mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
+        Choose a tool avator
+      </p>
       <div className="flex flex-wrap gap-4 mt-2">
         {Object.keys(avators).map((avator, idx) => {
           return (
@@ -41,7 +43,7 @@ export const ChooseAvator = ({ setData, currentAvator }) => {
               onClick={handleClick}
               className={`cursor-pointer ${
                 selAvator === avator &&
-                "outline outline-2 outline-lime-500 rounded-full border-lime-400 shadow-sm"
+                "outline outline-2 outline-blue-cement rounded-full outline-offset-2 "
               }`}
             />
           );

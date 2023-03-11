@@ -79,7 +79,7 @@ export const Login = () => {
         data-testid="form"
       >
         <p
-          className="mx-auto mt-4 text-sm text-center text-red-700"
+          className="mx-auto mt-4 text-sm text-center text-red-500"
           style={{ opacity: `${showErr ? 1 : 0}` }}
         >
           Please enter a valid email and password.

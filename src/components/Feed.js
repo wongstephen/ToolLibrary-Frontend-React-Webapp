@@ -21,18 +21,33 @@ export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
 
+  useEffect(() => {
+    async function checkToken() {
+      const token = localStorage.getItem("token");
+      const data = await getUserToolsApi(token);
+      if (!data) {
+        localStorage.clear();
+        navigate("/login");
+      }
+    }
+    checkToken();
+  }, []);
+
   // axios instance implementation
-  const [response, error, loading] = useAxios({
-    axiosInstance: axios,
-    method: "GET",
-    url: "/tools/",
-    requestConfig: {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+  const [response, error, loading] = useAxios(
+    {
+      axiosInstance: axios,
+      method: "GET",
+      url: "/tools/",
+      requestConfig: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       },
+      data: {},
     },
-    data: {},
-  });
+    []
+  );
 
   // Update list when loanee is removed
   useEffect(() => {
@@ -42,6 +57,22 @@ export const Feed = () => {
   useEffect(() => {
     setSearchData(feedData);
   }, [feedData]);
+
+  //return list unfiltered
+  const showFullList = () => {
+    setSearchData(() => {
+      return feedData;
+    });
+  };
+
+  //return list with server data filtered with items borrorwd
+  const showBorrowedList = () => {
+    setSearchData(() => {
+      return feedData.filter((tool) => {
+        return tool.loanee;
+      });
+    });
+  };
 
   // Sort Name and Borrower
   const [sortUp, setSortUp] = useState(true);
@@ -66,18 +97,6 @@ export const Feed = () => {
   // Send user to login if no data
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function checkToken() {
-      const token = localStorage.getItem("token");
-      const data = await getUserToolsApi(token);
-      if (!data) {
-        localStorage.clear();
-        navigate("/login");
-      }
-    }
-    checkToken();
-  }, []);
-
   function createSkeleton() {
     const rand = Math.floor(Math.random() * 10 + 3);
     const arr = new Array(rand).fill("");
@@ -87,7 +106,11 @@ export const Feed = () => {
 
   return (
     <PageTemplate>
-      <FeedMenu leftBtn="inventory" />
+      <FeedMenu
+        leftBtn="inventory"
+        showFullList={showFullList}
+        showBorrowedList={showBorrowedList}
+      />
 
       {/* checkout feed */}
       <ul className="flex flex-col justify-between gap-2 mt-8">
@@ -131,19 +154,14 @@ export const Feed = () => {
                 </p>
               </>
             )}
-            <ul className="mt-4 mb-12">
-              {searchData &&
-                searchData
-                  .filter((tool) => {
-                    return tool.loanee;
-                  })
-                  .map((tool, idx) => (
-                    <FeedItem
-                      key={tool._id}
-                      feed={tool}
-                      setFeedData={setFeedData}
-                    />
-                  ))}
+            <ul className="mt-4 mb-20">
+              {searchData.map((tool, idx) => (
+                <FeedItem
+                  key={tool._id}
+                  feed={tool}
+                  setFeedData={setFeedData}
+                />
+              ))}
             </ul>
           </div>
         )}
