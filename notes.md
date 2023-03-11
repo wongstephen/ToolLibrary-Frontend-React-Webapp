@@ -35,3 +35,5 @@ Please enter a valid email and password.
 search
 
         className="w-full p-4 font-light text-white transition ease-in-out bg-transparent border-none focus:bg-gray-500 focus:border-none focus:outline-none group"
+
+.
