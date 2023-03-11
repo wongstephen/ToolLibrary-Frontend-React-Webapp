@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-  HomeIcon,
   ListBulletIcon,
   PlusIcon,
   ArrowLeftOnRectangleIcon,
-  UserIcon,
 } from "@heroicons/react/24/solid";
 
 export const FeedMenu = ({ leftBtn, showFullList, showBorrowedList }) => {
@@ -41,8 +39,8 @@ export const FeedMenu = ({ leftBtn, showFullList, showBorrowedList }) => {
       <StdNavBtn nav="Add Item" onClick={navAdd}>
         <PlusIcon className="w-12 h-12 p-2 text-white transition-all rounded-full cursor-pointer bg-blue-cement" />
       </StdNavBtn>
-      <StdNavBtn nav="Profile" onClick={handleLogout}>
-        <UserIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer" />
+      <StdNavBtn nav="Logout" onClick={handleLogout}>
+        <ArrowLeftOnRectangleIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer" />
       </StdNavBtn>
     </ul>
   );

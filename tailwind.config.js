@@ -20,6 +20,7 @@ module.exports = {
       backgroundImage: {
         titleImg: "url('/src/assets/title-bg.jpg')",
         bgImg: "url('/src/assets/bg_bggenerator_com.jpg')",
+        toolTable: "url('/src/assets/tools-table.jpg')",
       },
     },
   },

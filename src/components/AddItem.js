@@ -19,12 +19,14 @@ export const AddItem = () => {
   };
 
   const [data, setData] = useState(initialState);
+
   const [submitErr, setSubmitErr] = useState(false);
   useEffect(() => {
     setSubmitErr(() => {
       return false;
     });
   }, [data]);
+
   // avator for items
 
   const handleChange = (event) => {

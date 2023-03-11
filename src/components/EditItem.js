@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateTool, deleteTool } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
+import { XCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 export const EditItem = () => {
   const location = useLocation();
@@ -16,6 +17,13 @@ export const EditItem = () => {
     avator: tool.avator,
   });
 
+  const [submitErr, setSubmitErr] = useState(false);
+  useEffect(() => {
+    setSubmitErr(() => {
+      return false;
+    });
+  }, [body]);
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -26,6 +34,12 @@ export const EditItem = () => {
 
   const editTool = async (e) => {
     e.preventDefault();
+    if (!body.name) {
+      setSubmitErr(() => {
+        return true;
+      });
+      return;
+    }
     try {
       await updateTool(tool._id, body);
       navigate(-1);
@@ -44,64 +58,66 @@ export const EditItem = () => {
     }
   };
 
+  const inputStyle =
+    "w-full p-3 text-sm font-light transition-all ease-in-out bg-gray-800 text-light-gray focus:text-white";
+
   return (
     <PageTemplate>
-      <h2 className="text-3xl text-center uppercase">Edit Item</h2>
-      <form onSubmit={editTool}>
-        <label className="relative hidden top-5" htmlFor="name">
-          Item Name
+      <h2 className="mx-4 mt-8 text-4xl font-light tracking-wider text-left text-white">
+        Edit Item{" "}
+        <button type="button" className="" onClick={handleDelTool}>
+          <TrashIcon className="w-6 h-6 text-light-gray right-16 top-4 hover:text-light-gray active:text-med-gray" />
+        </button>
+      </h2>
+      <p className="mx-4 mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
+        Edit the item name or who you loaned your item to. Leave the borrower
+        blank if it was returned.
+      </p>
+      <form onSubmit={editTool} className="flex flex-col gap-4 mt-4">
+        <label className="sr-only" htmlFor="name">
+          Tool Name
         </label>
+        <p
+          className={`mx-auto text-xs text-center text-red-500 ${
+            !submitErr ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          A tool name is required!
+        </p>
         <input
           name="name"
-          className="block w-full px-3 py-3 m-0 my-5 text-base font-normal text-gray-700 ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding ransition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          className={inputStyle}
           value={body.name}
           onChange={handleChange}
         />
-
-        {/* Images removed 
-        
-          <input
-          className="block w-full px-3 py-3 m-0 my-5 text-base font-normal text-gray-700 ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding ransition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          type="text"
-          name="photo"
-          //   defaultValue={tool.photo}
-          value={body.photo}
-          onChange={handleChange}
-        /> */}
-        <label className="relative hidden top-5" htmlFor="name">
+        <label className="sr-only" htmlFor="name">
           Borrower Name
         </label>
         <input
           name="loanee"
-          className="block w-full px-3 py-3 m-0 my-5 text-base font-normal text-gray-700 ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding ransition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          className={inputStyle}
           placeholder="Borrower"
           //   defaultValue={tool.loanee}
           value={body.loanee}
           onChange={handleChange}
         />
         <ChooseAvator setData={setBody} currentAvator={tool.avator} />
-        <div className="flex justify-between mt-12">
+        <div className="justify-center mx-auto my-4">
           <button
             type="submit"
-            className="px-6 py-3 font-bold text-white bg-blue-600 rounded-md"
+            className="w-40 py-3 font-bold text-white rounded-md bg-blue-cement hover:bg-blue-cement/80 active:bg-blue-900"
           >
             Submit
           </button>
+
           <button
             type="button"
-            className="px-6 py-3 font-bold text-white bg-gray-600 rounded-md"
-            onClick={handleDelTool}
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            className="px-6 py-3 font-bold text-white bg-red-600 rounded-md"
+            className="font-bold text-white "
             onClick={() => {
-              navigate(-1);
+              navigate("/feed");
             }}
           >
-            Cancel
+            <XCircleIcon className="absolute w-12 h-12 text-white right-4 top-4 hover:text-light-gray active:text-med-gray" />
           </button>
         </div>
       </form>

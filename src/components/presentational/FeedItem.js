@@ -39,7 +39,7 @@ export const FeedItem = (props) => {
   };
 
   return (
-    <li className="flex py-1.5 border-b-[1px] border-b-gray-700/50 last-of-type:border-none">
+    <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none">
       {/* Temp removed images features */}
       <img
         src={
