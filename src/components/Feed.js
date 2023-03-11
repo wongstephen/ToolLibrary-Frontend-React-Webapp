@@ -164,7 +164,7 @@ export const Feed = () => {
 
       <div>
         {searchData?.length > 0 ? (
-          <ul className="p-4 mx-4 mx-auto mt-2 rounded-md bg-white/5 max-w-7xl">
+          <ul className="p-4 mx-4 mt-2 rounded-md xl:mx-auto bg-white/5 max-w-7xl">
             {searchData.map((tool) => (
               <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
             ))}
