@@ -3,25 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-d * {
-  box-sizing: border-box;
-}
-:root {
-  --primary-color: hsl(70, 70%, 60%);
-}
-
-html {
-  overflow: hidden;
-  height: 100%;
-}
-
-body {
-  height: 100%;
-  overflow: auto;
-}
-
-body,
-#root {
-  @apply bg-gray-100;
-  min-height: 100vh;
-}

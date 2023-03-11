@@ -15,6 +15,8 @@ import { PageTemplate } from "./presentational/PageTemplate";
 import { FeedSortButton } from "./presentational/FeedSortButton";
 import axios from "../api/axios";
 
+import { FunnelIcon } from "@heroicons/react/24/outline";
+
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
@@ -86,31 +88,36 @@ export const Feed = () => {
   return (
     <PageTemplate>
       <FeedMenu leftBtn="inventory" />
-      <FeedSearch feedData={feedData} setSearchData={setSearchData} />
 
       {/* checkout feed */}
-      <ul className="flex flex-col justify-between gap-2.5 ">
+      <ul className="flex flex-col justify-between gap-2 mt-8">
         <li>
-          <h2
-            className="text-lg font-medium tracking-wider text-left "
-            onClick={() => console.log(feedData)}
-          >
-            Loaned Out
-          </h2>
+          <div className="flex items-center justify-between mx-4">
+            <h2 className="text-4xl font-light tracking-wider text-left text-light-gray">
+              Inventory
+            </h2>
+            <div>
+              <FunnelIcon className="w-6 h-6 ml-2 bg-transparent cursor-pointer text-light-gray" />
+            </div>
+          </div>
         </li>
 
         {/* sort */}
-        <li className="flex items-center gap-5">
-          <p className="text-sm font-normal tracking-wider ">Sort By</p>
-          <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton>
-          <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton>
+        <li className="flex items-center ml-2">
+          {/* <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton> */}
+          {/* <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton> */}
+        </li>
+        <li>
+          <FeedSearch feedData={feedData} setSearchData={setSearchData} />
         </li>
         {loading ? (
           <>{createSkeleton()}</>
         ) : !searchData || searchData.length === 0 ? (
           <div>
             <br />
-            No results!
+            <p className="text-sm font-light text-center text-light-gray">
+              No results!
+            </p>
           </div>
         ) : (
           <div>
@@ -119,16 +126,25 @@ export const Feed = () => {
             }).length === 0 && (
               <>
                 <br />
-                <p className="text-sm text-center">The list is empty!</p>
+                <p className="text-sm font-light text-center text-light-gray">
+                  The list is empty!
+                </p>
               </>
             )}
-            {searchData
-              .filter((tool) => {
-                return tool.loanee;
-              })
-              .map((tool, idx) => (
-                <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
-              ))}
+            <ul className="mt-4 mb-12">
+              {searchData &&
+                searchData
+                  .filter((tool) => {
+                    return tool.loanee;
+                  })
+                  .map((tool, idx) => (
+                    <FeedItem
+                      key={tool._id}
+                      feed={tool}
+                      setFeedData={setFeedData}
+                    />
+                  ))}
+            </ul>
           </div>
         )}
       </ul>

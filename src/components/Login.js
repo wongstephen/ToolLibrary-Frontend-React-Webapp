@@ -64,15 +64,26 @@ export const Login = () => {
 
   return (
     <PageTemplate>
-      <h2 className="mt-5 text-sm font-light text-center" data-testid="title">
-        Login or Register below to get started
+      <h2
+        className="mt-12 text-4xl font-medium text-center text-white"
+        data-testid="title"
+      >
+        Login to Your Account
       </h2>
-
+      <p className="mt-4 font-light text-center text-light-gray">
+        Never misplace a borrowed tool again.
+      </p>
       <form
-        className="flex flex-wrap justify-center max-w-sm gap-2.5 my-2 mx-auto"
+        className="flex flex-col max-w-sm gap-4 mx-auto mt-10 jusify-center"
         onSubmit={handleLogin}
         data-testid="form"
       >
+        <p
+          className="mx-auto mt-4 text-sm text-center text-red-700"
+          style={{ opacity: `${showErr ? 1 : 0}` }}
+        >
+          Please enter a valid email and password.
+        </p>
         <InputText
           placeholder="Email"
           type="text"
@@ -88,21 +99,15 @@ export const Login = () => {
           onChange={handleChange}
           required
         />
-        <p
-          className="mx-auto mt-5 text-sm text-center text-red-700"
-          style={{ display: `${showErr ? "block" : "none"}` }}
-        >
-          Please enter a valid email and password.
-        </p>
         <button
           aria-label="login"
           disabled={disabled}
           name="loginBtn"
           type="submit"
-          className={`px-6 py-3 font-bold text-white rounded-sm w-full ${
+          className={`py-3 font-bold text-white w-40 mx-auto rounded-md ${
             disabled
-              ? "bg-gray-300 disabled:"
-              : "bg-blue-500  hover:bg-blue-700 hover:shadow-lg"
+              ? "bg-med-gray disabled:"
+              : "bg-blue-cement  hover:bg-blue-700 hover:shadow-lg"
           }`}
           onClick={handleLogin}
         >
