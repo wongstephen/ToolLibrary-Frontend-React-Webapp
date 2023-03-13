@@ -1,47 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
 
 // api
-import { getUserToolsApi } from "../api/axiosApi";
 import useAxios from "../hooks/useAxiosInstance";
-// import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 // components
 import { FeedItem } from "./presentational/FeedItem";
-import { FeedMenu } from "./presentational/FeedMenu";
+import { Nav } from "./presentational/Nav";
 import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
-import { FeedSortButton } from "./presentational/FeedSortButton";
+// import { FeedSortButton } from "./presentational/FeedSortButton";
 import axios from "../api/axios";
+import useAuth from "../hooks/useAuth";
 
-import { FunnelIcon } from "@heroicons/react/24/outline";
+// import { FunnelIcon } from "@heroicons/react/24/outline";
 
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const listTitleRef = useRef("All Items");
-
-  useEffect(() => {
-    async function checkToken() {
-      const token = localStorage.getItem("token");
-      const data = await getUserToolsApi(token);
-      if (!data) {
-        localStorage.clear();
-        navigate("/login");
-      }
-    }
-    checkToken();
-  }, []);
+  const { auth } = useAuth();
 
   // axios instance implementation
-  const [response, error, loading] = useAxios(
+  const [response, loading] = useAxios(
     {
       axiosInstance: axios,
       method: "GET",
       url: "/tools/",
       requestConfig: {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${auth.token}`,
         },
       },
       data: {},
@@ -109,7 +97,7 @@ export const Feed = () => {
     <PageTemplate>
       <div className="w-full h-[30vh] bg-center bg-cover my-10 bg-toolTable"></div>
       {/* <img src={require("../assets/tools-table.jpg")} className="my-4" /> */}
-      <FeedMenu
+      <Nav
         leftBtn="inventory"
         showFullList={showFullList}
         showBorrowedList={showBorrowedList}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useDisabled from "../hooks/useDisabled";
 import { useNavigate } from "react-router-dom";
-import { useCheckToken } from "../hooks/useCheckToken";
 import { signUp } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
@@ -19,7 +18,6 @@ export const Register = () => {
   const [passwordsNotMatch, setPasswordsNotMatch] = useState(false);
 
   const navigate = useNavigate();
-  useCheckToken(); //Send user to feed if already logged in
 
   useEffect(() => {
     if (formVal.email && formVal.password) {
@@ -58,9 +56,12 @@ export const Register = () => {
 
   return (
     <PageTemplate>
-      <p className="mt-5 text-sm font-light text-center">
-        Register a new account
-      </p>
+      <h2
+        className="mx-2 mt-12 mb-4 text-4xl font-medium text-center text-white"
+        data-testid="title"
+      >
+        Register a New Account
+      </h2>
       {dupUser && <Alert>Email has already been taken.</Alert>}
       {passwordsNotMatch && (
         <Alert>
@@ -69,7 +70,7 @@ export const Register = () => {
       )}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-wrap justify-center max-w-sm gap-2.5 my-2 mx-auto"
+        className="flex flex-wrap justify-center max-w-sm gap-2.5 my-2 mx-auto w-full"
       >
         <InputText
           type="email"
@@ -105,16 +106,16 @@ export const Register = () => {
           disabled={disabledBtn}
           name="register"
           type="submit"
-          className={`w-full px-6 py-3 mt-0 font-bold text-white bg-blue-500 rounded-sm ${
+          className={`py-3 font-bold text-white w-full rounded-md ${
             disabledBtn
-              ? "bg-gray-400 disabled:"
-              : "bg-green-600 hover:bg-green-700 hover:shadow-lg"
+              ? "bg-med-gray disabled:"
+              : "bg-blue-cement  hover:bg-blue-700 hover:shadow-lg"
           }`}
         >
           Register
         </button>
       </form>
-      <p className="p-4 text-xs font-light">
+      <p className="p-4 mx-auto text-xs font-light text-white max-w-prose">
         The purpose of collecting the email address is to facilitate user
         authentication for accessing the Tool Library. The email address will
         not be utilized for any form of communication or correspondence by the
@@ -123,10 +124,12 @@ export const Register = () => {
       </p>
       <div className="h-[1px] w-auto bg-gray-300 my-10" />
 
-      <h3 className="m-2.5 text-base text-center">Already have an account?</h3>
+      <h3 className="m-2.5 text-base text-center text-white">
+        Already have an account?
+      </h3>
       <div className="text-center">
         <button
-          className="w-full max-w-sm px-6 py-3 mt-0 font-bold text-white bg-blue-600 rounded-sm hover:bg-blue-700 hover:shadow-lg"
+          className="w-40 py-3 mx-auto font-bold text-white rounded-md bg-blue-cement hover:bg-blue-700 hover:shadow-lg"
           onClick={goHome}
         >
           Log In

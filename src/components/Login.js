@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
+import { userLogin } from "../api/axiosApi";
+import useAuth from "../hooks/useAuth";
 
 import { LoginRegisterLink } from "./presentational/LoginRegisterLink";
 import useDisabled from "../hooks/useDisabled";
@@ -8,13 +10,17 @@ import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
 
 export const Login = () => {
+  const { setAuth } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/home";
 
   const [userInput, setUserInput] = useState({
     email: "",
     password: "",
   });
   const [disabled, setDisabled] = useDisabled(true);
+  const [errMsg, setErrMsg] = useState("");
   const [showErr, setShowErr] = useState(false);
 
   // stores values of input into userInput state
@@ -42,25 +48,42 @@ export const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
+      // disables login btn
       setDisabled(true);
-      const res = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/users/signin`,
-        userInput
-      );
-      if (res.status === 200) {
-        await localStorage.setItem("token", res.data.token);
-        navigate("/home");
-        return;
-      }
+      const res = await userLogin(userInput);
+      const token = res?.data?.token;
+      setAuth({ token });
+      // localStorage.setItem("token", token);
+      navigate(from, { replace: true });
     } catch (err) {
-      console.log("Invalid email or password.");
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Invalid Username or Password");
+      }
       setShowErr(true);
       return;
     } finally {
       setDisabled(false);
     }
   };
+
+  // check if local storage has token, if true then setAuth to token
+  useEffect(() => {
+    const token = JSON.parse(window.localStorage.getItem("token"));
+    if (token) {
+      setAuth((prev) => {
+        return { ...prev, token: token };
+      });
+      navigate(from, "/home");
+    }
+  }, []);
 
   return (
     <PageTemplate>
@@ -82,7 +105,7 @@ export const Login = () => {
           className="mx-auto mt-4 text-sm text-center text-red-500"
           style={{ opacity: `${showErr ? 1 : 0}` }}
         >
-          Please enter a valid email and password.
+          {errMsg}
         </p>
         <InputText
           placeholder="Email"
@@ -104,7 +127,7 @@ export const Login = () => {
           disabled={disabled}
           name="loginBtn"
           type="submit"
-          className={`py-3 font-bold text-white w-40 mx-auto rounded-md ${
+          className={`py-3 font-bold text-white w-full rounded-md ${
             disabled
               ? "bg-med-gray disabled:"
               : "bg-blue-cement  hover:bg-blue-700 hover:shadow-lg"

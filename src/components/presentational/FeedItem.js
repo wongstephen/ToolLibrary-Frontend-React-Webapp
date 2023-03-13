@@ -4,35 +4,30 @@ import {
   TrashIcon,
   UserMinusIcon,
 } from "@heroicons/react/24/solid";
-import { updateTool } from "../../api/axiosApi";
+import { deleteTool, getUserToolsApi, updateTool } from "../../api/axiosApi";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
-export const FeedItem = (props) => {
+import useAuth from "../../hooks/useAuth";
+export const FeedItem = ({ feed, setFeedData }) => {
   const navigate = useNavigate();
-  const tool = props.feed;
+
+  const { auth } = useAuth();
+  const tool = feed;
 
   const handleLoanee = async () => {
-    const res = await updateTool(tool._id, { loanee: "" });
-    props.setFeedData(res);
+    try {
+      const res = await updateTool(tool._id, { loanee: "" }, auth.token);
+      setFeedData(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleTrash = async () => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_SERVER_URL}/tools/${tool._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/tools`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      props.setFeedData(res.data);
+      await deleteTool(tool._id, auth.token);
+      const res = await getUserToolsApi(auth.token);
+      setFeedData(res);
     } catch (err) {
       console.log(err);
     }
@@ -40,7 +35,6 @@ export const FeedItem = (props) => {
 
   return (
     <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none">
-      {/* Temp removed images features */}
       <img
         src={
           tool?.avator
@@ -53,28 +47,37 @@ export const FeedItem = (props) => {
       />
       <div className="flex flex-col justify-around flex-1">
         <h3 className="font-light tracking-wider text-white">{tool.name}</h3>
-        <p className="text-xs tracking-wider text-gray-500 ">{tool.loanee}</p>
+        <p className="text-xs tracking-wider text-gray-300 ">{tool.loanee}</p>
       </div>
       <div className="flex items-center justify-center gap-2.5">
         {tool.loanee && (
-          <UserMinusIcon
-            className="hidden w-6 h-auto text-gray-500 cursor-pointer sm:block"
+          <button
             onClick={handleLoanee}
-            title="Remove Loanee"
-          />
+            className="hidden text-gray-300 cursor-pointer sm:block hover:text-blue-cement active:text-blue-cement/50"
+            aria-label={`Remove borrow of ${tool.name}`}
+          >
+            <UserMinusIcon className="w-6 h-auto " title="Remove Loanee" />
+          </button>
         )}
-        <PencilSquareIcon
-          title="Edit Tool"
-          className="w-6 h-auto text-gray-500 cursor-pointer"
+        <button
           onClick={() => {
             navigate("/edit-item", { state: tool });
           }}
-        />
-        <TrashIcon
-          className="hidden w-6 h-auto text-gray-500 cursor-pointerm sm:block"
-          title="Delete Tool"
+          className="text-gray-300 cursor-pointer hover:text-blue-cement active:text-blue-cement/50"
+          aria-label={`Edit ${tool.name} details`}
+        >
+          <PencilSquareIcon title="Edit Tool" className="w-6 h-auto" />
+        </button>
+        <button
           onClick={handleTrash}
-        />
+          className="hidden text-gray-300 cursor-pointer hover:text-blue-cement sm:block active:text-blue-cement/50"
+          aria-label={`Delete ${tool.name} from inventory`}
+        >
+          <TrashIcon
+            className="hidden w-6 h-auto cursor-pointer sm:block"
+            title="Delete Tool"
+          />
+        </button>
       </div>
     </li>
   );

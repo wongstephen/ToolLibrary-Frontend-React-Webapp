@@ -1,7 +1,18 @@
 import axios from "axios";
 
 const URL = process.env.REACT_APP_SERVER_URL;
-// const URL = "http://localhost:8000";
+
+export const userLogin = async (userInput) => {
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/users/signin`,
+      userInput
+    );
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
 
 export const getUserToolsApi = async (token) => {
   try {
@@ -19,15 +30,28 @@ export const getUserToolsApi = async (token) => {
 export const signUp = async (userData) => {
   try {
     const res = await axios.post(`${URL}/users/signup`, userData);
+    console.log(res);
     return res;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 
-export const updateTool = async (id, body) => {
+export const addTool = async (body, token) => {
   try {
-    const token = await localStorage.getItem("token");
+    await axios.post(`${URL}/tools/`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const updateTool = async (id, body, token) => {
+  try {
     const res = await axios.patch(`${URL}/tools/${id}`, body, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,9 +63,8 @@ export const updateTool = async (id, body) => {
   }
 };
 
-export const deleteTool = async (id) => {
+export const deleteTool = async (id, token) => {
   try {
-    const token = await localStorage.getItem("token");
     const res = await axios.delete(`${URL}/tools/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,

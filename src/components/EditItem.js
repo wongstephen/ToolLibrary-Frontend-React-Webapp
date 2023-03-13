@@ -4,9 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { updateTool, deleteTool } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { XCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
+import useAuth from "../hooks/useAuth";
 
 export const EditItem = () => {
   const location = useLocation();
+  const { auth } = useAuth();
 
   const navigate = useNavigate();
   const tool = location.state;
@@ -41,7 +43,7 @@ export const EditItem = () => {
       return;
     }
     try {
-      await updateTool(tool._id, body);
+      await updateTool(tool._id, body, auth.token);
       navigate(-1);
     } catch (err) {
       console.log(err);
@@ -51,8 +53,8 @@ export const EditItem = () => {
   const handleDelTool = async (e) => {
     e.preventDefault();
     try {
-      await deleteTool(tool._id);
-      navigate(-1);
+      await deleteTool(tool._id, auth.token);
+      navigate("/home");
     } catch (err) {
       console.log(err);
     }
@@ -117,7 +119,7 @@ export const EditItem = () => {
                 navigate("/home");
               }}
             >
-              <XCircleIcon className="absolute w-12 h-12 text-white right-4 top-4 hover:text-light-gray active:text-med-gray" />
+              <XCircleIcon className="absolute w-12 h-12 right-4 top-4 hover:text-light-gray active:text-med-gray" />
             </button>
           </div>
         </form>
