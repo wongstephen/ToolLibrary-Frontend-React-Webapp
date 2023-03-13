@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import useAuth from "../hooks/useAuth";
 
 // api
-import { getUserToolsApi } from "../api/axiosApi";
 import useAxios from "../hooks/useAxiosInstance";
+
 // import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -20,28 +21,17 @@ export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const listTitleRef = useRef("All Items");
-
-  useEffect(() => {
-    async function checkToken() {
-      const token = localStorage.getItem("token");
-      const data = await getUserToolsApi(token);
-      if (!data) {
-        localStorage.clear();
-        navigate("/login");
-      }
-    }
-    checkToken();
-  }, []);
+  const { auth } = useAuth();
 
   // axios instance implementation
-  const [response, error, loading] = useAxios(
+  const [response, loading] = useAxios(
     {
       axiosInstance: axios,
       method: "GET",
       url: "/tools/",
       requestConfig: {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${auth.token}`,
         },
       },
       data: {},

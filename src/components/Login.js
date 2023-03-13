@@ -60,11 +60,9 @@ export const Login = () => {
       const res = await userLogin(userInput);
       const token = res?.data?.token;
       setAuth({ token });
-      localStorage.setItem("token", token);
+      // localStorage.setItem("token", token);
       navigate(from, { replace: true });
- 
     } catch (err) {
-  
       if (!err?.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 400) {
