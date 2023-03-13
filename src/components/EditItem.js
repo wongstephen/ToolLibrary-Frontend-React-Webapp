@@ -119,7 +119,7 @@ export const EditItem = () => {
                 navigate("/home");
               }}
             >
-              <XCircleIcon className="absolute w-12 h-12 text-white right-4 top-4 hover:text-light-gray active:text-med-gray" />
+              <XCircleIcon className="absolute w-12 h-12 right-4 top-4 hover:text-light-gray active:text-med-gray" />
             </button>
           </div>
         </form>

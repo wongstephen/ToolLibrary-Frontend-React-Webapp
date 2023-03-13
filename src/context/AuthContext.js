@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = auth?.token;
     token && window.localStorage.setItem("token", JSON.stringify(token));
-    console.log(auth);
   }, [auth]);
 
   return (

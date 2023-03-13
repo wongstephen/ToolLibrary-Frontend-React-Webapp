@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
 // api
-// import { getUserToolsApi } from "../api/axiosApi";
 import useAxios from "../hooks/useAxiosInstance";
-// import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 // components
 import { FeedItem } from "./presentational/FeedItem";
-import { FeedMenu } from "./presentational/FeedMenu";
+import { Nav } from "./presentational/Nav";
 import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
 // import { FeedSortButton } from "./presentational/FeedSortButton";
@@ -22,17 +20,6 @@ export const Feed = () => {
   const [searchData, setSearchData] = useState([]);
   const listTitleRef = useRef("All Items");
   const { auth } = useAuth();
-
-  // useEffect(() => {
-  //   async function checkToken() {
-  //     const data = await getUserToolsApi(auth.token);
-  //     if (!data) {
-  //       localStorage.clear();
-  //       navigate("/login");
-  //     }
-  //   }
-  //   checkToken();
-  // }, []);
 
   // axios instance implementation
   const [response, loading] = useAxios(
@@ -110,7 +97,7 @@ export const Feed = () => {
     <PageTemplate>
       <div className="w-full h-[30vh] bg-center bg-cover my-10 bg-toolTable"></div>
       {/* <img src={require("../assets/tools-table.jpg")} className="my-4" /> */}
-      <FeedMenu
+      <Nav
         leftBtn="inventory"
         showFullList={showFullList}
         showBorrowedList={showBorrowedList}

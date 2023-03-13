@@ -30,9 +30,10 @@ export const getUserToolsApi = async (token) => {
 export const signUp = async (userData) => {
   try {
     const res = await axios.post(`${URL}/users/signup`, userData);
+    console.log(res);
     return res;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 

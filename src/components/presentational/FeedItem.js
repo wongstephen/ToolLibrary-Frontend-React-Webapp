@@ -53,34 +53,28 @@ export const FeedItem = ({ feed, setFeedData }) => {
         {tool.loanee && (
           <button
             onClick={handleLoanee}
-            className="hidden cursor-pointer sm:block"
+            className="hidden text-gray-300 cursor-pointer sm:block hover:text-blue-cement active:text-blue-cement/50"
             aria-label={`Remove borrow of ${tool.name}`}
           >
-            <UserMinusIcon
-              className="w-6 h-auto text-gray-300 "
-              title="Remove Loanee"
-            />
+            <UserMinusIcon className="w-6 h-auto " title="Remove Loanee" />
           </button>
         )}
         <button
           onClick={() => {
             navigate("/edit-item", { state: tool });
           }}
-          className="cursor-pointer"
+          className="text-gray-300 cursor-pointer hover:text-blue-cement active:text-blue-cement/50"
           aria-label={`Edit ${tool.name} details`}
         >
-          <PencilSquareIcon
-            title="Edit Tool"
-            className="w-6 h-auto text-gray-300"
-          />
+          <PencilSquareIcon title="Edit Tool" className="w-6 h-auto" />
         </button>
         <button
           onClick={handleTrash}
-          className="hidden cursor-pointer sm:block"
+          className="hidden text-gray-300 cursor-pointer hover:text-blue-cement sm:block active:text-blue-cement/50"
           aria-label={`Delete ${tool.name} from inventory`}
         >
           <TrashIcon
-            className="hidden w-6 h-auto text-gray-300 cursor-pointer sm:block"
+            className="hidden w-6 h-auto cursor-pointer sm:block"
             title="Delete Tool"
           />
         </button>

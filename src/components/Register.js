@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useDisabled from "../hooks/useDisabled";
 import { useNavigate } from "react-router-dom";
-import { useCheckToken } from "../useCheckToken";
 import { signUp } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
@@ -19,7 +18,6 @@ export const Register = () => {
   const [passwordsNotMatch, setPasswordsNotMatch] = useState(false);
 
   const navigate = useNavigate();
-  useCheckToken(); //Send user to feed if already logged in
 
   useEffect(() => {
     if (formVal.email && formVal.password) {

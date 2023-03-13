@@ -7,7 +7,7 @@ import {
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/solid";
 
-export const FeedMenu = ({ leftBtn, showFullList, showBorrowedList }) => {
+export const Nav = ({ leftBtn, showFullList, showBorrowedList }) => {
   const [borrowed, setBorrowed] = useState(true);
   const navigate = useNavigate();
 
@@ -38,13 +38,13 @@ export const FeedMenu = ({ leftBtn, showFullList, showBorrowedList }) => {
           nav={borrowed ? "Borrowed" : "Show All"}
           onClick={handleList}
         >
-          <ListBulletIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer" />
+          <ListBulletIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer   active:bg-blue-cement/50  hover:bg-blue-500" />
         </StdNavBtn>
         <StdNavBtn nav="Add Item" onClick={navAdd}>
-          <PlusIcon className="w-12 h-12 p-2 text-white transition-all rounded-full cursor-pointer bg-blue-cement" />
+          <PlusIcon className="w-12 h-12 p-2 text-white transition-all rounded-full cursor-pointer bg-blue-cement active:bg-blue-cement/50 hover:bg-blue-500" />
         </StdNavBtn>
         <StdNavBtn nav="Logout" onClick={handleLogout}>
-          <ArrowLeftOnRectangleIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer" />
+          <ArrowLeftOnRectangleIcon className="p-2.5 text-white rounded-md w-8 h-8 transition-all bg-blue-cement cursor-pointer  active:bg-blue-cement/50  hover:bg-blue-500" />
         </StdNavBtn>
       </ul>
     </div>
