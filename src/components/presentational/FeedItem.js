@@ -34,7 +34,7 @@ export const FeedItem = ({ feed, setFeedData }) => {
   };
 
   return (
-    <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none">
+    <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none ">
       <img
         src={
           tool?.avator
@@ -42,7 +42,7 @@ export const FeedItem = ({ feed, setFeedData }) => {
             : require(`../../assets/avator/empty.png`)
         }
         alt="tool"
-        className="flex-1 w-2/12 rounded-full max-w-[4rem] hidden"
+        className="flex-1 w-2/12 rounded-full max-w-[3rem] mr-4 hidden sm:block"
         placeholder="none"
       />
       <div className="flex flex-col justify-around flex-1">

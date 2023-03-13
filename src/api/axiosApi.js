@@ -1,13 +1,11 @@
 import axios from "axios";
 
-const URL = process.env.REACT_APP_SERVER_URL;
+// const URL = process.env.REACT_APP_SERVER_URL;
+const URL = "http://localhost:8000";
 
 export const userLogin = async (userInput) => {
   try {
-    const res = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/users/signin`,
-      userInput
-    );
+    const res = await axios.post(`${URL}/users/signin`, userInput);
     return res;
   } catch (err) {
     throw err;
