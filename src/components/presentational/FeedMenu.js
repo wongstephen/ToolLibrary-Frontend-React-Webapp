@@ -59,6 +59,7 @@ function StdNavBtn({ children, nav, onClick }) {
           nav === "Add Item" && "relative bottom-2"
         }`}
         onClick={onClick}
+        aria-label={nav}
       >
         {children}
         <span className="text-xs font-light text-center text-light-gray">

@@ -13,7 +13,6 @@ export const Login = () => {
   const { setAuth } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  // const from = location
   const from = location.state?.from?.pathname || "/home";
 
   const [userInput, setUserInput] = useState({
@@ -53,10 +52,6 @@ export const Login = () => {
     try {
       // disables login btn
       setDisabled(true);
-      // const res = await axios.post(
-      //   `${process.env.REACT_APP_SERVER_URL}/users/signin`,
-      //   userInput
-      // );
       const res = await userLogin(userInput);
       const token = res?.data?.token;
       setAuth({ token });
@@ -78,6 +73,17 @@ export const Login = () => {
       setDisabled(false);
     }
   };
+
+  // check if local storage has token, if true then setAuth to token
+  useEffect(() => {
+    const token = JSON.parse(window.localStorage.getItem("token"));
+    if (token) {
+      setAuth((prev) => {
+        return { ...prev, token: token };
+      });
+      navigate(from, "/home");
+    }
+  }, []);
 
   return (
     <PageTemplate>

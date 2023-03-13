@@ -1,15 +1,15 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PageTemplate } from "./presentational/PageTemplate";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-
-const serverUrl = process.env.REACT_APP_SERVER_URL;
+import useAuth from "../hooks/useAuth";
+import { addTool } from "../api/axiosApi";
 
 export const AddItem = () => {
   const navigate = useNavigate();
+  const { auth } = useAuth();
 
   const initialState = {
     name: "",
@@ -36,23 +36,15 @@ export const AddItem = () => {
     });
   };
 
-  const addTool = async (event) => {
+  const handleAdd = async (event) => {
     event.preventDefault();
     if (!data.name) {
-      setSubmitErr(() => {
+      return setSubmitErr(() => {
         return true;
       });
-      return;
     }
     try {
-      const token = await localStorage.getItem("token");
-      await axios.post(`${serverUrl}/tools/`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
+      await addTool(data, auth.token);
       setData(initialState);
       navigate("/home");
     } catch (err) {
@@ -108,7 +100,7 @@ export const AddItem = () => {
             <button
               type="submit"
               className="w-40 py-3 font-bold text-white rounded-md bg-blue-cement hover:bg-blue-cement/80 active:bg-blue-900"
-              onClick={addTool}
+              onClick={handleAdd}
             >
               Submit
             </button>
@@ -118,6 +110,7 @@ export const AddItem = () => {
               onClick={() => {
                 navigate("/home");
               }}
+              aria-label="Cancel and go back to homepage"
             >
               <XCircleIcon className="absolute w-12 h-12 text-white right-4 top-4 hover:text-light-gray active:text-med-gray" />
             </button>

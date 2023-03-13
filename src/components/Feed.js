@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import useAuth from "../hooks/useAuth";
 
 // api
+// import { getUserToolsApi } from "../api/axiosApi";
 import useAxios from "../hooks/useAxiosInstance";
-
 // import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +13,7 @@ import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
 // import { FeedSortButton } from "./presentational/FeedSortButton";
 import axios from "../api/axios";
+import useAuth from "../hooks/useAuth";
 
 // import { FunnelIcon } from "@heroicons/react/24/outline";
 
@@ -22,6 +22,17 @@ export const Feed = () => {
   const [searchData, setSearchData] = useState([]);
   const listTitleRef = useRef("All Items");
   const { auth } = useAuth();
+
+  // useEffect(() => {
+  //   async function checkToken() {
+  //     const data = await getUserToolsApi(auth.token);
+  //     if (!data) {
+  //       localStorage.clear();
+  //       navigate("/login");
+  //     }
+  //   }
+  //   checkToken();
+  // }, []);
 
   // axios instance implementation
   const [response, loading] = useAxios(

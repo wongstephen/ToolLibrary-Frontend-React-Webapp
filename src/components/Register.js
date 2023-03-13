@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useDisabled from "../hooks/useDisabled";
 import { useNavigate } from "react-router-dom";
-import { useCheckToken } from "../hooks/useCheckToken";
+import { useCheckToken } from "../useCheckToken";
 import { signUp } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
