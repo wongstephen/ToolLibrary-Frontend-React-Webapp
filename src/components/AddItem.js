@@ -7,15 +7,18 @@ import { XCircleIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
 import { addTool } from "../api/axiosApi";
 
+const userImageInput = document.querySelector("#userImage");
+const addToolForm = document.querySelector("#addToolForm");
+
 export const AddItem = () => {
   const navigate = useNavigate();
   const { auth } = useAuth();
 
   const initialState = {
     name: "",
-    // photo: "https://loremflickr.com/200/200",
     loanee: "",
     avator: "empty",
+    userImage: "",
   };
 
   const [data, setData] = useState(initialState);
@@ -33,6 +36,18 @@ export const AddItem = () => {
     const { name, value } = event.target;
     setData((prevState) => {
       return { ...prevState, [name]: value };
+    });
+  };
+
+  const handleUserImage = (event) => {
+    const { name, files } = event.target;
+    if (files[0].size > 10000000) {
+      alert("File size must be less than 10MB");
+      event.target.value = null;
+      return;
+    }
+    setData((prevState) => {
+      return { ...prevState, [name]: files[0] };
     });
   };
 
@@ -65,7 +80,11 @@ export const AddItem = () => {
           To begin tracking a new item in your inventory, complete the form
           below and add it to your list.
         </p>
-        <form onSubmit={addTool} className="flex flex-col gap-4 mt-4">
+        <form
+          onSubmit={addTool}
+          className="flex flex-col gap-4 mt-4"
+          id="addToolForm"
+        >
           <label className="sr-only" htmlFor="name">
             Tool Name
           </label>
@@ -95,6 +114,14 @@ export const AddItem = () => {
             placeholder="Borrower"
           />
           <ChooseAvator setData={setData} />
+          <input
+            className="text-white"
+            type="file"
+            name="userImage"
+            id="userImage"
+            onChange={handleUserImage}
+            accept="image/png, image/jpeg, image/jpg, image/gif"
+          />
 
           <div className="justify-center mx-auto my-6">
             <button
