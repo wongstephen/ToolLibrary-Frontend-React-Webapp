@@ -35,17 +35,37 @@ export const signUp = async (userData) => {
   }
 };
 
-export const addTool = async (body, token) => {
-  try {
-    await axios.post(`${URL}/tools/`, body, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+export const addTool = async (formData, token) => {
+  // try {
+  //   await axios.post(`${URL}/tools/image`, body, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   });
+  // } catch (err) {
+  //   throw err;
+  // }
+
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${URL}/tools/image`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+    data: formData,
+  };
+
+  axios
+    .request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  } catch (err) {
-    throw err;
-  }
 };
 
 export const updateTool = async (id, body, token) => {

@@ -7,8 +7,9 @@ import { XCircleIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
 import { addTool } from "../api/axiosApi";
 
-const userImageInput = document.querySelector("#userImage");
-const addToolForm = document.querySelector("#addToolForm");
+const FormData = require("form-data");
+
+let formData = new FormData();
 
 export const AddItem = () => {
   const navigate = useNavigate();
@@ -59,13 +60,34 @@ export const AddItem = () => {
       });
     }
     try {
+      formData.append("name", data.name);
+      formData.append("loanee", data.loanee);
+      formData.append("avator", data.avator);
+      formData.append("userImage", data.userImage);
+      for (let value of formData.entries()) {
+        console.log(value);
+      }
+      await addTool(formData, auth.token);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /*   const handleAdd = async (event) => {
+    event.preventDefault();
+    if (!data.name) {
+      return setSubmitErr(() => {
+        return true;
+      });
+    }
+    try {
       await addTool(data, auth.token);
       setData(initialState);
       navigate("/home");
     } catch (err) {
       console.log(err);
     }
-  };
+  }; */
 
   const inputStyle =
     "w-full p-3 text-sm font-light transition-all ease-in-out bg-gray-800 text-light-gray focus:text-white";
