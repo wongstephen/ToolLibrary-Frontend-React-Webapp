@@ -15,6 +15,8 @@ export const AddItem = () => {
   const navigate = useNavigate();
   const { auth } = useAuth();
 
+  const [imagePreview, setImagePreview] = useState(null);
+
   const initialState = {
     name: "",
     loanee: "",
@@ -25,6 +27,7 @@ export const AddItem = () => {
   const [data, setData] = useState(initialState);
 
   const [submitErr, setSubmitErr] = useState(false);
+
   useEffect(() => {
     setSubmitErr(() => {
       return false;
@@ -39,6 +42,13 @@ export const AddItem = () => {
       return { ...prevState, [name]: value };
     });
   };
+
+  useEffect(() => {
+    if (data.userImage) {
+      setImagePreview(URL.createObjectURL(data.userImage));
+    }
+    console.log(data);
+  }, [data]);
 
   const handleUserImage = (event) => {
     const { name, files } = event.target;
@@ -72,22 +82,6 @@ export const AddItem = () => {
       console.log(err);
     }
   };
-
-  /*   const handleAdd = async (event) => {
-    event.preventDefault();
-    if (!data.name) {
-      return setSubmitErr(() => {
-        return true;
-      });
-    }
-    try {
-      await addTool(data, auth.token);
-      setData(initialState);
-      navigate("/home");
-    } catch (err) {
-      console.log(err);
-    }
-  }; */
 
   const inputStyle =
     "w-full p-3 text-sm font-light transition-all ease-in-out bg-gray-800 text-light-gray focus:text-white";
@@ -136,6 +130,8 @@ export const AddItem = () => {
             placeholder="Borrower"
           />
           <ChooseAvator setData={setData} />
+
+          {/* user image */}
           <input
             className="text-white"
             type="file"
@@ -144,6 +140,9 @@ export const AddItem = () => {
             onChange={handleUserImage}
             accept="image/png, image/jpeg, image/jpg, image/gif"
           />
+
+          {/* image preview */}
+          <img src={imagePreview} alt="" />
 
           <div className="justify-center mx-auto my-6">
             <button
