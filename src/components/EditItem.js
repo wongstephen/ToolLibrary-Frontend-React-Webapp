@@ -65,7 +65,7 @@ export const EditItem = () => {
 
   return (
     <PageTemplate>
-      <div className="mx-auto max-w-7xl">
+      <div className="max-w-xl mx-auto">
         <h2 className="mx-4 mt-8 text-4xl font-light tracking-wider text-left text-white">
           Edit Item{" "}
           <button type="button" className="" onClick={handleDelTool}>

@@ -104,11 +104,11 @@ export const Feed = () => {
       />
       {/* checkout feed */}
 
-      <div className="flex flex-col justify-between mx-auto mt-8 max-w-7xl">
+      <div className="flex flex-col justify-between max-w-xl mx-auto mt-8">
         {feedData?.length > 0 && (
           <>
             <div>
-              <div className="flex items-center justify-between mx-4">
+              <div className="flex items-center justify-between mx-4 ">
                 <h2 className="text-4xl font-light tracking-wider text-left text-light-gray">
                   Inventory
                 </h2>
@@ -150,9 +150,9 @@ export const Feed = () => {
         )}
       </div>
 
-      <div>
+      <div className="mx-4">
         {searchData?.length > 0 ? (
-          <ul className="p-4 mx-4 mt-2 rounded-md xl:mx-auto bg-white/5 max-w-7xl">
+          <ul className="max-w-xl p-4 mx-auto mt-2 rounded-md xl:mx-auto bg-white/5">
             {searchData.map((tool) => (
               <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
             ))}

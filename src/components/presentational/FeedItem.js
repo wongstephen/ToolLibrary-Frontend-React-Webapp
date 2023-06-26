@@ -34,17 +34,29 @@ export const FeedItem = ({ feed, setFeedData }) => {
   };
 
   return (
-    <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none ">
-      <img
-        src={
-          tool?.avator
-            ? require(`../../assets/avator/${tool.avator}.png`)
-            : require(`../../assets/avator/empty.png`)
-        }
-        alt="tool"
-        className="flex-1 w-2/12 rounded-full max-w-[3rem] mr-4 hidden sm:block"
-        placeholder="none"
-      />
+    <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none">
+      {tool.toolImage ? (
+        <div className="w-2/12 max-w-[3rem] max-h-[3rem]  mr-4 overflow-hidden rounded-full">
+          <img
+            src={tool.toolImage}
+            alt="tool"
+            className="object-cover w-full"
+            placeholder="none"
+          />
+        </div>
+      ) : (
+        <img
+          src={
+            tool?.avator
+              ? require(`../../assets/avator/${tool.avator}.png`)
+              : require(`../../assets/avator/empty.png`)
+          }
+          alt="tool"
+          className="flex-1 w-2/12 rounded-full max-w-[3rem] mr-4 hidden sm:block"
+          placeholder="none"
+        />
+      )}
+
       <div className="flex flex-col justify-around flex-1">
         <h3 className="font-light tracking-wider text-white">{tool.name}</h3>
         <p className="text-xs tracking-wider text-gray-300 ">{tool.loanee}</p>

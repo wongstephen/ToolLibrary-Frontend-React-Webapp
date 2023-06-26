@@ -88,7 +88,7 @@ export const AddItem = () => {
 
   return (
     <PageTemplate>
-      <div className="mx-auto max-w-7xl">
+      <div className="max-w-xl mx-auto">
         <h2 className="mx-4 mt-8 text-4xl font-light tracking-wider text-left text-white">
           Add Item
         </h2>
@@ -132,17 +132,21 @@ export const AddItem = () => {
           <ChooseAvator setData={setData} />
 
           {/* user image */}
-          <input
-            className="text-white"
-            type="file"
-            name="userImage"
-            id="userImage"
-            onChange={handleUserImage}
-            accept="image/png, image/jpeg, image/jpg, image/gif"
-          />
+          <div className="my-4 text-center">
+            <input
+              className="w-40 h-10 mx-auto text-xs font-thin rounded-md text-cente text-light-gray"
+              type="file"
+              name="userImage"
+              id="userImage"
+              onChange={handleUserImage}
+              accept="image/png, image/jpeg, image/jpg, image/gif"
+            />
 
-          {/* image preview */}
-          <img src={imagePreview} alt="" />
+            {/* image preview */}
+            {imagePreview && (
+              <img src={imagePreview} alt="" className="max-w-sm mx-auto" />
+            )}
+          </div>
 
           <div className="justify-center mx-auto my-6">
             <button
