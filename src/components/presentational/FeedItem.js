@@ -36,11 +36,11 @@ export const FeedItem = ({ feed, setFeedData }) => {
   return (
     <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none">
       {tool.toolImage ? (
-        <div className="w-2/12 max-w-[3rem] max-h-[3rem]  mr-4 overflow-hidden rounded-full">
+        <div className="w-2/12 max-w-[3rem] max-h-[3rem]  mr-4 overflow-hidden rounded-md">
           <img
             src={tool.toolImage}
             alt="tool"
-            className="object-cover w-full"
+            className="object-cover h-[125%] w-[125%] left-[50%] top-[50%] "
             placeholder="none"
           />
         </div>

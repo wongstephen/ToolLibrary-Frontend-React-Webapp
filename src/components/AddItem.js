@@ -16,6 +16,7 @@ export const AddItem = () => {
   const { auth } = useAuth();
 
   const [imagePreview, setImagePreview] = useState(null);
+  const [imageStatus, setImageStatus] = useState(false);
 
   const initialState = {
     name: "",
@@ -43,12 +44,12 @@ export const AddItem = () => {
     });
   };
 
-  useEffect(() => {
-    if (data.userImage) {
-      setImagePreview(URL.createObjectURL(data.userImage));
-    }
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   if (data.userImage) {
+  //     setImagePreview(URL.createObjectURL(data.userImage));
+  //   }
+  //   console.log(data);
+  // }, [data]);
 
   const handleUserImage = (event) => {
     const { name, files } = event.target;
@@ -74,10 +75,12 @@ export const AddItem = () => {
       formData.append("loanee", data.loanee);
       formData.append("avator", data.avator);
       formData.append("userImage", data.userImage);
-      for (let value of formData.entries()) {
-        console.log(value);
-      }
-      await addTool(formData, auth.token);
+      // for (let value of formData.entries()) {
+      //   console.log(value);
+      // }
+      const res = await addTool(formData, auth.token);
+      console.log(res);
+      navigate("/home");
     } catch (err) {
       console.log(err);
     }
