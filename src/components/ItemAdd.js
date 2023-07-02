@@ -21,7 +21,7 @@ export const ItemAdd = () => {
     name: "",
     loanee: "",
     avator: "empty",
-    userImage: "",
+    userImage: null,
   };
 
   const [data, setData] = useState(initialState);

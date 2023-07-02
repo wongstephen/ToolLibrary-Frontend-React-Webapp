@@ -56,6 +56,9 @@ export const toolCreateAxios = async (formData, token) => {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Headers":
+          "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept,Authorization",
+        "Access-Control-Allow-Origin": "*",
       },
       data: formData,
     };
