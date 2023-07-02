@@ -24,10 +24,6 @@ export const Feed = () => {
     setSearchData(() => user.user.tool);
   }, [user]);
 
-  useEffect(() => {
-    console.log(searchData.length);
-    console.log(feedData.length);
-  }, [searchData, feedData]);
   const [searchVal, setSearchVal] = useState("");
 
   //return list unfiltered
