@@ -136,7 +136,7 @@ export const ItemAdd = () => {
               name="userImage"
               id="userImage"
               onChange={handleUserImage}
-              accept="image/png, image/jpeg, image/jpg, image/gif"
+              accept="image/*"
             />
 
             {/* image preview */}
