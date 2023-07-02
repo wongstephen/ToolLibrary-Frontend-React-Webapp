@@ -44,12 +44,6 @@ export const AddItem = () => {
     });
   };
 
-  // useEffect(() => {
-  //   if (data.userImage) {
-  //     setImagePreview(URL.createObjectURL(data.userImage));
-  //   }
-  //   console.log(data);
-  // }, [data]);
 
   const handleUserImage = (event) => {
     const { name, files } = event.target;
@@ -79,9 +73,10 @@ export const AddItem = () => {
       //   console.log(value);
       // }
       const res = await addTool(formData, user.token);
-      console.log(res);
-      updateUserData();
-      navigate("/home");
+      if (res.status === 201) {
+        updateUserData();
+        navigate("/home");
+      }
     } catch (err) {
       console.log(err);
     }
