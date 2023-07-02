@@ -5,18 +5,17 @@ import { PageTemplate } from "./presentational/PageTemplate";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
-import { addTool } from "../api/axiosApi";
+import { toolCreateAxios } from "../api/axiosApi";
 
 const FormData = require("form-data");
 
 let formData = new FormData();
 
-export const AddItem = () => {
+export const ItemAdd = () => {
   const navigate = useNavigate();
   const { user, updateUserData } = useAuth();
 
-  const [imagePreview, setImagePreview] = useState(null);
-  const [imageStatus, setImageStatus] = useState(false);
+  const [imagePreview, setImagePreview] = useState();
 
   const initialState = {
     name: "",
@@ -44,7 +43,6 @@ export const AddItem = () => {
     });
   };
 
-
   const handleUserImage = (event) => {
     const { name, files } = event.target;
     if (files[0].size > 10000000) {
@@ -57,7 +55,7 @@ export const AddItem = () => {
     });
   };
 
-  const handleAdd = async (event) => {
+  const handleCreate = async (event) => {
     event.preventDefault();
     if (!data.name) {
       return setSubmitErr(() => {
@@ -72,7 +70,7 @@ export const AddItem = () => {
       // for (let value of formData.entries()) {
       //   console.log(value);
       // }
-      const res = await addTool(formData, user.token);
+      const res = await toolCreateAxios(formData, user.token);
       if (res.status === 201) {
         updateUserData();
         navigate("/home");
@@ -96,7 +94,7 @@ export const AddItem = () => {
           below and add it to your list.
         </p>
         <form
-          onSubmit={addTool}
+          onSubmit={toolCreateAxios}
           className="flex flex-col gap-4 mt-4"
           id="addToolForm"
         >
@@ -143,7 +141,14 @@ export const AddItem = () => {
 
             {/* image preview */}
             {imagePreview && (
-              <img src={imagePreview} alt="" className="max-w-sm mx-auto" />
+              <div>
+                <br></br>
+                <img
+                  src={imagePreview}
+                  alt=""
+                  className="max-w-sm mx-auto w-"
+                />
+              </div>
             )}
           </div>
 
@@ -151,7 +156,7 @@ export const AddItem = () => {
             <button
               type="submit"
               className="w-40 py-3 font-bold text-white rounded-md bg-blue-cement hover:bg-blue-cement/80 active:bg-blue-900"
-              onClick={handleAdd}
+              onClick={handleCreate}
             >
               Submit
             </button>

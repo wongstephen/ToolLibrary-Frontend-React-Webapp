@@ -1,11 +1,9 @@
+import { createContext, useState, useContext, useEffect } from "react";
 import {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-  useReducer,
-} from "react";
-import { checkUser, getUserToolsApi, userLogin } from "../api/axiosApi";
+  userCheckAxios,
+  toolFetchAxios,
+  userLoginAxios,
+} from "../api/axiosApi";
 
 export const AuthContext = createContext();
 
@@ -15,16 +13,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     checkUserStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
 
   const loginUser = async (userInfo) => {
     setLoading(true);
     try {
-      const res = await userLogin(userInfo);
+      const res = await userLoginAxios(userInfo);
       if (res.status === 200) {
         setUser((prev) => res.data);
         localStorage.setItem("token", res.data.token);
@@ -45,7 +40,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await checkUser(token);
+      const res = await userCheckAxios(token);
       if (res.status === 200) {
         setUser((prev) => {
           return {
@@ -66,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateUserData = async () => {
     const token = localStorage.getItem("token");
-    const res = await getUserToolsApi(token);
+    const res = await toolFetchAxios(token);
     setUser((prev) => {
       return { ...prev, user: { ...prev.user, tool: res } };
     });
@@ -82,8 +77,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
+    // todo loading trobber
     <AuthContext.Provider value={contextData}>
-      {loading ? <p>loading...</p> : children}
+      {loading ? (
+        <div className="min-w-full min-h-screen bg-slate-900">
+          <p>loading...</p>
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };

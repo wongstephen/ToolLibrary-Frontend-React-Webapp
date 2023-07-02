@@ -12,6 +12,7 @@ export const SignOut = () => {
     setTimeout(() => {
       navigate("/");
     }, 2000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="flex flex-col justify-center w-full h-screen text-center item-center">

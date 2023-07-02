@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateTool, deleteTool } from "../api/axiosApi";
+import { toolUpdateAxios, toolDeleteAxios } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { XCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
 
-export const EditItem = () => {
+export const ItemEdit = () => {
   const location = useLocation();
   const { user, updateUserData } = useAuth();
 
@@ -43,7 +43,7 @@ export const EditItem = () => {
       return;
     }
     try {
-      await updateTool(tool._id, body, user.token);
+      await toolUpdateAxios(tool._id, body, user.token);
       updateUserData();
       navigate(-1);
     } catch (err) {
@@ -54,7 +54,7 @@ export const EditItem = () => {
   const handleDelTool = async (e) => {
     e.preventDefault();
     try {
-      await deleteTool(tool._id, user.token);
+      await toolDeleteAxios(tool._id, user.token);
       updateUserData();
       navigate("/home");
     } catch (err) {

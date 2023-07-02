@@ -18,7 +18,7 @@ export const Nav = ({ leftBtn, showFullList, showBorrowedList }) => {
   };
 
   const navAdd = () => {
-    navigate("/addItem");
+    navigate("/itemadd");
   };
 
   const handleList = () => {

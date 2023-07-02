@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
-// import axios from "axios";
-// import { userLogin } from "../api/axiosApi";
+import { useNavigate } from "react-router-dom";
 import { LoginRegisterLink } from "./presentational/LoginRegisterLink";
 import useDisabled from "../hooks/useDisabled";
 import { PageTemplate } from "./presentational/PageTemplate";
@@ -9,12 +7,9 @@ import { InputText } from "./presentational/InputText";
 import { useAuth } from "../context/AuthContext";
 
 export const Login = () => {
-  const { user, loginUser } = useAuth();
-
-  const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/home";
 
+  const { user, loginUser } = useAuth();
   const [userInput, setUserInput] = useState({
     email: "",
     password: "",
@@ -37,6 +32,7 @@ export const Login = () => {
     } else {
       setDisabled(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInput]);
 
   // resets error when changes are made to input
@@ -52,7 +48,7 @@ export const Login = () => {
     try {
       // disables login btn
       setDisabled(true);
-      const res = await loginUser(userInput);
+      await loginUser(userInput);
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -75,6 +71,7 @@ export const Login = () => {
     if (user) {
       navigate("/home");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (
