@@ -17,9 +17,9 @@ export const AuthProvider = ({ children }) => {
     checkUserStatus();
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   const loginUser = async (userInfo) => {
     setLoading(true);
