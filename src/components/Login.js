@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import axios from "axios";
-import { userLogin } from "../api/axiosApi";
-import useAuth from "../hooks/useAuth";
-
+// import axios from "axios";
+// import { userLogin } from "../api/axiosApi";
 import { LoginRegisterLink } from "./presentational/LoginRegisterLink";
 import useDisabled from "../hooks/useDisabled";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
+import { useAuth } from "../context/AuthContext";
 
 export const Login = () => {
-  const { setAuth } = useAuth();
+  const { user, loginUser } = useAuth();
+
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/home";
@@ -52,11 +52,7 @@ export const Login = () => {
     try {
       // disables login btn
       setDisabled(true);
-      const res = await userLogin(userInput);
-      const token = res?.data?.token;
-      setAuth({ token });
-      // localStorage.setItem("token", token);
-      navigate(from, { replace: true });
+      const res = await loginUser(userInput);
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -74,16 +70,12 @@ export const Login = () => {
     }
   };
 
-  // check if local storage has token, if true then setAuth to token
+  // If user is logged in, redirect to feed
   useEffect(() => {
-    const token = JSON.parse(window.localStorage.getItem("token"));
-    if (token) {
-      setAuth((prev) => {
-        return { ...prev, token: token };
-      });
-      navigate(from, "/home");
+    if (user) {
+      navigate("/home");
     }
-  }, []);
+  }, [user]);
 
   return (
     <PageTemplate>

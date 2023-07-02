@@ -13,7 +13,7 @@ let formData = new FormData();
 
 export const AddItem = () => {
   const navigate = useNavigate();
-  const { auth } = useAuth();
+  const { user, updateUserData } = useAuth();
 
   const [imagePreview, setImagePreview] = useState(null);
   const [imageStatus, setImageStatus] = useState(false);
@@ -78,8 +78,9 @@ export const AddItem = () => {
       // for (let value of formData.entries()) {
       //   console.log(value);
       // }
-      const res = await addTool(formData, auth.token);
+      const res = await addTool(formData, user.token);
       console.log(res);
+      updateUserData();
       navigate("/home");
     } catch (err) {
       console.log(err);

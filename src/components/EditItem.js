@@ -8,7 +8,7 @@ import useAuth from "../hooks/useAuth";
 
 export const EditItem = () => {
   const location = useLocation();
-  const { auth } = useAuth();
+  const { user, updateUserData } = useAuth();
 
   const navigate = useNavigate();
   const tool = location.state;
@@ -43,7 +43,8 @@ export const EditItem = () => {
       return;
     }
     try {
-      await updateTool(tool._id, body, auth.token);
+      await updateTool(tool._id, body, user.token);
+      updateUserData();
       navigate(-1);
     } catch (err) {
       console.log(err);
@@ -53,7 +54,8 @@ export const EditItem = () => {
   const handleDelTool = async (e) => {
     e.preventDefault();
     try {
-      await deleteTool(tool._id, auth.token);
+      await deleteTool(tool._id, user.token);
+      updateUserData();
       navigate("/home");
     } catch (err) {
       console.log(err);
