@@ -11,13 +11,13 @@ import useAuth from "../../hooks/useAuth";
 export const FeedItem = ({ feed, setFeedData }) => {
   const navigate = useNavigate();
 
-  const { auth } = useAuth();
+  const { user, updateUserData } = useAuth();
   const tool = feed;
 
   const handleLoanee = async () => {
     try {
-      const res = await updateTool(tool._id, { loanee: "" }, auth.token);
-      setFeedData(res);
+      await updateTool(tool._id, { loanee: "" }, user.token);
+      updateUserData();
     } catch (err) {
       console.log(err);
     }
@@ -25,9 +25,9 @@ export const FeedItem = ({ feed, setFeedData }) => {
 
   const handleTrash = async () => {
     try {
-      await deleteTool(tool._id, auth.token);
-      const res = await getUserToolsApi(auth.token);
-      setFeedData(res);
+      await deleteTool(tool._id, user.token);
+      await getUserToolsApi(user.token);
+      updateUserData();
     } catch (err) {
       console.log(err);
     }

@@ -9,42 +9,22 @@ import { FeedItem } from "./presentational/FeedItem";
 import { Nav } from "./presentational/Nav";
 import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
+
 // import { FeedSortButton } from "./presentational/FeedSortButton";
-import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
 
-// import { FunnelIcon } from "@heroicons/react/24/outline";
-
 export const Feed = () => {
+  const navigate = useNavigate();
+
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const listTitleRef = useRef("All Items");
-  const { auth } = useAuth();
-
-  // axios instance implementation
-  const [response, loading] = useAxios(
-    {
-      axiosInstance: axios,
-      method: "GET",
-      url: "/tools/",
-      requestConfig: {
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-        },
-      },
-      data: {},
-    },
-    []
-  );
-
-  // Update list when loanee is removed
-  useEffect(() => {
-    setFeedData(response);
-  }, [response]);
+  const { user, loading } = useAuth();
 
   useEffect(() => {
-    setSearchData(feedData);
-  }, [feedData]);
+    setFeedData(() => user.user.tool);
+    setSearchData(() => user.user.tool);
+  }, [user]);
 
   const [searchVal, setSearchVal] = useState("");
 
@@ -71,32 +51,30 @@ export const Feed = () => {
   };
 
   // Sort Name and Borrower
-  const [sortUp, setSortUp] = useState(true);
-  const handleSort = () => {
-    setSortUp((prevVal) => !prevVal);
-    sortUp
-      ? setSearchData(searchData.sort((a, b) => (a.name > b.name ? 1 : -1)))
-      : setSearchData(searchData.sort((a, b) => (a.name < b.name ? 1 : -1)));
-  };
+  // const [sortUp, setSortUp] = useState(true);
+  // const handleSort = () => {
+  //   setSortUp((prevVal) => !prevVal);
+  //   sortUp
+  //     ? setSearchData(searchData.sort((a, b) => (a.name > b.name ? 1 : -1)))
+  //     : setSearchData(searchData.sort((a, b) => (a.name < b.name ? 1 : -1)));
+  // };
 
-  const [borrowUp, setBorrowUp] = useState(true);
-  const handleBorrow = () => {
-    setBorrowUp((prevVal) => !prevVal);
-    borrowUp
-      ? setSearchData(searchData.sort((a, b) => (a.loanee > b.loanee ? 1 : -1)))
-      : setSearchData(
-          searchData.sort((a, b) => (a.loanee < b.loanee ? 1 : -1))
-        );
-  };
+  // const [borrowUp, setBorrowUp] = useState(true);
+  // const handleBorrow = () => {
+  //   setBorrowUp((prevVal) => !prevVal);
+  //   borrowUp
+  //     ? setSearchData(searchData.sort((a, b) => (a.loanee > b.loanee ? 1 : -1)))
+  //     : setSearchData(
+  //         searchData.sort((a, b) => (a.loanee < b.loanee ? 1 : -1))
+  //       );
+  // };
   // End Sort Name and Borrower
 
   // Send user to login if no data
-  const navigate = useNavigate();
 
   return (
     <PageTemplate>
       <div className="w-full h-[30vh] bg-center bg-cover my-10 bg-toolTable"></div>
-      {/* <img src={require("../assets/tools-table.jpg")} className="my-4" /> */}
       <Nav
         leftBtn="inventory"
         showFullList={showFullList}
@@ -144,7 +122,7 @@ export const Feed = () => {
           <div>
             <br />
             <p className="mt-8 text-sm font-light text-center text-light-gray">
-              No results! Your list is empty.
+              No Items To Display
             </p>
           </div>
         )}

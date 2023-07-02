@@ -2,6 +2,19 @@ import axios from "axios";
 
 const URL = process.env.REACT_APP_SERVER_URL;
 
+export const checkUser = async (token) => {
+  try {
+    const res = await axios.get(`${URL}/users/single`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const userLogin = async (userInput) => {
   try {
     const res = await axios.post(`${URL}/users/signin`, userInput);

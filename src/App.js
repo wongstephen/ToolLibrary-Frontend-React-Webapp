@@ -11,7 +11,7 @@ import { EditItem } from "./components/EditItem";
 import { AccountCreated } from "./components/AccountCreated";
 import { Login } from "./components/Login";
 import Layout from "./components/Layout";
-import RequireAuth from "./components/utils/RequireAuth";
+import PrivateRoutes from "./components/utils/PrivateRoutes";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
             <Route path="/signout" element={<SignOut />} />
             <Route path="/accountcreated" element={<AccountCreated />} />
             {/* private Routes */}
-            <Route element={<RequireAuth />}>
+            <Route element={<PrivateRoutes />}>
               <Route path="/home" element={<Feed />} exact />
               <Route path="/additem" element={<AddItem />} />
               <Route path="/edit-item/" element={<EditItem />} />

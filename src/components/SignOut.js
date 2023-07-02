@@ -5,10 +5,10 @@ import useAuth from "../hooks/useAuth";
 
 export const SignOut = () => {
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { logoutUser } = useAuth();
   useEffect(() => {
     window.localStorage.clear();
-    setAuth("");
+    logoutUser();
     setTimeout(() => {
       navigate("/");
     }, 2000);
