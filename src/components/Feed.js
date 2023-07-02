@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
 // api
-import useAxios from "../hooks/useAxiosInstance";
-import { useNavigate } from "react-router-dom";
+// import useAxios from "../hooks/useAxiosInstance";
+// import { useNavigate } from "react-router-dom";
 
 // components
 import { FeedItem } from "./presentational/FeedItem";
@@ -86,7 +86,7 @@ export const Feed = () => {
             <div>
               <div className="flex items-center justify-between mx-4 ">
                 <h2 className="text-4xl font-light tracking-wider text-left text-light-gray">
-                  Inventory
+                  Your Inventory
                 </h2>
                 <div>
                   {/* <FunnelIcon className="w-6 h-6 ml-2 bg-transparent cursor-pointer text-light-gray" /> */}

@@ -4,7 +4,7 @@ import {
   TrashIcon,
   UserMinusIcon,
 } from "@heroicons/react/24/solid";
-import { deleteTool, getUserToolsApi, updateTool } from "../../api/axiosApi";
+import { toolDeleteAxios, toolUpdateAxios } from "../../api/axiosApi";
 import { useNavigate } from "react-router-dom";
 
 import useAuth from "../../hooks/useAuth";
@@ -16,7 +16,7 @@ export const FeedItem = ({ feed, setFeedData }) => {
 
   const handleLoanee = async () => {
     try {
-      await updateTool(tool._id, { loanee: "" }, user.token);
+      await toolUpdateAxios(tool._id, { loanee: "" }, user.token);
       updateUserData();
     } catch (err) {
       console.log(err);
@@ -25,8 +25,7 @@ export const FeedItem = ({ feed, setFeedData }) => {
 
   const handleTrash = async () => {
     try {
-      await deleteTool(tool._id, user.token);
-      await getUserToolsApi(user.token);
+      await toolDeleteAxios(tool._id, user.token);
       updateUserData();
     } catch (err) {
       console.log(err);
@@ -73,7 +72,7 @@ export const FeedItem = ({ feed, setFeedData }) => {
         )}
         <button
           onClick={() => {
-            navigate("/edit-item", { state: tool });
+            navigate("/itemedit", { state: tool });
           }}
           className="text-gray-300 cursor-pointer hover:text-blue-cement active:text-blue-cement/50"
           aria-label={`Edit ${tool.name} details`}

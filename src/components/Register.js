@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useDisabled from "../hooks/useDisabled";
 import { useNavigate } from "react-router-dom";
-import { signUp } from "../api/axiosApi";
+import { userRegisterAxios } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
@@ -43,7 +43,7 @@ export const Register = () => {
       return;
     }
     setDisabledBtn(true);
-    const res = await signUp(formVal);
+    const res = await userRegisterAxios(formVal);
     setDisabledBtn(false);
 
     if (res.request.status === 500) {
