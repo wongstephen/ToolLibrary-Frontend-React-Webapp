@@ -9,6 +9,7 @@ export const AccountCreated = () => {
     setTimeout(() => {
       navigate("/home");
     }, 3000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
   return (
     <div className="flex flex-col flex-wrap justify-center w-full text-center item-center h-1/3">

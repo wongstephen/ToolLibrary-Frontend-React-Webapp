@@ -17,6 +17,7 @@ export const Search = ({ feedData, setSearchData, inputVal, setInputVal }) => {
         feedData.filter((tool) => tool.name.toLowerCase().includes(searchTerm))
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput]);
 
   return (

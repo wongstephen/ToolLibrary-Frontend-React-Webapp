@@ -18,6 +18,7 @@ export const ChooseAvator = ({ setData, currentAvator }) => {
     if (currentAvator) {
       setSelAvator(currentAvator);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClick = (el) => {

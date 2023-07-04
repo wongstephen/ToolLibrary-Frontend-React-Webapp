@@ -15,8 +15,6 @@ export const ItemAdd = () => {
   const navigate = useNavigate();
   const { user, updateUserData } = useAuth();
 
-  const [imagePreview, setImagePreview] = useState();
-
   const initialState = {
     name: "",
     loanee: "",
@@ -140,11 +138,11 @@ export const ItemAdd = () => {
             />
 
             {/* image preview */}
-            {imagePreview && (
+            {data.userImage && (
               <div>
                 <br></br>
                 <img
-                  src={imagePreview}
+                  src={data.userImage}
                   alt=""
                   className="max-w-sm mx-auto w-"
                 />

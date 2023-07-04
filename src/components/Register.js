@@ -25,6 +25,7 @@ export const Register = () => {
     } else {
       setDisabledBtn(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formVal]);
 
   const handleChange = (e) => {
