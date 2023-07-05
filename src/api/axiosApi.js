@@ -4,7 +4,7 @@ const URL = process.env.REACT_APP_SERVER_URL;
 
 export const userCheckAxios = async (token) => {
   try {
-    const res = await axios.get(`${URL}/users/single`, {
+    const res = await axios.get(`${URL}/user/single`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -17,7 +17,7 @@ export const userCheckAxios = async (token) => {
 
 export const userLoginAxios = async (userInput) => {
   try {
-    const res = await axios.post(`${URL}/users/signin`, userInput);
+    const res = await axios.post(`${URL}/user/signin`, userInput);
     return res;
   } catch (err) {
     throw err;
@@ -26,7 +26,7 @@ export const userLoginAxios = async (userInput) => {
 
 export const userRegisterAxios = async (userData) => {
   try {
-    const res = await axios.post(`${URL}/users/signup`, userData);
+    const res = await axios.post(`${URL}/user/signup`, userData);
     console.log(res);
     return res;
   } catch (err) {
@@ -36,7 +36,7 @@ export const userRegisterAxios = async (userData) => {
 
 export const toolFetchAxios = async (token) => {
   try {
-    const res = await axios.get(`${URL}/tools`, {
+    const res = await axios.get(`${URL}/tool`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -50,9 +50,9 @@ export const toolFetchAxios = async (token) => {
 export const toolCreateAxios = async (formData, token) => {
   try {
     let config = {
-      method: "post",
+      method: "POST",
       maxBodyLength: Infinity,
-      url: `${URL}/tools/image`,
+      url: `${URL}/tool`,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -70,7 +70,7 @@ export const toolCreateAxios = async (formData, token) => {
 
 export const toolUpdateAxios = async (id, body, token) => {
   try {
-    const res = await axios.patch(`${URL}/tools/${id}`, body, {
+    const res = await axios.patch(`${URL}/tool/${id}`, body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -83,7 +83,7 @@ export const toolUpdateAxios = async (id, body, token) => {
 
 export const toolDeleteAxios = async (id, token) => {
   try {
-    const res = await axios.delete(`${URL}/tools/${id}`, {
+    const res = await axios.delete(`${URL}/tool/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
