@@ -19,7 +19,7 @@ export const ChooseAvator = ({ setAvator, avator }) => {
   return (
     <div className="mx-4 mt-4">
       <p className="mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
-        Choose a tool avator or upload your own image.
+        Choose a tool icon or upload your own image.
       </p>
       <div className="flex flex-wrap gap-4 mt-4">
         {Object.keys(avators).map((avatormap, idx) => {
