@@ -23,6 +23,12 @@ export const ItemAdd = () => {
   };
 
   const [data, setData] = useState(initialState);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
+
+  useEffect(() => {
+    console.log(selectedImage);
+  }, [selectedImage]);
 
   const [submitErr, setSubmitErr] = useState(false);
 
@@ -41,16 +47,15 @@ export const ItemAdd = () => {
     });
   };
 
-  const handleUserImage = (event) => {
-    const { name, files } = event.target;
-    if (files[0].size > 10000000) {
+  const handleImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    if (imageFile.size > 10000000) {
       alert("File size must be less than 10MB");
       event.target.value = null;
       return;
     }
-    setData((prevState) => {
-      return { ...prevState, [name]: files[0] };
-    });
+    setSelectedImage(imageFile);
+    setPreviewImage(URL.createObjectURL(imageFile));
   };
 
   const handleCreate = async (event) => {
@@ -64,10 +69,7 @@ export const ItemAdd = () => {
       formData.append("name", data.name);
       formData.append("loanee", data.loanee);
       formData.append("avator", data.avator);
-      formData.append("userImage", data.userImage);
-      // for (let value of formData.entries()) {
-      //   console.log(value);
-      // }
+      formData.append("userImage", selectedImage);
       const res = await toolCreateAxios(formData, user.token);
       if (res.status === 201) {
         updateUserData();
@@ -133,16 +135,17 @@ export const ItemAdd = () => {
               type="file"
               name="userImage"
               id="userImage"
-              onChange={handleUserImage}
+              onChange={handleImageChange}
               accept="image/*"
             />
 
             {/* image preview */}
-            {data.userImage && (
+            {previewImage && (
               <div>
+                sdf
                 <br></br>
                 <img
-                  src={data.userImage}
+                  src={previewImage}
                   alt=""
                   className="max-w-sm mx-auto w-"
                 />
