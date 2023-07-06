@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-export const ChooseAvator = ({ setData, currentAvator }) => {
+export const ChooseAvator = ({ setAvator, avator }) => {
   const avators = {
     empty: "empty.png",
     hammer: "hammer.png",
@@ -12,20 +12,8 @@ export const ChooseAvator = ({ setData, currentAvator }) => {
     wrench: "wrench.png",
   };
 
-  const [selAvator, setSelAvator] = useState("empty");
-
-  useEffect(() => {
-    if (currentAvator) {
-      setSelAvator(currentAvator);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handleClick = (el) => {
-    setSelAvator(el.target.name);
-    setData((data) => {
-      return { ...data, avator: el.target.name };
-    });
+    setAvator(() => el.target.name);
   };
 
   return (
@@ -34,16 +22,16 @@ export const ChooseAvator = ({ setData, currentAvator }) => {
         Choose a tool avator or upload your own image.
       </p>
       <div className="flex flex-wrap gap-4 mt-4">
-        {Object.keys(avators).map((avator, idx) => {
+        {Object.keys(avators).map((avatormap, idx) => {
           return (
             <img
               key={idx}
-              src={require(`../../assets/avator/${avators[avator]}`)}
-              name={avator}
-              alt={avator}
+              src={require(`../../assets/avator/${avators[avatormap]}`)}
+              name={avatormap}
+              alt={avatormap}
               onClick={handleClick}
               className={`cursor-pointer ${
-                selAvator === avator &&
+                avatormap === avator &&
                 "outline outline-2 outline-blue-cement rounded-full outline-offset-2 "
               }`}
             />
