@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+
+import { toolCreateAxios } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
 import { ChooseAvator } from "./presentational/ChooseAvator";
+
 import { XCircleIcon } from "@heroicons/react/24/outline";
-import useAuth from "../hooks/useAuth";
-import { toolCreateAxios } from "../api/axiosApi";
 
 const FormData = require("form-data");
 
@@ -16,7 +18,7 @@ export const ItemAdd = () => {
 
   const toolNameInputRef = useRef();
   const loaneeInputRef = useRef();
-  const imageInputRef = useRef();
+  // const imageInputRef = useRef();
 
   const [avator, setAvator] = useState("empty");
   const [selectedImage, setSelectedImage] = useState(null);
