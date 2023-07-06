@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PageTemplate } from "./presentational/PageTemplate";
@@ -11,38 +11,17 @@ const FormData = require("form-data");
 
 export const ItemAdd = () => {
   const navigate = useNavigate();
+
   const { user, updateUserData } = useAuth();
 
-  const initialState = {
-    name: "",
-    loanee: "",
-    avator: "empty",
-  };
+  const toolNameInputRef = useRef();
+  const loaneeInputRef = useRef();
+  const imageInputRef = useRef();
 
-  const [data, setData] = useState(initialState);
+  const [avator, setAvator] = useState("empty");
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState("");
-
-  useEffect(() => {
-    console.log(selectedImage);
-  }, [selectedImage]);
-
   const [submitErr, setSubmitErr] = useState(false);
-
-  useEffect(() => {
-    setSubmitErr(() => {
-      return false;
-    });
-  }, [data]);
-
-  // avator for items
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setData((prevState) => {
-      return { ...prevState, [name]: value };
-    });
-  };
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
@@ -53,7 +32,7 @@ export const ItemAdd = () => {
       event.target.value = null;
       return;
     }
-    setSelectedImage(imageFile);
+    setSelectedImage(() => imageFile);
     setPreviewImage(URL.createObjectURL(imageFile));
   };
 
@@ -62,22 +41,23 @@ export const ItemAdd = () => {
 
     let formData = new FormData();
 
-    if (!data.name) {
+    if (!toolNameInputRef.current.value) {
       return setSubmitErr(() => {
         return true;
       });
     }
     try {
-      formData.append("name", data.name);
-      formData.append("loanee", data.loanee);
-      formData.append("avator", data.avator);
+      formData.append("name", toolNameInputRef.current.value);
+      formData.append("loanee", loaneeInputRef.current.value);
+      formData.append("avator", avator);
       formData.append("userImage", selectedImage);
       const res = await toolCreateAxios(formData, user.token);
       if (res.status === 201) {
         updateUserData();
-        setData(initialState);
-        setData(null);
-        setPreviewImage(null);
+        toolNameInputRef.current.value = "";
+        loaneeInputRef.current.value = "";
+        setAvator(() => "empty");
+        setPreviewImage(() => null);
         navigate("/home");
       }
     } catch (err) {
@@ -120,21 +100,20 @@ export const ItemAdd = () => {
           <input
             name="name"
             className={inputStyle}
-            onChange={handleChange}
-            value={data.name}
             placeholder="Tool Name"
+            ref={toolNameInputRef}
           />
           <label className="sr-only" htmlFor="loanee">
             Borrower
           </label>
           <input
             name="loanee"
-            onChange={handleChange}
-            value={data.loanee}
             className={inputStyle}
             placeholder="Borrower"
+            ref={loaneeInputRef}
           />
-          <ChooseAvator setData={setData} />
+
+          <ChooseAvator setAvator={setAvator} avator={avator} />
 
           {/* user image */}
           <div className="my-4 text-center">
