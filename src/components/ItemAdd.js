@@ -9,8 +9,6 @@ import { toolCreateAxios } from "../api/axiosApi";
 
 const FormData = require("form-data");
 
-let formData = new FormData();
-
 export const ItemAdd = () => {
   const navigate = useNavigate();
   const { user, updateUserData } = useAuth();
@@ -19,7 +17,6 @@ export const ItemAdd = () => {
     name: "",
     loanee: "",
     avator: "empty",
-    userImage: null,
   };
 
   const [data, setData] = useState(initialState);
@@ -60,6 +57,9 @@ export const ItemAdd = () => {
 
   const handleCreate = async (event) => {
     event.preventDefault();
+
+    let formData = new FormData();
+
     if (!data.name) {
       return setSubmitErr(() => {
         return true;
@@ -73,11 +73,16 @@ export const ItemAdd = () => {
       const res = await toolCreateAxios(formData, user.token);
       if (res.status === 201) {
         updateUserData();
+        setData(initialState);
+        setData(null);
+        setPreviewImage(null);
         navigate("/home");
       }
     } catch (err) {
       console.log(err);
       alert("Something went wrong, please try again.");
+    } finally {
+      formData = null;
     }
   };
 
