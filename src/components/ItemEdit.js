@@ -19,8 +19,6 @@ export const ItemEdit = () => {
   const toolNameInputRef = useRef(activeTool.name);
   const loaneeInputRef = useRef(activeTool.loanee);
 
-  console.log(toolNameInputRef.current);
-
   const [avator, setAvator] = useState("empty");
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState("");
@@ -30,8 +28,9 @@ export const ItemEdit = () => {
     setPreviewImage(() => activeTool.photo);
     toolNameInputRef.current.value = activeTool.name;
     loaneeInputRef.current.value = activeTool.loanee;
+    setPreviewImage(() => activeTool?.toolImage);
 
-    //
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // console.log(avator);
@@ -135,6 +134,30 @@ export const ItemEdit = () => {
             // onChange={handleChange}
           />
           <ChooseAvator setAvator={setAvator} avator={avator} />
+
+          {/* user image */}
+          <div className="my-4 text-center">
+            <input
+              className="w-40 h-10 mx-auto text-xs font-thin rounded-md text-cente text-light-gray"
+              type="file"
+              name="userImage"
+              id="userImage"
+              // onChange={handleImageChange}
+              accept="image/*"
+            />
+
+            {/* image preview */}
+            {previewImage && (
+              <div>
+                <br></br>
+                <img
+                  src={previewImage}
+                  alt=""
+                  className="max-w-sm mx-auto w-"
+                />
+              </div>
+            )}
+          </div>
 
           <div className="justify-center mx-auto my-6">
             <button
