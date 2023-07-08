@@ -18,7 +18,6 @@ export const ItemAdd = () => {
 
   const toolNameInputRef = useRef();
   const loaneeInputRef = useRef();
-  // const imageInputRef = useRef();
 
   const [avator, setAvator] = useState("empty");
   const [selectedImage, setSelectedImage] = useState(null);

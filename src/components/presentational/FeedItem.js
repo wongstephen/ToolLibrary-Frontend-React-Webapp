@@ -72,7 +72,7 @@ export const FeedItem = ({ feed, setFeedData }) => {
         )}
         <button
           onClick={() => {
-            navigate("/itemedit", { state: tool });
+            navigate(`/itemedit/${tool.id}`, { state: tool });
           }}
           className="text-gray-300 cursor-pointer hover:text-blue-cement active:text-blue-cement/50"
           aria-label={`Edit ${tool.name} details`}

@@ -1,16 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { PageTemplate } from "./presentational/PageTemplate";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toolUpdateAxios, toolDeleteAxios } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { XCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
+import { act } from "react-dom/test-utils";
 
 export const ItemEdit = () => {
+  const navigate = useNavigate();
+  let { id: toolId } = useParams();
+
   const location = useLocation();
   const { user, updateUserData } = useAuth();
+  const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
 
-  const navigate = useNavigate();
+  console.log(activeTool);
+  const toolNameInputRef = useRef(activeTool.name);
+  const loaneeInputRef = useRef(activeTool.loanee);
+
+  console.log(toolNameInputRef.current);
+
+  const [avator, setAvator] = useState("empty");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
+
+  useEffect(() => {
+    setAvator(() => activeTool.avator);
+    setPreviewImage(() => activeTool.photo);
+    toolNameInputRef.current.value = activeTool.name;
+    loaneeInputRef.current.value = activeTool.loanee;
+
+    //
+  }, []);
+
+  // console.log(avator);
+
   const tool = location.state;
   const [body, setBody] = useState({
     name: tool.name,
@@ -26,13 +51,13 @@ export const ItemEdit = () => {
     });
   }, [body]);
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setBody((prevState) => {
-      return { ...prevState, [name]: value };
-    });
-  };
+  // const handleChange = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   setBody((prevState) => {
+  //     return { ...prevState, [name]: value };
+  //   });
+  // };
 
   const editTool = async (e) => {
     e.preventDefault();
@@ -92,8 +117,9 @@ export const ItemEdit = () => {
           <input
             name="name"
             className={inputStyle}
-            value={body.name}
-            onChange={handleChange}
+            ref={toolNameInputRef}
+            placeholder={"Borrower"}
+            // onChange={handleChange}
           />
           <label className="sr-only" htmlFor="name">
             Borrower Name
@@ -101,12 +127,15 @@ export const ItemEdit = () => {
           <input
             name="loanee"
             className={inputStyle}
-            placeholder="Borrower"
+            // placeholder="Borrower"
             //   defaultValue={tool.loanee}
-            value={body.loanee}
-            onChange={handleChange}
+            ref={loaneeInputRef}
+            // placeholder={loaneeInputRef.current.value}
+            // value={body.loanee}
+            // onChange={handleChange}
           />
-          <ChooseAvator setData={setBody} currentAvator={tool.avator} />
+          <ChooseAvator setAvator={setAvator} avator={avator} />
+
           <div className="justify-center mx-auto my-6">
             <button
               type="submit"

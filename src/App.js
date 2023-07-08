@@ -29,7 +29,8 @@ function App() {
             <Route element={<PrivateRoutes />}>
               <Route path="/home" element={<Feed />} exact />
               <Route path="/itemadd" element={<ItemAdd />} />
-              <Route path="/itemedit/" element={<ItemEdit />} />
+              {/* <Route path="/itemedit/" element={<ItemEdit />} /> */}
+              <Route path="/itemedit/:id" element={<ItemEdit />} />
             </Route>
             {/* todo 404  */}
             <Route
