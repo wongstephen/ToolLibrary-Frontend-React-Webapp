@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { PageTemplate } from "./presentational/PageTemplate";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toolUpdateAxios, toolDeleteAxios } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { XCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
