@@ -1,51 +1,77 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { PageTemplate } from "./presentational/PageTemplate";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toolUpdateAxios, toolDeleteAxios } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { XCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
+import ToolModel from "./models/ToolModel";
 
 export const ItemEdit = () => {
-  const location = useLocation();
   const { user, updateUserData } = useAuth();
-
+  const { id: toolId } = useParams();
   const navigate = useNavigate();
-  const tool = location.state;
-  const [body, setBody] = useState({
-    name: tool.name,
-    photo: tool.photo,
-    loanee: tool.loanee,
-    avator: tool.avator,
-  });
 
   const [submitErr, setSubmitErr] = useState(false);
-  useEffect(() => {
-    setSubmitErr(() => {
-      return false;
-    });
-  }, [body]);
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setBody((prevState) => {
-      return { ...prevState, [name]: value };
-    });
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [avator, setAvator] = useState("empty");
+  const [previewImage, setPreviewImage] = useState("");
+
+  const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
+  const toolNameInputRef = useRef(activeTool.name);
+  const loaneeInputRef = useRef(activeTool.loanee);
+
+  const currentToolObj = new ToolModel(
+    activeTool.name,
+    activeTool.loanee,
+    activeTool.avator,
+    activeTool.toolImage
+  );
+
+  useEffect(() => {
+    toolNameInputRef.current.value = currentToolObj.getToolName();
+    loaneeInputRef.current.value = currentToolObj.getToolLoanee();
+    setAvator(() => currentToolObj.getToolAvator());
+    setPreviewImage(() => currentToolObj.getToolImageUrl());
+    // eslint-disable-next-line
+  }, []);
+
+  const handleImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    if (imageFile.size > 10000000) {
+      alert("File size must be less than 10MB");
+      event.target.value = null;
+      return;
+    }
+    setSelectedImage(() => imageFile);
+    setPreviewImage(URL.createObjectURL(imageFile));
   };
 
-  const editTool = async (e) => {
+  const onEditSubmit = async (e) => {
     e.preventDefault();
-    if (!body.name) {
+    if (!toolNameInputRef.current.value) {
       setSubmitErr(() => {
         return true;
       });
       return;
     }
     try {
-      await toolUpdateAxios(tool._id, body, user.token);
-      updateUserData();
-      navigate(-1);
+      currentToolObj.setToolName(toolNameInputRef.current.value);
+      currentToolObj.setToolLoanee(loaneeInputRef.current.value);
+      currentToolObj.setToolAvator(avator);
+      currentToolObj.setToolImageFile(selectedImage);
+      const res = await toolUpdateAxios(
+        toolId,
+        currentToolObj.getFormData(),
+        user.token
+      );
+      if (res.status === 202) {
+        updateUserData();
+        navigate("/home");
+      } else {
+        throw new Error("Opps something went wrong. Try again");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -54,7 +80,7 @@ export const ItemEdit = () => {
   const handleDelTool = async (e) => {
     e.preventDefault();
     try {
-      await toolDeleteAxios(tool._id, user.token);
+      await toolDeleteAxios(toolId, user.token);
       updateUserData();
       navigate("/home");
     } catch (err) {
@@ -78,7 +104,7 @@ export const ItemEdit = () => {
           Edit the item name or who you loaned your item to. Leave the borrower
           blank if it was returned.
         </p>
-        <form onSubmit={editTool} className="flex flex-col gap-4 mt-4">
+        <form onSubmit={onEditSubmit} className="flex flex-col gap-4 mt-4">
           <label className="sr-only" htmlFor="name">
             Tool Name
           </label>
@@ -92,8 +118,8 @@ export const ItemEdit = () => {
           <input
             name="name"
             className={inputStyle}
-            value={body.name}
-            onChange={handleChange}
+            ref={toolNameInputRef}
+            placeholder={"Borrower"}
           />
           <label className="sr-only" htmlFor="name">
             Borrower Name
@@ -101,12 +127,35 @@ export const ItemEdit = () => {
           <input
             name="loanee"
             className={inputStyle}
-            placeholder="Borrower"
-            //   defaultValue={tool.loanee}
-            value={body.loanee}
-            onChange={handleChange}
+            ref={loaneeInputRef}
+            placeholder={"Loanee"}
           />
-          <ChooseAvator setData={setBody} currentAvator={tool.avator} />
+          <ChooseAvator setAvator={setAvator} avator={avator} />
+
+          {/* user image */}
+          <div className="my-4 text-center">
+            <input
+              className="w-40 h-10 mx-auto text-xs font-thin rounded-md text-cente text-light-gray"
+              type="file"
+              name="userImage"
+              id="userImage"
+              onChange={handleImageChange}
+              accept="image/*"
+            />
+
+            {/* image preview */}
+            {previewImage && (
+              <div>
+                <br></br>
+                <img
+                  src={previewImage}
+                  alt=""
+                  className="w-full max-w-sm mx-auto"
+                />
+              </div>
+            )}
+          </div>
+
           <div className="justify-center mx-auto my-6">
             <button
               type="submit"

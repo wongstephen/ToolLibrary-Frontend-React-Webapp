@@ -27,7 +27,6 @@ export const userLoginAxios = async (userInput) => {
 export const userRegisterAxios = async (userData) => {
   try {
     const res = await axios.post(`${URL}/user/signup`, userData);
-    console.log(res);
     return res;
   } catch (err) {
     throw err;
@@ -51,13 +50,10 @@ export const toolCreateAxios = async (formData, token) => {
   try {
     let config = {
       method: "POST",
-      maxBodyLength: Infinity,
       url: `${URL}/tool`,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Origin": "*",
       },
       data: formData,
     };
@@ -68,14 +64,18 @@ export const toolCreateAxios = async (formData, token) => {
   }
 };
 
-export const toolUpdateAxios = async (id, body, token) => {
+export const toolUpdateAxios = async (toolId, body, token) => {
   try {
-    const res = await axios.patch(`${URL}/tool/${id}`, body, {
+    const res = await axios.patch(`${URL}/tool/${toolId}`, body, {
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Origin": "*",
       },
+      maxBodyLength: Infinity,
     });
-    return res.data.tool;
+    return res;
   } catch (err) {
     console.log(err);
   }

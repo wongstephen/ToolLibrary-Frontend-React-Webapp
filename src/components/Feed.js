@@ -17,6 +17,7 @@ export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const listTitleRef = useRef("All Items");
+  
   const { user, loading } = useAuth();
 
   useEffect(() => {

@@ -18,7 +18,6 @@ export const ItemAdd = () => {
 
   const toolNameInputRef = useRef();
   const loaneeInputRef = useRef();
-  // const imageInputRef = useRef();
 
   const [avator, setAvator] = useState("empty");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -135,7 +134,7 @@ export const ItemAdd = () => {
                 <img
                   src={previewImage}
                   alt=""
-                  className="max-w-sm mx-auto w-"
+                  className="w-full max-w-sm mx-auto"
                 />
               </div>
             )}
