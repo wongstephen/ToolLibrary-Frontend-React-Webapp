@@ -9,7 +9,7 @@ export const HomeScreen = () => {
 
   return (
     <div className="h-full">
-      <div id="homescreen" className="p-10 mx-auto max-w-7xl">
+      <div id="homescreen" className="mx-auto max-w-7xl">
         <div className="flex justify-between mb-20">
           <h1 className="text-2xl tracking-tight text-white uppercase md:text-4xl font-unbounded">
             Tool Library
@@ -97,14 +97,14 @@ export const HomeScreen = () => {
               with friends and family.
             </p>
 
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center w-full item-center">
               <p className="mb-8 text-2xl font-bold tracking-wider text-center text-white leading-wider max-w-prose">
                 Sign up for an account or log in to start keeping track of your
                 tools!
               </p>
-              <div className="flex justify-center">
+              <div className="flex flex-col items-center justify-center gap-2 align-middle sm:flex-row">
                 <button
-                  className="mr-2 tracking-wider text-white rounded-sm h-16mb-2 bg-blue-cement hover:bg-blue-cement/90 active:bg-blue-cement/50 w-52"
+                  className="h-16 tracking-wider text-white rounded-sm bg-blue-cement hover:bg-blue-cement/90 active:bg-blue-cement/50 w-52"
                   name="register"
                   onClick={handleClick}
                 >

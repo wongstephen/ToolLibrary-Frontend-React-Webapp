@@ -134,7 +134,7 @@ export const ItemAdd = () => {
                 <img
                   src={previewImage}
                   alt=""
-                  className="max-w-sm mx-auto w-"
+                  className="w-full max-w-sm mx-auto"
                 />
               </div>
             )}

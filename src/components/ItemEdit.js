@@ -5,71 +5,73 @@ import { toolUpdateAxios, toolDeleteAxios } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { XCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
-import { act } from "react-dom/test-utils";
+import ToolModel from "./models/ToolModel";
 
 export const ItemEdit = () => {
-  const navigate = useNavigate();
-  let { id: toolId } = useParams();
-
-  const location = useLocation();
   const { user, updateUserData } = useAuth();
-  const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
+  const { id: toolId } = useParams();
+  const navigate = useNavigate();
 
-  console.log(activeTool);
+  const [submitErr, setSubmitErr] = useState(false);
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [avator, setAvator] = useState("empty");
+  const [previewImage, setPreviewImage] = useState("");
+
+  const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
   const toolNameInputRef = useRef(activeTool.name);
   const loaneeInputRef = useRef(activeTool.loanee);
 
-  const [avator, setAvator] = useState("empty");
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [previewImage, setPreviewImage] = useState("");
+  const currentToolObj = new ToolModel(
+    activeTool.name,
+    activeTool.loanee,
+    activeTool.avator,
+    activeTool.toolImage
+  );
 
   useEffect(() => {
-    setAvator(() => activeTool.avator);
-    setPreviewImage(() => activeTool.photo);
-    toolNameInputRef.current.value = activeTool.name;
-    loaneeInputRef.current.value = activeTool.loanee;
-    setPreviewImage(() => activeTool?.toolImage);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    toolNameInputRef.current.value = currentToolObj.getToolName();
+    loaneeInputRef.current.value = currentToolObj.getToolLoanee();
+    setAvator(() => currentToolObj.getToolAvator());
+    setPreviewImage(() => currentToolObj.getToolImageUrl());
+    // eslint-disable-next-line
   }, []);
 
-  // console.log(avator);
+  const handleImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    if (imageFile.size > 10000000) {
+      alert("File size must be less than 10MB");
+      event.target.value = null;
+      return;
+    }
+    setSelectedImage(() => imageFile);
+    setPreviewImage(URL.createObjectURL(imageFile));
+  };
 
-  const tool = location.state;
-  const [body, setBody] = useState({
-    name: tool.name,
-    photo: tool.photo,
-    loanee: tool.loanee,
-    avator: tool.avator,
-  });
-
-  const [submitErr, setSubmitErr] = useState(false);
-  useEffect(() => {
-    setSubmitErr(() => {
-      return false;
-    });
-  }, [body]);
-
-  // const handleChange = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   setBody((prevState) => {
-  //     return { ...prevState, [name]: value };
-  //   });
-  // };
-
-  const editTool = async (e) => {
+  const onEditSubmit = async (e) => {
     e.preventDefault();
-    if (!body.name) {
+    if (!toolNameInputRef.current.value) {
       setSubmitErr(() => {
         return true;
       });
       return;
     }
     try {
-      await toolUpdateAxios(tool._id, body, user.token);
-      updateUserData();
-      navigate(-1);
+      currentToolObj.setToolName(toolNameInputRef.current.value);
+      currentToolObj.setToolLoanee(loaneeInputRef.current.value);
+      currentToolObj.setToolAvator(avator);
+      currentToolObj.setToolImageFile(selectedImage);
+      const res = await toolUpdateAxios(
+        toolId,
+        currentToolObj.getFormData(),
+        user.token
+      );
+      if (res.status === 202) {
+        updateUserData();
+        navigate("/home");
+      } else {
+        throw new Error("Opps something went wrong. Try again");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +80,7 @@ export const ItemEdit = () => {
   const handleDelTool = async (e) => {
     e.preventDefault();
     try {
-      await toolDeleteAxios(tool._id, user.token);
+      await toolDeleteAxios(toolId, user.token);
       updateUserData();
       navigate("/home");
     } catch (err) {
@@ -102,7 +104,7 @@ export const ItemEdit = () => {
           Edit the item name or who you loaned your item to. Leave the borrower
           blank if it was returned.
         </p>
-        <form onSubmit={editTool} className="flex flex-col gap-4 mt-4">
+        <form onSubmit={onEditSubmit} className="flex flex-col gap-4 mt-4">
           <label className="sr-only" htmlFor="name">
             Tool Name
           </label>
@@ -118,7 +120,6 @@ export const ItemEdit = () => {
             className={inputStyle}
             ref={toolNameInputRef}
             placeholder={"Borrower"}
-            // onChange={handleChange}
           />
           <label className="sr-only" htmlFor="name">
             Borrower Name
@@ -126,12 +127,8 @@ export const ItemEdit = () => {
           <input
             name="loanee"
             className={inputStyle}
-            // placeholder="Borrower"
-            //   defaultValue={tool.loanee}
             ref={loaneeInputRef}
-            // placeholder={loaneeInputRef.current.value}
-            // value={body.loanee}
-            // onChange={handleChange}
+            placeholder={"Loanee"}
           />
           <ChooseAvator setAvator={setAvator} avator={avator} />
 
@@ -142,7 +139,7 @@ export const ItemEdit = () => {
               type="file"
               name="userImage"
               id="userImage"
-              // onChange={handleImageChange}
+              onChange={handleImageChange}
               accept="image/*"
             />
 
@@ -153,7 +150,7 @@ export const ItemEdit = () => {
                 <img
                   src={previewImage}
                   alt=""
-                  className="max-w-sm mx-auto w-"
+                  className="w-full max-w-sm mx-auto"
                 />
               </div>
             )}
