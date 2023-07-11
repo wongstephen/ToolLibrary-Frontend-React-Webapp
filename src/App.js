@@ -14,6 +14,9 @@ import Layout from "./components/Layout";
 import PrivateRoutes from "./components/utils/PrivateRoutes";
 
 function App() {
+  if (process.env.REACT_APP_NODE_ENV === "development") {
+    console.log("DEV ENVIRONMENT");
+  }
   return (
     <AuthProvider>
       <main className="min-w-full min-h-screen bg-slate-900">

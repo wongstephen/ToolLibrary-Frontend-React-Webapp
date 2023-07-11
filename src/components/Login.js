@@ -44,7 +44,7 @@ export const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    console.log("test");
     try {
       // disables login btn
       setDisabled(true);
