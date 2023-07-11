@@ -1,5 +1,28 @@
-Dockerfile
-.git
-.gitignore
-.dockerignore
+# Ignore development-related files and directories
 node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.DS_Store
+
+# Ignore build artifacts
+build
+dist
+
+# Ignore editor-specific files and directories
+.vscode
+.idea
+
+# Ignore testing-related files and directories
+coverage
+reports
+
+# Ignore miscellaneous files
+.git
+.github
+.gitignore
+.env
+.env.local
+.env.development
+.env.test
+.env.production

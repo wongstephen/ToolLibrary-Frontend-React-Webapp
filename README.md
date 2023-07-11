@@ -53,13 +53,20 @@ The page will reload when you make changes.
 
 ### Future Updates
 
-- Forget password
-- Host backend on AWS
-- Relationship Schema for Loanee
-- Additional test for user login
-- Password requirements
-- Store data into useContext to reduce API calls
-
+- [ ] Forget password
+- [ ] Host backend on AWS
+- [ ] Relationship Schema for Loanee
+- [ ] Password requirements
+- [x] Store data into useContext to reduce API calls
+- [ ] Create loading throbber for AddItems and Edit items when user selects a new image.
+- [ ] Create staging environment deployed to AWS via CI/CD
+- [ ] Additional Test
+  - Login
+  - [ ] Passes when user enters correct username and password
+  - [ ] Fails when user enters wrong username
+  - [ ] Fails when user enters correct username and wrong password
+  - [ ] Faits when user does not enter an username and/or password
 
 ### Issue Tracking
+
 - When the user edits an item and tries to update it, the server responds with an error.
