@@ -33,7 +33,7 @@ export const FeedItem = ({ feed, setFeedData }) => {
   };
 
   return (
-    <li className="flex py-1.5 min-h-[53px] border-b-[1px] border-b-gray-700/50 last-of-type:border-none">
+    <li className="flex items-center px-4 rounded-lg min-h-[84px] border-2 hover:border-theme-green bg-white shadow-sm">
       {tool.toolImage ? (
         <div className="w-2/12 max-w-[3rem] max-h-[3rem]  mr-4 overflow-hidden rounded-md">
           <img
@@ -57,14 +57,14 @@ export const FeedItem = ({ feed, setFeedData }) => {
       )}
 
       <div className="flex flex-col justify-around flex-1">
-        <h3 className="font-light tracking-wider text-white">{tool.name}</h3>
-        <p className="text-xs tracking-wider text-gray-300 ">{tool.loanee}</p>
+        <h3 className="font-light tracking-wider text-black">{tool.name}</h3>
+        <p className="text-xs tracking-wider text-gray-800 ">{tool.loanee}</p>
       </div>
       <div className="flex items-center justify-center gap-2.5">
         {tool.loanee && (
           <button
             onClick={handleLoanee}
-            className="hidden text-gray-300 cursor-pointer sm:block hover:text-blue-cement active:text-blue-cement/50"
+            className="hidden cursor-pointer text-theme-yellow sm:block hover:text-theme-yellow/90 active:text-theme-yellow/50"
             aria-label={`Remove borrow of ${tool.name}`}
           >
             <UserMinusIcon className="w-6 h-auto " title="Remove Loanee" />
@@ -74,14 +74,14 @@ export const FeedItem = ({ feed, setFeedData }) => {
           onClick={() => {
             navigate(`/itemedit/${tool.id}`, { state: tool });
           }}
-          className="text-gray-300 cursor-pointer hover:text-blue-cement active:text-blue-cement/50"
+          className="cursor-pointer text-theme-green hover:text-theme-green/90 active:text-theme-green/50"
           aria-label={`Edit ${tool.name} details`}
         >
           <PencilSquareIcon title="Edit Tool" className="w-6 h-auto" />
         </button>
         <button
           onClick={handleTrash}
-          className="hidden text-gray-300 cursor-pointer hover:text-blue-cement sm:block active:text-blue-cement/50"
+          className="hidden cursor-pointer text-theme-red hover:text-theme-red/90 sm:block active:text-theme-red/50"
           aria-label={`Delete ${tool.name} from inventory`}
         >
           <TrashIcon

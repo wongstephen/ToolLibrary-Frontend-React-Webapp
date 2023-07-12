@@ -10,12 +10,20 @@ module.exports = {
         comfortaa: ["Comfortaa", "cursive"],
         poppins: ["Poppins", "sans-serif"],
         unbounded: ["Unbounded", "cursive"],
+
+        archivo: ["Archivo", "sans-serif"],
+        "open-sans": ["Open Sans", "sans-serif"],
+        sans: ["Open Sans", "sans-serif"],
       },
       colors: {
         "dark-gray": "#191919",
         "med-gray": "#515151",
         "light-gray": "#cccccc",
         "blue-cement": "#0072be",
+
+        "theme-green": "#5AC3B0",
+        "theme-red": "#DE5935",
+        "theme-yellow": "#F7CD46",
       },
       backgroundImage: {
         titleImg: "url('/src/assets/title-bg.jpg')",

@@ -7,13 +7,13 @@ export const LoginRegisterLink = () => {
     navigate("/register");
   };
   return (
-    <p className="text-sm text-center text-light-gray">
-      Don't have an account?
+    <p className="mt-10 text-sm text-center text-gray-500">
+      Need an Account?
       <span
         onClick={handleClick}
-        className="ml-4 font-medium cursor-pointer text-blue-cement"
+        className="ml-2 font-medium underline cursor-pointer text-blue-cement"
       >
-        Register
+        Sign Up
       </span>
     </p>
   );

@@ -9,71 +9,62 @@ export const HomeScreen = () => {
 
   return (
     <div className="h-full">
-      <div id="homescreen" className="mx-auto max-w-7xl">
-        <div className="flex justify-between mb-20">
-          <h1 className="text-2xl tracking-tight text-white uppercase md:text-4xl font-unbounded">
-            Tool Library
-          </h1>
-          <button
-            className="w-24 h-8 text-white rounded-sm bg-blue-cement hover:bg-blue-cement/90 active:bg-blue-cement/50"
-            name="login"
-            onClick={handleClick}
-          >
-            Login
-          </button>
-        </div>
-
-        <div className="w-full grid-flow-col gap-8 mb-20 lg:grid auto-cols-auto">
-          <div className="">
-            <h2
-              className="mb-12 text-4xl font-medium leading-tight tracking-tight text-white md:text-7xl"
-              id="home-subtitle"
-            >
-              The #1 List Platform to Track Your Stuff.
-            </h2>
-
-            <p className="mb-12 tracking-wider font-extralight text-light-gray leading-wider ">
-              You've loaned your tools to a friend and now you're not sure which
-              tool they have. You're too embarrassed to ask them, and it's
-              become a pet peeve. Tool Library is an app that keeps track of the
-              tools you loan out to friends, so you get them back!
-            </p>
+      <div className="w-full py-20 bg-slate-50">
+        <div className="max-w-4xl px-8 mx-auto">
+          <div className="flex justify-between mb-20">
+            <h1 className="text-xl font-bold tracking-tight uppercase text-theme-green md:text-4xl font-archivo">
+              Tool Library
+            </h1>
             <button
-              className="h-16 mb-12 tracking-wider text-white rounded-sm bg-blue-cement hover:bg-blue-cement/90 active:bg-blue-cement/50 w-52"
-              name="register"
+              className="w-20 h-8 text-sm text-white rounded-md font-open-sans bg-theme-green hover:bg-theme-yellow active:bg-theme-yellow/50"
+              name="login"
               onClick={handleClick}
             >
-              Get Started Today
+              Login
             </button>
           </div>
-          <div className="">
-            <img
-              src={require("../assets/screenshots/desktop-black.png")}
-              alt="Garage art"
-              className="z-10 "
-            />
-            {/* <div className="absolute z-0 w-3/4 mt-48 rounded-lg opacity-25 h-1/3 -inset-10 bg-gradient-to-r from-purple-600 to-pink-600 blur-3xl"></div> */}
+          <div className="w-full grid-flow-col gap-8 mb-12 lg:grid auto-cols-auto">
+            <div className="flex flex-col">
+              <h2
+                className="mb-12 text-4xl font-bold leadiarng-tight font-archivo text-theme-red md:text-7xl"
+                id="home-subtitle"
+              >
+                The Best App to Track Your Stuff.
+              </h2>
+              <p className="mb-12 tracking-wider md:leading-loose font-open-sans text-theme-red ">
+                You've loaned your tools to a friend and now you're not sure
+                which tool they have. You're too embarrassed to ask them, and
+                it's become a pet peeve. Tool Library is an app that keeps track
+                of the tools you loan out to friends, so you get them back!
+              </p>
+              <button
+                className="self-center justify-center h-16 mb-12 text-white rounded-md tracking-widerfont-open-sans bg-theme-green hover:bg-theme-yellow active:bg-theme-yellow/50 w-52 "
+                name="register"
+                onClick={handleClick}
+              >
+                Get Started Today
+              </button>
+            </div>
+
+            <div className="flex justify-center md:block">
+              <img
+                src={require("../assets/screenshots/desktop-black.png")}
+                alt="Garage art"
+                className="z-10 mx-auto"
+              />
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="p-6 mx-auto mb-20 rounded-lg bg-white/10 md:p-16">
-          <p className="mb-12 tracking-wider text-white text-md md:text-2xl font-extralight leading-wider max-w-prose">
-            "You might not know it yet, but Tool Library is an app that keeps
+      <div className="max-w-4xl px-8 mx-auto">
+        <div className="items-center px-10 py-20 mb-20 rounded-lg md:my-40 md:px-20 py-mx-auto bg-theme-red">
+          <p className="tracking-wider text-center text-white text-md md:text-2xl font-extralight leading-wider max-w-prose">
+            You might not know it yet, but Tool Library is an app that keeps
             track of the tools you loan out to friends so you get them back! It
             makes lending tools easy and efficient. It's like giving someone a
-            key to your house."
+            key to your house.
           </p>
-          <div className="w-full py-6 pl-6 md:flex md:gap-12 md:items-center">
-            <p className="mb-4 text-white text-md md:text-lg font-extralight leading-wider md:order-2">
-              <span className="font-semibold">Stephen Wong</span>,<br /> Owner
-              at Tool Library
-            </p>
-            <img
-              src={require("../assets/avator.jpg")}
-              className="w-20 h-auto border-4 rounded-full md:w-36"
-              alt="Testimontial owner avator"
-            />
-          </div>
         </div>
 
         <div className="mx-auto">
@@ -91,27 +82,27 @@ export const HomeScreen = () => {
           </div>
 
           <div className="mt-20">
-            <p className="w-full mx-auto mb-12 text-lg tracking-wider text-center text-light-gray font-extralight leading-wider max-w-prose">
+            <p className="w-full mx-auto mb-12 text-lg tracking-wider text-center text-theme-red font-extralight leading-wider max-w-prose">
               Tool Library is the app for people who love lending tools! It's
               never been this easy for people to share their tool collections
               with friends and family.
             </p>
 
             <div className="flex flex-col justify-center w-full item-center">
-              <p className="mb-8 text-2xl font-bold tracking-wider text-center text-white leading-wider max-w-prose">
+              <p className="mb-8 text-2xl font-bold tracking-wider text-center text-theme-red leading-wider max-w-prose">
                 Sign up for an account or log in to start keeping track of your
                 tools!
               </p>
               <div className="flex flex-col items-center justify-center gap-2 align-middle sm:flex-row">
                 <button
-                  className="h-16 tracking-wider text-white rounded-sm bg-blue-cement hover:bg-blue-cement/90 active:bg-blue-cement/50 w-52"
+                  className="h-16 tracking-wider text-white rounded-md bg-theme-green hover:bg-theme-yellow active:bg-theme-yellow/50 w-52"
                   name="register"
                   onClick={handleClick}
                 >
                   Register
                 </button>
                 <button
-                  className="h-16 tracking-wider text-white rounded-sm bg-blue-cement hover:bg-blue-cement/90 active:bg-blue-cement/50 w-52"
+                  className="h-16 tracking-wider text-white rounded-md bg-theme-green hover:bg-theme-yellow active:bg-theme-yellow/50 w-52"
                   name="login"
                   onClick={handleClick}
                 >
