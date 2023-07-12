@@ -3,7 +3,7 @@ import { PageTemplate } from "./presentational/PageTemplate";
 import { useNavigate, useParams } from "react-router-dom";
 import { toolUpdateAxios, toolDeleteAxios } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
-import { XCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
 import ToolModel from "./models/ToolModel";
 

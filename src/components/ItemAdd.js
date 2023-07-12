@@ -7,8 +7,6 @@ import { toolCreateAxios } from "../api/axiosApi";
 import { PageTemplate } from "./presentational/PageTemplate";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 
-import { XCircleIcon } from "@heroicons/react/24/outline";
-
 const FormData = require("form-data");
 
 export const ItemAdd = () => {

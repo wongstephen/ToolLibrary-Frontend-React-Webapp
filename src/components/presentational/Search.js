@@ -32,6 +32,7 @@ export const Search = ({
 
   useEffect(() => {
     setFeedCount(() => feedData.length);
+    //eslint-disable-next-line
   }, [feedData]);
 
   return (
