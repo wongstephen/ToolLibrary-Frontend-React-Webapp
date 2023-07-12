@@ -10,7 +10,7 @@ export const InputText = ({
 }) => {
   return (
     <input
-      className="w-full p-4 font-light text-white transition ease-in-out bg-transparent bg-gray-700 border-none focus:bg-gray-600 focus:border-none focus:outline-none "
+      className="w-full p-4 font-light text-black transition ease-in-out bg-transparent border-2 border-gray-200 rounded-md focus:outline-theme-yellow"
       placeholder={placeholder}
       type={type}
       name={name}

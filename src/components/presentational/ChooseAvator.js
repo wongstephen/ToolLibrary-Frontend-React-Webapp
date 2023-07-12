@@ -18,7 +18,7 @@ export const ChooseAvator = ({ setAvator, avator }) => {
 
   return (
     <div className="mx-4 mt-4">
-      <p className="mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
+      <p className="mt-2 text-sm tracking-wider text-center font-extralight text-dark-gray ">
         Choose a tool icon or upload your own image.
       </p>
       <div className="flex flex-wrap gap-4 mt-4">
@@ -32,7 +32,7 @@ export const ChooseAvator = ({ setAvator, avator }) => {
               onClick={handleClick}
               className={`cursor-pointer ${
                 avatormap === avator &&
-                "outline outline-2 outline-blue-cement rounded-full outline-offset-2 "
+                "outline outline-2 outline-theme-yellow rounded-full outline-offset-2 "
               }`}
             />
           );

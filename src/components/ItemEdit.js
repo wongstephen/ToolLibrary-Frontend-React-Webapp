@@ -89,18 +89,18 @@ export const ItemEdit = () => {
   };
 
   const inputStyle =
-    "w-full p-3 text-sm font-light transition-all ease-in-out bg-gray-800 text-light-gray focus:text-white";
+    "w-full p-4 font-light text-black transition ease-in-out bg-transparent border-2 border-gray-200 rounded-md focus:outline-theme-yellow";
 
   return (
     <PageTemplate>
       <div className="max-w-xl mx-auto">
-        <h2 className="mx-4 mt-8 text-4xl font-light tracking-wider text-left text-white">
-          Edit Item{" "}
-          <button type="button" className="" onClick={handleDelTool}>
-            <TrashIcon className="w-6 h-6 text-light-gray right-16 top-4 hover:text-light-gray active:text-med-gray" />
+        <h2 className="text-2xl font-bold text-left text-theme-red">
+          Edit Item
+          <button type="button" className="ml-4" onClick={handleDelTool}>
+            <TrashIcon className="w-6 h-6 text-theme-red right-16 top-4 hover:text-light-gray active:text-med-gray" />
           </button>
         </h2>
-        <p className="mx-4 mt-2 text-sm tracking-wider text-left font-extralight text-light-gray ">
+        <p className="mt-2 text-sm tracking-wider text-left font-extralight text-dark-gray">
           Edit the item name or who you loaned your item to. Leave the borrower
           blank if it was returned.
         </p>
@@ -156,21 +156,22 @@ export const ItemEdit = () => {
             )}
           </div>
 
-          <div className="justify-center mx-auto my-6">
+          <div className="flex justify-center gap-2 mx-auto my-6 ">
             <button
               type="submit"
-              className="w-40 py-3 font-bold text-white rounded-md bg-blue-cement hover:bg-blue-cement/80 active:bg-blue-900"
+              className="px-10 py-4 font-bold text-white rounded-md bg-theme-green hover:bg-theme-green/80 active:bg-theme-green/90"
             >
               Submit
             </button>
             <button
               type="button"
-              className="font-bold text-white "
+              className="px-10 py-4 font-bold border-2 rounded-md text-theme-green border-theme-green hover:border-theme-green/80 active:border-theme-green/90"
               onClick={() => {
                 navigate("/home");
               }}
+              aria-label="Cancel and go back to homepage"
             >
-              <XCircleIcon className="absolute w-12 h-12 right-4 top-4 hover:text-light-gray active:text-med-gray" />
+              Cancel{" "}
             </button>
           </div>
         </form>

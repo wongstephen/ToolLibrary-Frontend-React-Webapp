@@ -19,7 +19,7 @@ function App() {
   }
   return (
     <AuthProvider>
-      <main className="min-w-full min-h-screen bg-slate-900">
+      <main className="min-w-full min-h-screen">
         <Routes>
           {/* public route */}
           <Route path="/" element={<Layout />}>

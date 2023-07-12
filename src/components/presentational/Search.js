@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-export const Search = ({ feedData, setSearchData, inputVal, setInputVal }) => {
+export const Search = ({
+  feedData,
+  setSearchData,
+  inputVal,
+  setInputVal,
+  setFeedCount,
+}) => {
   const [searchInput, setSearchInput] = useState("");
 
   const handleChange = (e) => {
@@ -10,37 +16,45 @@ export const Search = ({ feedData, setSearchData, inputVal, setInputVal }) => {
 
   useEffect(() => {
     if (searchInput.length === 0) {
+      setFeedCount(() => feedData.length);
       setSearchData(feedData);
     } else {
       const searchTerm = searchInput.toLowerCase().trim();
-      setSearchData((searchData) =>
-        feedData.filter((tool) => tool.name.toLowerCase().includes(searchTerm))
+      const filteredData = feedData.filter((tool) =>
+        tool.name.toLowerCase().includes(searchTerm)
       );
+      setSearchData(() => filteredData);
+      console.log(filteredData);
+      setFeedCount(() => filteredData.length);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput]);
 
+  useEffect(() => {
+    setFeedCount(() => feedData.length);
+  }, [feedData]);
+
   return (
-    <div className="flex w-full max-w-5xl mx-auto bg-gray-700 border-none lg:rounded-xl ">
+    <div className="flex w-full max-w-2xl mx-auto">
       <label htmlFor="search" className="sr-only">
         Search by Tool
       </label>
       <input
         type="search"
-        className="w-full p-4 font-light text-white transition ease-in-out bg-gray-700 border-none focus:bg-gray-600 focus:border-none focus:outline-none lg:rounded-l-xl "
+        className="w-full p-4 font-light text-black transition ease-in-out border-2 focus:outline-none lg:rounded-l-xl active:border-theme-yellow focus:border-theme-yellow"
         placeholder="Search by Tool Name"
         aria-label="Search"
         aria-describedby="button-addon3"
         onChange={handleChange}
         value={inputVal}
       />
-      <div className="flex items-center justify-center w-12">
+      <div className="flex items-center justify-center w-20 bg-theme-yellow rounded-r-xl">
         <svg
           aria-hidden="true"
           focusable="false"
           data-prefix="fas"
           data-icon="search"
-          className="w-4 text-light-gray "
+          className="w-4 text-white "
           role="img"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"

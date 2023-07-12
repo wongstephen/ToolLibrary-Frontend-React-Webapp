@@ -16,8 +16,9 @@ import useAuth from "../hooks/useAuth";
 export const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const [feedCount, setFeedCount] = useState(0);
   const listTitleRef = useRef("All Items");
-  
+
   const { user, loading } = useAuth();
 
   useEffect(() => {
@@ -32,6 +33,7 @@ export const Feed = () => {
     setSearchData(() => {
       return feedData;
     });
+    setFeedCount(() => feedData.length);
     listTitleRef.current = "All Items";
     setSearchVal((prev) => "");
     return;
@@ -39,11 +41,11 @@ export const Feed = () => {
 
   //return list with server data filtered with items borrorwd
   const showBorrowedList = () => {
-    setSearchData(() => {
-      return feedData.filter((tool) => {
-        return tool.loanee;
-      });
+    const filteredFeed = feedData.filter((tool) => {
+      return tool.loanee;
     });
+    setSearchData(() => filteredFeed);
+    setFeedCount(filteredFeed.length);
     listTitleRef.current = "Currently Loaned Out";
     setSearchVal((prev) => "");
     return;
@@ -73,38 +75,42 @@ export const Feed = () => {
 
   return (
     <PageTemplate>
-      <div className="w-full h-[30vh] bg-center bg-cover my-10 bg-toolTable"></div>
+      {/* <div className="w-full h-[30vh] bg-center bg-cover my-10 bg-toolTable"></div> */}
+
       <Nav
         leftBtn="inventory"
         showFullList={showFullList}
         showBorrowedList={showBorrowedList}
+        setFeedCount={setFeedCount}
       />
+
       {/* checkout feed */}
 
       <div className="flex flex-col justify-between max-w-xl mx-auto mt-8">
         {feedData?.length > 0 && (
           <>
             <div>
-              <div className="flex items-center justify-between mx-4 ">
-                <h2 className="text-4xl font-light tracking-wider text-left text-light-gray">
-                  Your Inventory
-                </h2>
+              <div className="flex items-center justify-between first-letter:">
+                {/* <h2 className="text-2xl font-bold tracking-wider text-center text-theme-red">
+                  Inventory
+                </h2> */}
                 <div>
                   {/* <FunnelIcon className="w-6 h-6 ml-2 bg-transparent cursor-pointer text-light-gray" /> */}
                 </div>
               </div>
             </div>
-            <div className="mt-12">
+            <div className="mt-4">
               <Search
                 feedData={feedData}
                 setSearchData={setSearchData}
                 inputVal={searchVal}
                 setInputVal={setSearchVal}
+                setFeedCount={setFeedCount}
               />
             </div>
             <div className="mt-12">
-              <p className="ml-8 text-sm font-bold text-light-gray">
-                {listTitleRef.current}
+              <p className="text-2xl font-bold text-left text-theme-red">
+                {listTitleRef.current} ({feedCount})
               </p>
             </div>
           </>
@@ -129,7 +135,7 @@ export const Feed = () => {
 
       <div className="mx-4">
         {searchData?.length > 0 ? (
-          <ul className="max-w-xl p-4 mx-auto mt-2 rounded-md xl:mx-auto bg-white/5">
+          <ul className="flex flex-col max-w-xl gap-3 mx-auto mt-2">
             {searchData.map((tool) => (
               <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
             ))}
