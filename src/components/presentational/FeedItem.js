@@ -33,9 +33,9 @@ export const FeedItem = ({ feed, setFeedData }) => {
   };
 
   return (
-    <li className="flex items-center px-4 rounded-lg min-h-[84px] border-2 hover:border-theme-green bg-white shadow-sm">
+    <li className="flex items-center px-2 sm:px-4 rounded-lg min-h-[84px] border-[1px] hover:border-theme-green bg-white shadow-sm">
       {tool.toolImage ? (
-        <div className="w-2/12 max-w-[3rem] max-h-[3rem]  mr-4 overflow-hidden rounded-md">
+        <div className="w-2/12 max-w-[3rem] max-h-[3rem]  mr-2 sm:mr-4 overflow-hidden rounded-md">
           <img
             src={tool.toolImage}
             alt="tool"

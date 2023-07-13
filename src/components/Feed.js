@@ -51,32 +51,8 @@ export const Feed = () => {
     return;
   };
 
-  // Sort Name and Borrower
-  // const [sortUp, setSortUp] = useState(true);
-  // const handleSort = () => {
-  //   setSortUp((prevVal) => !prevVal);
-  //   sortUp
-  //     ? setSearchData(searchData.sort((a, b) => (a.name > b.name ? 1 : -1)))
-  //     : setSearchData(searchData.sort((a, b) => (a.name < b.name ? 1 : -1)));
-  // };
-
-  // const [borrowUp, setBorrowUp] = useState(true);
-  // const handleBorrow = () => {
-  //   setBorrowUp((prevVal) => !prevVal);
-  //   borrowUp
-  //     ? setSearchData(searchData.sort((a, b) => (a.loanee > b.loanee ? 1 : -1)))
-  //     : setSearchData(
-  //         searchData.sort((a, b) => (a.loanee < b.loanee ? 1 : -1))
-  //       );
-  // };
-  // End Sort Name and Borrower
-
-  // Send user to login if no data
-
   return (
     <PageTemplate>
-      {/* <div className="w-full h-[30vh] bg-center bg-cover my-10 bg-toolTable"></div> */}
-
       <Nav
         leftBtn="inventory"
         showFullList={showFullList}
@@ -91,12 +67,7 @@ export const Feed = () => {
           <>
             <div>
               <div className="flex items-center justify-between first-letter:">
-                {/* <h2 className="text-2xl font-bold tracking-wider text-center text-theme-red">
-                  Inventory
-                </h2> */}
-                <div>
-                  {/* <FunnelIcon className="w-6 h-6 ml-2 bg-transparent cursor-pointer text-light-gray" /> */}
-                </div>
+                <div></div>
               </div>
             </div>
             <div className="mt-4">
@@ -115,9 +86,6 @@ export const Feed = () => {
             </div>
           </>
         )}
-        {/* sort */}
-        {/* <FeedSortButton handleSort={handleSort}>Tool Name</FeedSortButton> */}
-        {/* <FeedSortButton handleSort={handleBorrow}>Borrower</FeedSortButton> */}
         {loading && (
           <p className="mt-10 text-center text-light-gray animate-pulse">
             Loading Data
@@ -135,7 +103,7 @@ export const Feed = () => {
 
       <div className="mx-4">
         {searchData?.length > 0 ? (
-          <ul className="flex flex-col max-w-xl gap-3 mx-auto mt-2">
+          <ul className="flex flex-col max-w-xl gap-1 mx-auto mt-2">
             {searchData.map((tool) => (
               <FeedItem key={tool.id} feed={tool} setFeedData={setFeedData} />
             ))}

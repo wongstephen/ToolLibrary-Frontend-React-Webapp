@@ -9,7 +9,7 @@ export const HomeScreen = () => {
 
   return (
     <div className="h-full">
-      <div className="w-full py-20 bg-slate-50">
+      <div className="w-full md:py-10 bg-slate-50">
         <div className="max-w-4xl px-8 mx-auto">
           <div className="flex justify-between mb-20">
             <h1 className="text-xl font-bold tracking-tight uppercase text-theme-green md:text-4xl font-archivo">
@@ -26,7 +26,7 @@ export const HomeScreen = () => {
           <div className="w-full grid-flow-col gap-8 mb-12 lg:grid auto-cols-auto">
             <div className="flex flex-col">
               <h2
-                className="mb-12 text-4xl font-bold leadiarng-tight font-archivo text-theme-red md:text-7xl"
+                className="mb-12 text-4xl font-bold leading-tight font-archivo text-theme-red md:text-7xl"
                 id="home-subtitle"
               >
                 The Best App to Track Your Stuff.
@@ -38,7 +38,7 @@ export const HomeScreen = () => {
                 of the tools you loan out to friends, so you get them back!
               </p>
               <button
-                className="self-center justify-center h-16 mb-12 text-white rounded-md tracking-widerfont-open-sans bg-theme-green hover:bg-theme-yellow active:bg-theme-yellow/50 w-52 "
+                className="self-center justify-center h-16 mb-12 text-white rounded-md lg:mb-0 tracking-widerfont-open-sans bg-theme-green hover:bg-theme-yellow active:bg-theme-yellow/50 w-52 "
                 name="register"
                 onClick={handleClick}
               >
@@ -58,7 +58,7 @@ export const HomeScreen = () => {
       </div>
 
       <div className="max-w-4xl px-8 mx-auto">
-        <div className="items-center px-10 py-20 mb-20 rounded-lg md:my-40 md:px-20 py-mx-auto bg-theme-red">
+        <div className="items-center px-10 py-20 my-10 rounded-lg md:py-40 md:px-20 bg-theme-red">
           <p className="tracking-wider text-center text-white text-md md:text-2xl font-extralight leading-wider max-w-prose">
             You might not know it yet, but Tool Library is an app that keeps
             track of the tools you loan out to friends so you get them back! It

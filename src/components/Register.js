@@ -53,7 +53,7 @@ export const Register = () => {
 
   return (
     <PageTemplate>
-      <div className="w-11/12 max-w-md py-10 mx-auto mt-12 border-gray-100 rounded-lg sm:border-2">
+      <div className="w-11/12 max-w-md py-10 mx-auto mt-12 bg-white border-gray-100 rounded-lg sm:border-2">
         <h2
           className="mx-2 mb-4 text-4xl font-medium text-center text-theme-red"
           data-testid="title"

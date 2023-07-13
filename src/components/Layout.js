@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div className="min-h-screen sm:py-10 bg-theme-green">
-      <div className="max-w-2xl p-1 pb-32 m-auto bg-slate-50 sm:rounded-xl">
+    <div className="min-h-screen xl:py-10 bg-theme-green">
+      <div className="max-w-5xl p-1 pb-32 m-auto bg-slate-50 xl:rounded-xl">
         <Outlet />
       </div>
     </div>
