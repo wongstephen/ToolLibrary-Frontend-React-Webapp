@@ -94,8 +94,8 @@ export const Feed = () => {
         {!loading && feedData?.length === 0 && (
           <div>
             <br />
-            <p className="mt-8 text-sm font-light text-center text-light-gray">
-              No Items To Display
+            <p className="mt-8 text-sm font-light text-center text-dark-gray">
+              No Items To Display. Track a new tool by clicking Add.
             </p>
           </div>
         )}

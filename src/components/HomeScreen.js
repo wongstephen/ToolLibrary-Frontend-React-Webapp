@@ -46,12 +46,18 @@ export const HomeScreen = () => {
               </button>
             </div>
 
-            <div className="flex justify-center md:block">
-              <img
-                src={require("../assets/screenshots/desktop-black.png")}
-                alt="Garage art"
-                className="z-10 mx-auto"
-              />
+            <div className="flex justify-center p-6 border-2 md:block border-theme-yellow rounded-xl">
+              <picture>
+                <source
+                  srcset={require("../assets/screenshots/feedfade-lg.webp")}
+                  media="(min-width: 1024px)"
+                />
+                <img
+                  src={require("../assets/screenshots/feedfade-sm.webp")}
+                  alt="Tool List"
+                  className="z-10 mx-auto"
+                />
+              </picture>
             </div>
           </div>
         </div>
@@ -68,16 +74,11 @@ export const HomeScreen = () => {
         </div>
 
         <div className="mx-auto">
-          <div className="relative">
+          <div className="border-2 border-theme-yellow md:p-4 md:py-20 rounded-xl ">
             <img
-              src={require("../assets/screenshots/tablet-black.png")}
-              alt="Tablet Screenshot"
-              className="w-2/6 h-auto mx-auto mb-16 rounded-md min-w-[150px]"
-            />
-            <img
-              src={require("../assets/screenshots/mobile-black.png")}
-              alt="Mobile screenshot"
-              className="absolute top-[50%] w-1/6 h-auto mx-auto mb-16 rounded-md left-[50%] -mt-14 ml-14"
+              src={require("../assets/screenshots/additem.webp")}
+              alt="Add Item Screenshot"
+              className="w-3/4 h-auto mx-auto rounded-md min-w-[150px]"
             />
           </div>
 
