@@ -20,7 +20,7 @@ export const ItemEdit = () => {
 
   const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
   const toolNameInputRef = useRef(activeTool.name);
-  const loaneeInputRef = useRef(activeTool.loanee);
+  const loaneeInputRef = useRef();
   const toolNotesInputRef = useRef();
 
   const currentToolObj = new ToolModel(
@@ -31,6 +31,7 @@ export const ItemEdit = () => {
   );
 
   useEffect(() => {
+    activeTool.notes && currentToolObj.setToolNotes(activeTool.notes);
     toolNameInputRef.current.value = currentToolObj.getToolName();
     loaneeInputRef.current.value = currentToolObj.getToolLoanee();
     toolNotesInputRef.current.value = currentToolObj.getToolNotes();
