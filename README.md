@@ -32,6 +32,30 @@ Backend
 - Bcrypt Encryption
 - JWT Authentication
 
+DevOps
+
+- Docker
+- Nginx
+- GitHub Actions CI/ID
+- Digital Ocean Virtual Private Server
+- Pm2
+
+### User Stories
+
+- As a user, I want to be able to add tools to my inventory with their respective details (name, description, image) so that I can keep track of all the tools I own.
+- As a user, I want to be able to view a list of all the tools in my inventory so that I can see what tools I have available.
+- As a user, I want to be able to loan a tool to someone else and specify the loanee's name and the loan start date, so that I can keep track of who has borrowed my tools.
+- As a user, I want to be able to mark a tool as returned when it is returned by the loanee, so that I can update the status of the tool in my inventory.
+- As a user, I want to be able to view a list of tools that I have loaned out and see the loanee's name and the loan duration, so that I can keep track of the tools that are currently on loan.
+- As a user, I want to be able to edit the details of a tool in my inventory (name, description, image) so that I can update the information if it changes.
+- As a user, I want to be able to delete a tool from my inventory if I no longer own it, so that I can keep my inventory up to date.
+- As a user, I want to be able to search for a specific tool in my inventory by its name, so that I can quickly find the tool I am looking for.
+- As a user, I want to receive notifications or reminders when a tool is overdue or when the loan period is about to expire, so that I can follow up with the loanee if necessary.
+  As a user, I want to be able to generate reports or export data from my tool inventory, so that I can keep records or share information with others.
+- As a user, I want to be able to securely log in to the app using my username and password, so that my tool inventory remains private and accessible only to me.
+
+- As a user, I want to be able to reset my password if I forget it, so that I can regain access to my tool inventory.
+
 ### `npm start`
 
 Runs the app in the development mode.
@@ -54,6 +78,8 @@ The page will reload when you make changes.
 ### Future Updates
 
 - [ ] Forget password
+- [ ] Add notes field for user to enter notes about a tool
+- [x] Add date and track dates tools are loaned out. Include days loaned out.
 - [ ] Host backend on AWS
 - [ ] Relationship Schema for Loanee
 - [ ] Password requirements
