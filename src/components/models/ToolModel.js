@@ -15,6 +15,9 @@ class ToolModel {
   }
 
   getToolLoanee() {
+    if (!this.loanee) {
+      return "";
+    }
     return this.toolLoanee;
   }
 
@@ -64,7 +67,7 @@ class ToolModel {
     this.toolAvator && formData.append("avator", this.toolAvator);
     this.toolImageFile && formData.append("toolImageFile", this.toolImageFile);
     this.toolNotes && formData.append("notes", this.toolNotes);
-    console.log(this.toolImageFile);
+    // console.log(tshis.toolImageFile);
     // for (const el of formData.entries()) {
     //   console.log(el[0] + ": " + el[1]);
     // }
