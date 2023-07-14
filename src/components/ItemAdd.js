@@ -6,8 +6,7 @@ import { toolCreateAxios } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
 import { ChooseAvator } from "./presentational/ChooseAvator";
-
-const FormData = require("form-data");
+import ToolModel from "./models/ToolModel";
 
 export const ItemAdd = () => {
   const navigate = useNavigate();
@@ -15,7 +14,8 @@ export const ItemAdd = () => {
   const { user, updateUserData } = useAuth();
 
   const toolNameInputRef = useRef();
-  const loaneeInputRef = useRef();
+  const loaneeInputRef = useRef("");
+  const toolNotesInputRef = useRef("");
 
   const [avator, setAvator] = useState("empty");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -38,19 +38,21 @@ export const ItemAdd = () => {
   const handleCreate = async (event) => {
     event.preventDefault();
 
-    let formData = new FormData();
-
     if (!toolNameInputRef.current.value) {
       return setSubmitErr(() => {
         return true;
       });
     }
     try {
-      formData.append("name", toolNameInputRef.current.value);
-      formData.append("loanee", loaneeInputRef.current.value);
-      formData.append("avator", avator);
-      formData.append("userImage", selectedImage);
-      const res = await toolCreateAxios(formData, user.token);
+      const newTool = new ToolModel(
+        toolNameInputRef.current.value,
+        loaneeInputRef.current.value,
+        avator
+      );
+      newTool.setToolImageFile(selectedImage);
+      newTool.setToolNotes(toolNotesInputRef.current.value);
+
+      const res = await toolCreateAxios(newTool.getFormData(), user.token);
       if (res.status === 201) {
         updateUserData();
         toolNameInputRef.current.value = "";
@@ -62,8 +64,6 @@ export const ItemAdd = () => {
     } catch (err) {
       console.log(err);
       alert("Something went wrong, please try again.");
-    } finally {
-      formData = null;
     }
   };
 
@@ -112,6 +112,16 @@ export const ItemAdd = () => {
             ref={loaneeInputRef}
           />
 
+          <label className="sr-only" htmlFor="notes">
+            Notes
+          </label>
+          <textarea
+            rows={5}
+            name="notes"
+            className={inputStyle}
+            placeholder="Notes"
+            ref={toolNotesInputRef}
+          />
           <ChooseAvator setAvator={setAvator} avator={avator} />
 
           {/* user image */}

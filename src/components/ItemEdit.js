@@ -21,6 +21,7 @@ export const ItemEdit = () => {
   const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
   const toolNameInputRef = useRef(activeTool.name);
   const loaneeInputRef = useRef(activeTool.loanee);
+  const toolNotesInputRef = useRef();
 
   const currentToolObj = new ToolModel(
     activeTool.name,
@@ -32,6 +33,8 @@ export const ItemEdit = () => {
   useEffect(() => {
     toolNameInputRef.current.value = currentToolObj.getToolName();
     loaneeInputRef.current.value = currentToolObj.getToolLoanee();
+    toolNotesInputRef.current.value = currentToolObj.getToolNotes();
+
     setAvator(() => currentToolObj.getToolAvator());
     setPreviewImage(() => currentToolObj.getToolImageUrl());
     // eslint-disable-next-line
@@ -61,6 +64,7 @@ export const ItemEdit = () => {
       currentToolObj.setToolLoanee(loaneeInputRef.current.value);
       currentToolObj.setToolAvator(avator);
       currentToolObj.setToolImageFile(selectedImage);
+      currentToolObj.setToolNotes(toolNotesInputRef.current.value);
       const res = await toolUpdateAxios(
         toolId,
         currentToolObj.getFormData(),
@@ -130,6 +134,18 @@ export const ItemEdit = () => {
             ref={loaneeInputRef}
             placeholder={"Loanee"}
           />
+
+          <label className="sr-only" htmlFor="notes">
+            Notes
+          </label>
+          <textarea
+            rows={5}
+            name="notes"
+            className={inputStyle}
+            placeholder="Notes"
+            ref={toolNotesInputRef}
+          />
+
           <ChooseAvator setAvator={setAvator} avator={avator} />
 
           {/* user image */}
