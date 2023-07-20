@@ -26,7 +26,6 @@ export const ItemAdd = () => {
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
-    console.log(imageFile.size);
 
     if (imageFile.size > 10000000) {
       alert("File size must be less than 10MB");
