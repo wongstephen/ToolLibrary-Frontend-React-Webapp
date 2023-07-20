@@ -18,6 +18,8 @@ export const ItemEdit = () => {
   const [avator, setAvator] = useState("empty");
   const [previewImage, setPreviewImage] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
   const toolNameInputRef = useRef(activeTool.name);
   const loaneeInputRef = useRef();
@@ -54,6 +56,7 @@ export const ItemEdit = () => {
 
   const onEditSubmit = async (e) => {
     e.preventDefault();
+    setLoading(() => true);
     if (!toolNameInputRef.current.value) {
       setSubmitErr(() => {
         return true;
@@ -79,6 +82,8 @@ export const ItemEdit = () => {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(() => false);
     }
   };
 
@@ -176,7 +181,11 @@ export const ItemEdit = () => {
           <div className="flex justify-center gap-2 mx-auto my-6 ">
             <button
               type="submit"
-              className="px-10 py-4 font-bold text-white rounded-md bg-theme-green hover:bg-theme-green/80 active:bg-theme-green/90"
+              className={`px-10 py-4 font-bold text-white rounded-md ${
+                loading
+                  ? "bg-gray-400"
+                  : "bg-theme-green hover:bg-theme-green/80 active:bg-theme-green/90"
+              }`}
             >
               Submit
             </button>

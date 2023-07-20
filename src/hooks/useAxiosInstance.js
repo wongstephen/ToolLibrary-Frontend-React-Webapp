@@ -31,6 +31,8 @@ const useAxios = (configObj) => {
     // eslint-disable-next-line
   }, []);
 
+
+
   return [response, error, loading];
 };
 
