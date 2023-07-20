@@ -80,8 +80,8 @@ export const AuthProvider = ({ children }) => {
     // todo loading trobber
     <AuthContext.Provider value={contextData}>
       {loading ? (
-        <div className="min-w-full min-h-screen bg-slate-900">
-          <p>loading...</p>
+        <div className="flex items-center justify-center w-full h-full min-w-full min-h-screen bg-theme-green">
+          <p className="text-white animate-pulse">loading...</p>
         </div>
       ) : (
         children

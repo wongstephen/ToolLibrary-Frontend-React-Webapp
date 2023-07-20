@@ -22,6 +22,8 @@ export const ItemAdd = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [submitErr, setSubmitErr] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
     console.log(imageFile.size);
@@ -37,7 +39,7 @@ export const ItemAdd = () => {
 
   const handleCreate = async (event) => {
     event.preventDefault();
-
+    setLoading(() => true);
     if (!toolNameInputRef.current.value) {
       return setSubmitErr(() => {
         return true;
@@ -64,6 +66,8 @@ export const ItemAdd = () => {
     } catch (err) {
       console.log(err);
       alert("Something went wrong, please try again.");
+    } finally {
+      setLoading(() => false);
     }
   };
 
@@ -151,8 +155,13 @@ export const ItemAdd = () => {
           <div className="flex justify-center gap-2 mx-auto my-6">
             <button
               type="submit"
-              className="px-10 py-4 font-bold text-white rounded-md bg-theme-green hover:bg-theme-green/80 active:bg-theme-green/90"
+              className={`px-10 py-4 font-bold text-white rounded-md ${
+                loading
+                  ? "bg-gray-400"
+                  : "bg-theme-green hover:bg-theme-green/80 active:bg-theme-green/90"
+              }`}
               onClick={handleCreate}
+              disabled={loading}
             >
               Submit
             </button>
