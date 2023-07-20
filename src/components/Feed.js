@@ -30,6 +30,8 @@ export const Feed = () => {
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSortActive]);
 
   function handleOutsideClick(e) {
