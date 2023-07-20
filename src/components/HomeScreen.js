@@ -49,7 +49,7 @@ export const HomeScreen = () => {
             <div className="flex justify-center p-6 border-2 md:block border-theme-yellow rounded-xl">
               <picture>
                 <source
-                  srcset={require("../assets/screenshots/feedfade-lg.webp")}
+                  srcSet={require("../assets/screenshots/feedfade-lg.webp")}
                   media="(min-width: 1024px)"
                 />
                 <img

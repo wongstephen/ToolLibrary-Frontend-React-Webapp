@@ -5,7 +5,6 @@ import { FeedItem } from "./presentational/FeedItem";
 import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
 
-// import { FeedSortButton } from "./presentational/FeedSortButton";
 import useAuth from "../hooks/useAuth";
 import { Nav } from "./presentational/Nav";
 
@@ -30,6 +29,8 @@ export const Feed = () => {
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSortActive]);
 
   function handleOutsideClick(e) {
