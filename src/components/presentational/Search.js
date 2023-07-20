@@ -24,7 +24,6 @@ export const Search = ({
         tool.name.toLowerCase().includes(searchTerm)
       );
       setSearchData(() => filteredData);
-      console.log(filteredData);
       setFeedCount(() => filteredData.length);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

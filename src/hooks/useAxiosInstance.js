@@ -9,6 +9,7 @@ const useAxios = (configObj) => {
 
   useEffect(() => {
     const controller = new AbortController();
+
     const fetchData = async () => {
       try {
         const res = await axiosInstance[method.toLowerCase()](url, {
@@ -30,8 +31,6 @@ const useAxios = (configObj) => {
 
     // eslint-disable-next-line
   }, []);
-
-
 
   return [response, error, loading];
 };
