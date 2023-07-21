@@ -14,7 +14,7 @@ import Layout from "./components/Layout";
 import PrivateRoutes from "./components/utils/PrivateRoutes";
 
 function App() {
-  console.log(process.env.REACT_APP_NODE_ENV);
+  console.log(process.env.REACT_APP_ENV);
 
   return (
     <AuthProvider>
