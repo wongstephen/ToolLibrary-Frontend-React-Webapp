@@ -14,7 +14,7 @@ export const Nav = () => {
     <div className="fixed top-0 left-0 z-10 w-full bg-theme-red">
       <ul className="flex justify-between max-w-5xl p-2 mx-auto lg:px-0">
         <button
-          className="px-4 py-2 text-sm font-medium bg-white rounded-md hover:bg-theme-yellow"
+          className="px-4 py-2 text-sm font-medium bg-white rounded-md hover:bg-theme-yellow hover:text-white"
           onClick={() => navigate("/itemadd")}
         >
           New Item

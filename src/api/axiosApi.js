@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const URL = process.env.REACT_APP_SERVER_URL;
+const URL = process.env.REACT_APP_ENV.includes("DEVELOPMENT")
+  ? process.env.REACT_APP_LOCAL_SERVER_URL
+  : process.env.REACT_APP_SERVER_URL;
 
 export const userCheckAxios = async (token) => {
   try {
