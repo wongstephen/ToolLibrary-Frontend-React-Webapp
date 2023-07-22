@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Nav = () => {
+export const NavigationBar = () => {
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
