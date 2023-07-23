@@ -1,14 +1,13 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-
+import { useAuth } from "../context/AuthContext";
 import { toolCreateAxios } from "../api/axiosApi";
 
 import { PageTemplate } from "./presentational/PageTemplate";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import ToolModel from "./models/ToolModel";
 
-export const ItemAdd = () => {
+export const CreateItemPage = () => {
   const navigate = useNavigate();
 
   const { user, updateUserData } = useAuth();

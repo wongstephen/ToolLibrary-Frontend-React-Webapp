@@ -5,10 +5,10 @@ import { FeedItem } from "./presentational/FeedItem";
 import { Search } from "./presentational/Search";
 import { PageTemplate } from "./presentational/PageTemplate";
 
-import useAuth from "../hooks/useAuth";
-import { Nav } from "./presentational/Nav";
+import { useAuth } from "../context/AuthContext";
+import { NavigationBar } from "./presentational/NavigationBar";
 
-export const Feed = () => {
+export const Dashboard = () => {
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [feedCount, setFeedCount] = useState(0);
@@ -101,8 +101,7 @@ export const Feed = () => {
   };
   return (
     <PageTemplate>
-      <Nav />
-      {/* checkout feed */}
+      <NavigationBar />
       <div className="flex flex-col justify-between max-w-xl p-4 mx-auto mt-8">
         {feedData?.length > 0 && (
           <>

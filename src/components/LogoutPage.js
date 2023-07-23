@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppTitle } from "./presentational/AppTitle";
-import useAuth from "../hooks/useAuth";
+import { useAuth } from "../context/AuthContext";
 
-export const SignOut = () => {
+export const LogoutPage = () => {
   const navigate = useNavigate();
   const { logoutUser } = useAuth();
   useEffect(() => {

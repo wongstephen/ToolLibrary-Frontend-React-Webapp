@@ -4,10 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toolUpdateAxios, toolDeleteAxios } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { TrashIcon } from "@heroicons/react/24/solid";
-import useAuth from "../hooks/useAuth";
+import { useAuth } from "../context/AuthContext";
 import ToolModel from "./models/ToolModel";
 
-export const ItemEdit = () => {
+export const EditItemPage = () => {
   const { user, updateUserData } = useAuth();
   const { id: toolId } = useParams();
   const navigate = useNavigate();

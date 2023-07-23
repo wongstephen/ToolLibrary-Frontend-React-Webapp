@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export const HomeScreen = () => {
+export const HomePage = () => {
   const navigate = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();

@@ -6,7 +6,7 @@ import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
 import { useAuth } from "../context/AuthContext";
 
-export const Login = () => {
+export const LoginPage = () => {
   const navigate = useNavigate();
 
   const { user, loginUser } = useAuth();

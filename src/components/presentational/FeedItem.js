@@ -4,10 +4,12 @@ import {
   TrashIcon,
   UserMinusIcon,
 } from "@heroicons/react/24/solid";
+
 import { toolDeleteAxios, toolUpdateAxios } from "../../api/axiosApi";
 import { useNavigate } from "react-router-dom";
 
-import useAuth from "../../hooks/useAuth";
+import { useAuth } from "../../context/AuthContext";
+
 export const FeedItem = ({ feed, setFeedData }) => {
   const navigate = useNavigate();
 

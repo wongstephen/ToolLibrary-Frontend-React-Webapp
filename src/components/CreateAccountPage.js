@@ -7,7 +7,7 @@ import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
 import { Alert } from "./presentational/Alert";
 
-export const Register = () => {
+export const CreateAccountPage = () => {
   const [formVal, setFormVal] = useState({
     email: "",
     password: "",
