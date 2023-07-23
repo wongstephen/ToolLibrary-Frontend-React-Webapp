@@ -81,7 +81,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    // todo loading trobber
     <AuthContext.Provider value={contextData}>
       {loading ? (
         <div

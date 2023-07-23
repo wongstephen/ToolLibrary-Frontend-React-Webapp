@@ -102,7 +102,6 @@ export const Dashboard = () => {
   return (
     <PageTemplate>
       <NavigationBar />
-
       <div className="flex flex-col justify-between max-w-xl p-4 mx-auto mt-8">
         {feedData?.length > 0 && (
           <>
