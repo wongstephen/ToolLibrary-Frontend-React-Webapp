@@ -126,9 +126,9 @@ export const CreateAccountPage = () => {
         </form>
         <p className="p-4 mx-auto text-xs font-light text-black max-w-prose">
           The purpose of collecting the email address is to facilitate user
-          authentication for accessing the Tool Library. The email address will
+          authentication for accessing the BorrowNinja. The email address will
           not be utilized for any form of communication or correspondence by the
-          Tool Library Team. The password is stored in a secure manner by
+          BorrowNinja Team. The password is stored in a secure manner by
           applying a cryptographic hashing algorithm with a unique salt value
           for each user.
         </p>

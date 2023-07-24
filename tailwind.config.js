@@ -24,6 +24,9 @@ module.exports = {
         "theme-green": "#5AC3B0",
         "theme-red": "#DE5935",
         "theme-yellow": "#F7CD46",
+
+        "theme-dark-system-gray": "#1C1C1EFF",
+        "theme-dark-teritary-gray": "#2C2C2EFF",
       },
       backgroundImage: {
         titleImg: "url('/src/assets/title-bg.jpg')",

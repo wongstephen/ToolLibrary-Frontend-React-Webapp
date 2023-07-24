@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDarkmode } from "../../reducers/Darkmode";
 
 export const Search = ({
   feedData,
@@ -13,6 +14,8 @@ export const Search = ({
     setSearchInput(e.target.value);
     setInputVal((prev) => e.target.value);
   };
+
+  const { state } = useDarkmode();
 
   useEffect(() => {
     if (searchInput.length === 0) {
@@ -41,14 +44,22 @@ export const Search = ({
       </label>
       <input
         type="search"
-        className="w-full h-12 p-4 font-light text-black transition ease-in-out border-2 focus:outline-none rounded-xl active:border-theme-yellow focus:border-theme-yellow"
+        className={`w-full h-12 p-4 font-light text-black transition ease-in-out border-2 focus:outline-none rounded-xl active:border-theme-yellow focus:border-theme-yellow ${
+          state.isDark
+            ? "bg-theme-dark-system-gray border-theme-dark-teritary-gray"
+            : "bg-white"
+        }`}
         placeholder="Search by Tool Name"
         aria-label="Search"
         aria-describedby="button-addon3"
         onChange={handleChange}
         value={inputVal}
       />
-      <div className="flex items-center justify-center w-24 h-12 mx-auto text-white bg-theme-yellow rounded-xl">
+      <div
+        className={`flex items-center justify-center w-24 h-12 mx-auto text-white ${
+          !state.isDark && "bg-theme-yellow"
+        } rounded-xl`}
+      >
         Search
       </div>
     </div>

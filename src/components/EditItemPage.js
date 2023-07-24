@@ -13,11 +13,9 @@ export const EditItemPage = () => {
   const navigate = useNavigate();
 
   const [submitErr, setSubmitErr] = useState(false);
-
   const [selectedImage, setSelectedImage] = useState(null);
   const [avator, setAvator] = useState("empty");
   const [previewImage, setPreviewImage] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
