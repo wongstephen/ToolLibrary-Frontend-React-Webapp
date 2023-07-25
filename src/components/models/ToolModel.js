@@ -15,7 +15,7 @@ class ToolModel {
   }
 
   getToolLoanee() {
-    if (!this.loanee) {
+    if (!this.toolLoanee) {
       return "";
     }
     return this.toolLoanee;

@@ -100,7 +100,6 @@ export const CreateItemPage = () => {
           >
             A tool name is required!
           </p>
-
           <input
             name="name"
             className={state.isDark ? inputStyleDark : inputStyleLight}
@@ -116,7 +115,6 @@ export const CreateItemPage = () => {
             placeholder="Borrower"
             ref={loaneeInputRef}
           />
-
           <label className="sr-only" htmlFor="notes">
             Notes
           </label>
@@ -127,6 +125,7 @@ export const CreateItemPage = () => {
             placeholder="Notes"
             ref={toolNotesInputRef}
           />
+
           <ChooseAvator setAvator={setAvator} avator={avator} />
 
           {/* user image */}
@@ -152,7 +151,6 @@ export const CreateItemPage = () => {
               </div>
             )}
           </div>
-
           <div className="flex justify-center gap-2 mx-auto my-6">
             <button
               type="submit"
