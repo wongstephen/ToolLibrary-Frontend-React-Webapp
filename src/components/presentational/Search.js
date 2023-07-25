@@ -38,13 +38,13 @@ export const Search = ({
   }, [feedData]);
 
   return (
-    <div className="flex flex-col w-full max-w-2xl gap-4 mx-auto md:flex-row">
+    <div className="flex flex-col w-full max-w-2xl gap-4 mx-auto md:gap-2 md:flex-row">
       <label htmlFor="search" className="sr-only">
         Search by Tool
       </label>
       <input
         type="search"
-        className={`w-full h-12 p-4 font-light text-black transition ease-in-out border-2 focus:outline-none rounded-xl active:border-theme-yellow focus:border-theme-yellow ${
+        className={`w-full h-12 p-4 font-light text-black transition ease-in-out border-2 focus:outline-none rounded-md active:border-theme-yellow focus:border-theme-yellow ${
           state.isDark
             ? "bg-theme-dark-system-gray border-theme-dark-teritary-gray"
             : "bg-white"
@@ -58,7 +58,7 @@ export const Search = ({
       <div
         className={`flex items-center justify-center w-24 h-12 mx-auto text-white ${
           !state.isDark && "bg-theme-yellow"
-        } rounded-xl`}
+        } rounded-md`}
       >
         Search
       </div>

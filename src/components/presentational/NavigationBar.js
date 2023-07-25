@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDarkmode } from "../../reducers/Darkmode";
 import Button from "./Button";
+import logo from "../../assets/logo/2023logo.svg";
 
 export const NavigationBar = () => {
   const { state, dispatch } = useDarkmode();
@@ -15,27 +16,31 @@ export const NavigationBar = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 z-10 w-full py-1 ${
+      className={`fixed top-0 left-0 z-10 w-full  ${
         state.isDark
-          ? "bg-zinc-950 border-b-2 border-theme-red"
+          ? "bg-zinc-950 border-b-2 border-theme-red/50"
           : "bg-theme-red"
       } `}
     >
-      <ul className="flex justify-between max-w-5xl p-2 mx-auto lg:px-0">
-        <li>
-          {/* <button
-            className={`px-4 py-2 text-sm font-medium transition-all duration-500 ${
-              state.isDark
-                ? "bg-[#1C1C1EFF] hover:text-theme-yellow"
-                : "bg-white hover:bg-theme-yellow hover:text-white"
-            }  rounded-md`}
-            onClick={() => navigate("/itemadd")}
+      <div className="flex items-center justify-between p-4 mx-auto max-w-8xl">
+        <div className={`flex justify-left items-center gap-4`}>
+          <img src={logo} alt="BorrowNinja Logo" className="w-8 h-8" />
+          <h1
+            className={`hidden text-3xl font-bold tracking-normal text-center  font-archivo md:block ${
+              state.isDark ? "text-theme-green" : "text-white"
+            }`}
           >
-            New Item
-          </button> */}
-          <Button nav_to="/itemadd">New Item</Button>
-        </li>
-        <span className="flex gap-4">
+            BorrowNinja
+          </h1>
+        </div>
+
+        <ul className="flex items-center justify-between gap-4 lg:px-0">
+          <li>
+            <Button handleClick={() => navigate("/itemadd")} cname="">
+              New Item
+            </Button>
+          </li>
+
           <li>
             <button
               className="text-sm text-white hover:underline"
@@ -52,8 +57,8 @@ export const NavigationBar = () => {
               Logout
             </button>
           </li>
-        </span>
-      </ul>
+        </ul>
+      </div>
     </div>
   );
 };

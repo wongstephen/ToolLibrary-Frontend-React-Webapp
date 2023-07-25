@@ -3,7 +3,6 @@ import useDisabled from "../hooks/useDisabled";
 import { useNavigate } from "react-router-dom";
 import { userRegisterAxios } from "../api/axiosApi";
 
-import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
 import { Alert } from "./presentational/Alert";
 
@@ -52,7 +51,7 @@ export const CreateAccountPage = () => {
   };
 
   return (
-    <PageTemplate>
+    <div>
       <div className="w-11/12 max-w-md py-10 mx-auto mt-12 bg-white border-gray-100 rounded-lg sm:border-2">
         <h2
           className="mx-2 mb-4 text-4xl font-medium text-center text-theme-red"
@@ -146,6 +145,6 @@ export const CreateAccountPage = () => {
           </span>
         </p>
       </div>
-    </PageTemplate>
+    </div>
   );
 };

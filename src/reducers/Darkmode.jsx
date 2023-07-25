@@ -1,13 +1,15 @@
 import { useContext, createContext, useReducer } from "react";
 
-const DarkModeContext = createContext();
+const DarkmodeContext = createContext();
 
 export const useDarkmode = () => {
-  return useContext(DarkModeContext);
+  return useContext(DarkmodeContext);
 };
 
 export const ACTION = {
   TOGGLE_DARKMODE: "TOGGLE_DARKMODE",
+  SET_DARKMODE: "SET_DARKMODE",
+  SET_LIGHTMODE: "SET_LIGHTMODE",
 };
 
 const initalState = {
@@ -21,6 +23,16 @@ const reducer = (state, action) => {
         ...state,
         isDark: !state.isDark,
       };
+    case ACTION.SET_DARKMODE:
+      return {
+        ...state,
+        isDark: true,
+      };
+    case ACTION.SET_LIGHTMODE:
+      return {
+        ...state,
+        isDark: false,
+      };
     default:
       return state;
   }
@@ -33,8 +45,8 @@ export const DarkmodeProvider = ({ children }) => {
     dispatch,
   };
   return (
-    <DarkModeContext.Provider value={value}>
+    <DarkmodeContext.Provider value={value}>
       {children}
-    </DarkModeContext.Provider>
+    </DarkmodeContext.Provider>
   );
 };
