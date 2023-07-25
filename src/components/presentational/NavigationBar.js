@@ -5,7 +5,7 @@ import Button from "./Button";
 import logo from "../../assets/logo/2023logo.svg";
 
 export const NavigationBar = () => {
-  const { state, dispatch } = useDarkmode();
+  const { state } = useDarkmode();
   const navigate = useNavigate();
 
   const handleLogout = (e) => {

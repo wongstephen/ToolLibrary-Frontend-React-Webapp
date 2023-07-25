@@ -10,7 +10,7 @@ import Button from "./presentational/Button";
 import { useDarkmode, ACTION } from "../reducers/Darkmode";
 
 export const Dashboard = () => {
-  const { state, dispatch } = useDarkmode();
+  const { dispatch } = useDarkmode();
 
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
@@ -18,7 +18,7 @@ export const Dashboard = () => {
   const [isSortActive, setIsSortActive] = useState(false);
   const [activeFilter, setActiveFilter] = useState("allFilterBtn");
   const listTitleRef = useRef("All Items");
-  const { user, loading, updateUserData } = useAuth();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     setFeedData(() => user.user.tool);
@@ -29,6 +29,8 @@ export const Dashboard = () => {
     } else {
       dispatch({ type: ACTION.SET_LIGHTMODE });
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const [searchVal, setSearchVal] = useState("");
