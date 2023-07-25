@@ -1,13 +1,15 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useDarkmode } from "../reducers/Darkmode";
 import { toolCreateAxios } from "../api/axiosApi";
+import { inputStyleLight, inputStyleDark } from "./presentational/inputStyle";
 
-import { PageTemplate } from "./presentational/PageTemplate";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import ToolModel from "./models/ToolModel";
 
 export const CreateItemPage = () => {
+  const { state } = useDarkmode();
   const navigate = useNavigate();
 
   const { user, updateUserData } = useAuth();
@@ -69,16 +71,17 @@ export const CreateItemPage = () => {
     }
   };
 
-  const inputStyle =
-    "w-full p-4 font-light text-black transition ease-in-out bg-transparent border-2 border-gray-200 rounded-md focus:outline-theme-yellow";
-
   return (
-    <PageTemplate>
+    <div>
       <div className="relative max-w-xl mx-auto">
         <h2 className="text-2xl font-bold text-left text-theme-red">
           Add Item
         </h2>
-        <p className="mt-2 text-sm tracking-wider text-left font-extralight text-dark-gray">
+        <p
+          className={`mt-2 text-sm tracking-wider text-left font-extralight  ${
+            state.isDark ? "text-white/95" : "text-dark-gray"
+          }`}
+        >
           To begin tracking a new item in your inventory, complete the form
           below and add it to your list.
         </p>
@@ -100,7 +103,7 @@ export const CreateItemPage = () => {
 
           <input
             name="name"
-            className={inputStyle}
+            className={state.isDark ? inputStyleDark : inputStyleLight}
             placeholder="Tool Name"
             ref={toolNameInputRef}
           />
@@ -109,7 +112,7 @@ export const CreateItemPage = () => {
           </label>
           <input
             name="loanee"
-            className={inputStyle}
+            className={state.isDark ? inputStyleDark : inputStyleLight}
             placeholder="Borrower"
             ref={loaneeInputRef}
           />
@@ -120,7 +123,7 @@ export const CreateItemPage = () => {
           <textarea
             rows={5}
             name="notes"
-            className={inputStyle}
+            className={state.isDark ? inputStyleDark : inputStyleLight}
             placeholder="Notes"
             ref={toolNotesInputRef}
           />
@@ -177,6 +180,6 @@ export const CreateItemPage = () => {
           </div>
         </form>
       </div>
-    </PageTemplate>
+    </div>
   );
 };

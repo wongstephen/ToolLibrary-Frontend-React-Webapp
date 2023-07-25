@@ -3,7 +3,6 @@ import useDisabled from "../hooks/useDisabled";
 import { useNavigate } from "react-router-dom";
 import { userRegisterAxios } from "../api/axiosApi";
 
-import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
 import { Alert } from "./presentational/Alert";
 
@@ -52,7 +51,7 @@ export const CreateAccountPage = () => {
   };
 
   return (
-    <PageTemplate>
+    <div>
       <div className="w-11/12 max-w-md py-10 mx-auto mt-12 bg-white border-gray-100 rounded-lg sm:border-2">
         <h2
           className="mx-2 mb-4 text-4xl font-medium text-center text-theme-red"
@@ -126,9 +125,9 @@ export const CreateAccountPage = () => {
         </form>
         <p className="p-4 mx-auto text-xs font-light text-black max-w-prose">
           The purpose of collecting the email address is to facilitate user
-          authentication for accessing the Tool Library. The email address will
+          authentication for accessing the BorrowNinja. The email address will
           not be utilized for any form of communication or correspondence by the
-          Tool Library Team. The password is stored in a secure manner by
+          BorrowNinja Team. The password is stored in a secure manner by
           applying a cryptographic hashing algorithm with a unique salt value
           for each user.
         </p>
@@ -146,6 +145,6 @@ export const CreateAccountPage = () => {
           </span>
         </p>
       </div>
-    </PageTemplate>
+    </div>
   );
 };

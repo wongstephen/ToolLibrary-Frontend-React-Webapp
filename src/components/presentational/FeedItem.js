@@ -4,6 +4,7 @@ import {
   TrashIcon,
   UserMinusIcon,
 } from "@heroicons/react/24/solid";
+import { useDarkmode } from "../../reducers/Darkmode";
 
 import { toolDeleteAxios, toolUpdateAxios } from "../../api/axiosApi";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export const FeedItem = ({ feed, setFeedData }) => {
+  const { state } = useDarkmode();
   const navigate = useNavigate();
 
   const { user, updateUserData } = useAuth();
@@ -35,7 +37,13 @@ export const FeedItem = ({ feed, setFeedData }) => {
   };
 
   return (
-    <li className="flex items-center px-2 sm:px-4 rounded-lg min-h-[84px] border-[1px] hover:border-theme-green bg-white shadow-sm">
+    <li
+      className={`flex items-center px-2 sm:px-4 rounded-lg min-h-[84px] border-[1px] hover:border-theme-green  shadow-sm ${
+        state.isDark
+          ? "bg-theme-dark-teritary-gray border-theme-dark-system-gray text-white"
+          : "bg-white text-black border-theme-dark-teritary-gray/10"
+      }`}
+    >
       {tool.toolImage ? (
         <div className="w-2/12 max-w-[3rem] max-h-[3rem]  mr-2 sm:mr-4 overflow-hidden rounded-md">
           <img
@@ -59,8 +67,8 @@ export const FeedItem = ({ feed, setFeedData }) => {
       )}
 
       <div className="flex flex-col justify-around flex-1">
-        <h3 className="font-light tracking-wider text-black">{tool.name}</h3>
-        <p className="text-xs tracking-wider text-gray-800 ">{tool.loanee}</p>
+        <h3 className="font-light tracking-wider ">{tool.name}</h3>
+        <p className="text-xs tracking-wider ">{tool.loanee}</p>
       </div>
       <div className="flex items-center justify-center gap-2.5">
         {tool.loanee && (

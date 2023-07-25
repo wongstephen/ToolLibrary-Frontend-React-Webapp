@@ -1,23 +1,23 @@
 import React, { useEffect, useState, useRef } from "react";
-import { PageTemplate } from "./presentational/PageTemplate";
 import { useNavigate, useParams } from "react-router-dom";
 import { toolUpdateAxios, toolDeleteAxios } from "../api/axiosApi";
 import { ChooseAvator } from "./presentational/ChooseAvator";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useAuth } from "../context/AuthContext";
 import ToolModel from "./models/ToolModel";
+import { inputStyleLight, inputStyleDark } from "./presentational/inputStyle";
+import { useDarkmode } from "../reducers/Darkmode";
 
 export const EditItemPage = () => {
   const { user, updateUserData } = useAuth();
   const { id: toolId } = useParams();
   const navigate = useNavigate();
+  const { state } = useDarkmode();
 
   const [submitErr, setSubmitErr] = useState(false);
-
   const [selectedImage, setSelectedImage] = useState(null);
   const [avator, setAvator] = useState("empty");
   const [previewImage, setPreviewImage] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
@@ -98,11 +98,8 @@ export const EditItemPage = () => {
     }
   };
 
-  const inputStyle =
-    "w-full p-4 font-light text-black transition ease-in-out bg-transparent border-2 border-gray-200 rounded-md focus:outline-theme-yellow";
-
   return (
-    <PageTemplate>
+    <div>
       <div className="max-w-xl mx-auto">
         <h2 className="text-2xl font-bold text-left text-theme-red">
           Edit Item
@@ -127,7 +124,7 @@ export const EditItemPage = () => {
           </p>
           <input
             name="name"
-            className={inputStyle}
+            className={state.isDark ? inputStyleDark : inputStyleLight}
             ref={toolNameInputRef}
             placeholder={"Borrower"}
           />
@@ -136,7 +133,7 @@ export const EditItemPage = () => {
           </label>
           <input
             name="loanee"
-            className={inputStyle}
+            className={state.isDark ? inputStyleDark : inputStyleLight}
             ref={loaneeInputRef}
             placeholder={"Loanee"}
           />
@@ -147,7 +144,7 @@ export const EditItemPage = () => {
           <textarea
             rows={5}
             name="notes"
-            className={inputStyle}
+            className={state.isDark ? inputStyleDark : inputStyleLight}
             placeholder="Notes"
             ref={toolNotesInputRef}
           />
@@ -202,6 +199,6 @@ export const EditItemPage = () => {
           </div>
         </form>
       </div>
-    </PageTemplate>
+    </div>
   );
 };

@@ -1,11 +1,12 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import { ACTION, useDarkmode } from "../reducers/Darkmode";
 import {
   userCheckAxios,
   toolFetchAxios,
   userLoginAxios,
 } from "../api/axiosApi";
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -14,6 +15,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(false);
+  const { state, dispatch } = useDarkmode();
 
   useEffect(() => {
     checkUserStatus();
@@ -34,8 +36,10 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
   const logoutUser = () => {
     setUser(false);
+    dispatch({ type: ACTION.SET_LIGHTMODE });
     localStorage.removeItem("token");
   };
   const registerUser = (userInfo) => {};
@@ -69,6 +73,17 @@ export const AuthProvider = ({ children }) => {
     setUser((prev) => {
       return { ...prev, user: { ...prev.user, tool: res } };
     });
+
+    return;
+  };
+
+  const refreshUserData = async () => {
+    const token = localStorage.getItem("token");
+    const res = await checkUserStatus(token);
+    setUser((prev) => {
+      return { ...prev, ...res };
+    });
+    return;
   };
 
   const contextData = {
@@ -78,18 +93,25 @@ export const AuthProvider = ({ children }) => {
     registerUser,
     checkUserStatus,
     updateUserData,
+    refreshUserData,
   };
 
   return (
     <AuthContext.Provider value={contextData}>
       {loading ? (
         <div
-          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-          role="status"
+          className={`flex items-center justify-center min-w-full min-h-screen ${
+            state.isDark && "bg-black"
+          }`}
         >
-          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-            Loading...
-          </span>
+          <div
+            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-theme-green border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
+          >
+            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+              Loading...
+            </span>
+          </div>
         </div>
       ) : (
         children

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginRegisterLink } from "./presentational/LoginRegisterLink";
 import useDisabled from "../hooks/useDisabled";
-import { PageTemplate } from "./presentational/PageTemplate";
 import { InputText } from "./presentational/InputText";
 import { useAuth } from "../context/AuthContext";
 
@@ -74,7 +73,7 @@ export const LoginPage = () => {
   }, [user]);
 
   return (
-    <PageTemplate>
+    <div>
       <div className="w-11/12 max-w-md py-10 mx-auto mt-12 bg-white border-gray-100 rounded-lg sm:border-2">
         <h2
           className="text-4xl font-medium text-center text-theme-red font-open-sans"
@@ -140,6 +139,6 @@ export const LoginPage = () => {
         </form>
         <LoginRegisterLink />
       </div>
-    </PageTemplate>
+    </div>
   );
 };

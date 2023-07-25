@@ -17,6 +17,19 @@ export const userCheckAxios = async (token) => {
   }
 };
 
+export const userUpdateAxios = async (token, id, userInput) => {
+  try {
+    const res = await axios.patch(`${URL}/user/${id}`, userInput, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const userLoginAxios = async (userInput) => {
   try {
     const res = await axios.post(`${URL}/user/signin`, userInput);

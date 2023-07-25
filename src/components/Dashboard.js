@@ -3,23 +3,32 @@ import React, { useEffect, useRef, useState } from "react";
 // components
 import { FeedItem } from "./presentational/FeedItem";
 import { Search } from "./presentational/Search";
-import { PageTemplate } from "./presentational/PageTemplate";
 
 import { useAuth } from "../context/AuthContext";
 import { NavigationBar } from "./presentational/NavigationBar";
+import Button from "./presentational/Button";
+import { useDarkmode, ACTION } from "../reducers/Darkmode";
 
 export const Dashboard = () => {
+  const { state, dispatch } = useDarkmode();
+
   const [feedData, setFeedData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [feedCount, setFeedCount] = useState(0);
   const [isSortActive, setIsSortActive] = useState(false);
   const [activeFilter, setActiveFilter] = useState("allFilterBtn");
   const listTitleRef = useRef("All Items");
-  const { user, loading } = useAuth();
+  const { user, loading, updateUserData } = useAuth();
 
   useEffect(() => {
     setFeedData(() => user.user.tool);
     setSearchData(() => user.user.tool);
+
+    if (user.user.darkmode) {
+      dispatch({ type: ACTION.SET_DARKMODE });
+    } else {
+      dispatch({ type: ACTION.SET_LIGHTMODE });
+    }
   }, [user]);
 
   const [searchVal, setSearchVal] = useState("");
@@ -100,7 +109,7 @@ export const Dashboard = () => {
     });
   };
   return (
-    <PageTemplate>
+    <div>
       <NavigationBar />
       <div className="flex flex-col justify-between max-w-xl p-4 mx-auto mt-8">
         {feedData?.length > 0 && (
@@ -140,7 +149,7 @@ export const Dashboard = () => {
           </div>
         )}
       </div>
-      <div className="flex items-center justify-between max-w-xl p-4 mx-auto my-4 underline ">
+      <div className="flex items-center justify-between max-w-xl p-4 mx-auto my-4">
         <ul className="flex gap-4">
           <li>
             <button
@@ -151,7 +160,9 @@ export const Dashboard = () => {
                 showFullList();
               }}
               name="allFilterBtn"
-              className={`${activeFilter === "allFilterBtn" && "underline"}`}
+              className={` hover:text-theme-yellow  ${
+                activeFilter === "allFilterBtn" && "underline font-bold"
+              }`}
             >
               All
             </button>
@@ -164,8 +175,8 @@ export const Dashboard = () => {
                 });
                 showBorrowedList();
               }}
-              className={`${
-                activeFilter === "borrowedFilterBtn" && "underline"
+              className={` hover:text-theme-yellow  ${
+                activeFilter === "borrowedFilterBtn" && "underline font-bold"
               }`}
               name="borrowedFilterBtn"
             >
@@ -175,15 +186,16 @@ export const Dashboard = () => {
         </ul>
         <div>
           <div id="dropdown-wrapper" className="relative">
-            <button
-              className="px-4 py-2 text-sm font-bold bg-white border-2 border-gray-200 rounded-md hover:bg-gray-100"
-              onClick={() => {
+            <Button
+              cname="border-2 border-gray-200 "
+              handleClick={() => {
                 setIsSortActive((prev) => !prev);
               }}
-              id="sortby-button"
+              idName="sortby-button"
+              isDisabled={false}
             >
               Sort By
-            </button>
+            </Button>
 
             <ul
               id="sortby-container"
@@ -221,6 +233,6 @@ export const Dashboard = () => {
           </>
         )}
       </div>
-    </PageTemplate>
+    </div>
   );
 };
