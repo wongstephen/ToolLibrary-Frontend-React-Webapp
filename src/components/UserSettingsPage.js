@@ -32,8 +32,8 @@ const UserSettingsPage = () => {
   };
 
   useEffect(() => {
-    console.log(user);
     darkmodeInputRef.current.checked = state.isDark;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
