@@ -1,10 +1,10 @@
-# BrorrowNinja App
+# BorrowNinja App
 
 Why get frustrated trying to remember if you loaned your tools out again? BorrowNinja is a full-stack app that automatically tracks all the items in your tool inventory and you can see who has what. Forget about writing up a list on paper or trying to remember who you lent to; just use BorrowNinja and never worry about it again.
 <br />
 <br />
 
-<a href="https://toollibrary.netlify.app/">
+<a href="https://www.borrowninja.com/">
 <img src="https://img.shields.io/badge/WWW-Tool%20Library-green" alt="BorrowNinjalink"/></a>
 <br />
 <br />
