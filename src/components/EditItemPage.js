@@ -21,7 +21,7 @@ export const EditItemPage = () => {
   const [loading, setLoading] = useState(false);
 
   const activeTool = user.user.tool.filter((tool) => tool._id === toolId)[0];
-  const toolNameInputRef = useRef(activeTool.name);
+  const toolNameInputRef = useRef();
   const loaneeInputRef = useRef();
   const toolNotesInputRef = useRef();
 
