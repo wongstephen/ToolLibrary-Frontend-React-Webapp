@@ -17,7 +17,12 @@ import UserSettingsPage from "./UserSettingsPage";
 
 function App() {
   const { state } = useDarkmode();
-  console.log(process.env.REACT_APP_ENV);
+  if (
+    process.env.REACT_APP_ENV.toLowerCase().includes("development") ||
+    process.env.REACT_APP_ENV.toLowerCase().includes("staging")
+  ) {
+    console.log("Environment: " + process.env.REACT_APP_ENV);
+  }
 
   return (
     <main className={`min-w-full min-h-screen ${state.isDark && "bg-black"}`}>

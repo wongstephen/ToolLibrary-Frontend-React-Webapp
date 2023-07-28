@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo/2023logo.svg";
+import heroLg from "../assets/screenshots/feedfade-lg.webp";
+import heroSm from "../assets/screenshots/feedfade-sm.webp";
+import addItemSS from "../assets/screenshots/additem.webp";
+
 export const HomePage = () => {
   const navigate = useNavigate();
   const handleClick = (e) => {
@@ -51,15 +55,8 @@ export const HomePage = () => {
 
             <div className="flex justify-center p-6 border-2 md:block border-theme-yellow rounded-xl">
               <picture>
-                <source
-                  srcSet={require("../assets/screenshots/feedfade-lg.webp")}
-                  media="(min-width: 1024px)"
-                />
-                <img
-                  src={require("../assets/screenshots/feedfade-sm.webp")}
-                  alt="Tool List"
-                  className="z-10 mx-auto"
-                />
+                <source srcSet={heroLg} media="(min-width: 1024px)" />
+                <img src={heroSm} alt="Tool List" className="z-10 mx-auto" />
               </picture>
             </div>
           </div>
@@ -79,7 +76,7 @@ export const HomePage = () => {
         <div className="mx-auto">
           <div className="border-2 border-theme-yellow md:p-4 md:py-20 rounded-xl ">
             <img
-              src={require("../assets/screenshots/additem.webp")}
+              src={addItemSS}
               alt="Add Item Screenshot"
               className="w-3/4 h-auto mx-auto rounded-md min-w-[150px]"
             />
